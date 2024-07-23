@@ -1,17 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
   }
+
   
 header {
   background-color: #0078d7;
   color: #fff;
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  column-gap: 0.5em;
+}
+
+#title{
+  font-family: 'Pacifico';
+  font-weight: 100;
+  font-size:2em;
 }
 
 .container {
@@ -19,9 +29,56 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2em;
+  padding: 0.5em;
   gap: 1em;
   width: 100%;
+}
+
+.stylesContainer
+{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.colourListItem{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.3em;
+}
+
+
+.colourInput{
+  width:3em;
+  height: 3em;
+  border-radius: 50%;
+  background-color: red;
+}
+
+#colourLabel1{
+  background-color: pink;
+}
+
+input{
+  visibility: hidden;
+}
+
+
+#colour1{
+  fill:pink;
+}
+
+ul{
+  list-style-type: none;
+}
+.innerContainer
+{
+  padding: 2em;
+  margin: 1em;
+  background-color: aliceblue;
 }
 
 .dropdown--span {
