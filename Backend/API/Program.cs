@@ -19,7 +19,7 @@ namespace API
 			{
               var config = new AmazonDynamoDBConfig
 			  {
-               RegionEndpoint = Amazon.RegionEndpoint.USWest2
+               RegionEndpoint = Amazon.RegionEndpoint.EUWest1
 			  };
          
 		    return new AmazonDynamoDBClient(config);
