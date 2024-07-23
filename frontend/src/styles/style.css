@@ -107,3 +107,12 @@ ul{
   color: black;
   cursor: pointer;
 }
+
+.save-preference--btn{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  color: black;
+  cursor: pointer;
+}
