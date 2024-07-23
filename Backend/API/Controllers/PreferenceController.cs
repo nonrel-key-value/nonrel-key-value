@@ -30,7 +30,6 @@ namespace API.Controllers
 				_logger.LogError($"Error getting preferences: {ex.Message}");
 				return BadRequest(ex.Message);
 			}
-
 		}
 
 		[HttpPost("SetPreferences", Name = "SetPreferences")]
@@ -46,8 +45,6 @@ namespace API.Controllers
 				_logger.LogError($"Error setting preferences: {ex.Message}");
 				return BadRequest(ex.Message);
 			}
-
-
 		}
 	}
 }
