@@ -62,13 +62,18 @@ header {
   background-color: pink;
 }
 
-input{
+.colourIn{
   visibility: hidden;
 }
 
 
 #colour1{
   fill:pink;
+}
+
+#linkText{
+  font-style:italic;
+  text-decoration: underline;
 }
 
 ul{

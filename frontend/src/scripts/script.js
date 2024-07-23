@@ -13,6 +13,19 @@ const colourPicker5 = document.getElementById("inputColour5");
 const colourPicker6 = document.getElementById("inputColour6");
 const colourPicker7 = document.getElementById("inputColour7");
 
+const headingSize1 = document.getElementById("headingSize1");
+const headingSize2 = document.getElementById("headingSize2");
+const headingSize3 = document.getElementById("headingSize3");
+const headingSize4 = document.getElementById("headingSize4");
+const headingSize5 = document.getElementById("headingSize5");
+
+const paragraphArticle = document.getElementById("paragraphArticle");
+const linkText = document.getElementById("linkText");
+
+const paragraphSizeInput = document.getElementById("paragraphSize");
+const linkSizeInput = document.getElementById("linkSize");
+
+
 colourPicker1.addEventListener("change",changeColour);
 colourPicker2.addEventListener("change",changeColour);
 colourPicker3.addEventListener("change",changeColour);
@@ -20,6 +33,16 @@ colourPicker4.addEventListener("change",changeColour);
 colourPicker5.addEventListener("change",changeColour);
 colourPicker6.addEventListener("change",changeColour);
 colourPicker7.addEventListener("change",changeColour);
+
+headingSize1.addEventListener("change",changeSize);
+headingSize2.addEventListener("change",changeSize);
+headingSize3.addEventListener("change",changeSize);
+headingSize4.addEventListener("change",changeSize);
+headingSize5.addEventListener("change",changeSize);
+
+paragraphSizeInput.addEventListener("change",changeParagraphSize);
+
+linkSizeInput.addEventListener("change",changeLinkSize);
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,7 +78,22 @@ function switchPreference(value) {
 
 function changeColour(event)
 {
-    console.log(event);
-    console.log(event.target.value);
     event.target.parentNode.style.backgroundColor = event.target.value;
+}
+
+function changeSize(event)
+{
+    event.target.parentNode.style.fontSize = (event.target.value) + "pt";
+}
+
+function changeParagraphSize(event)
+{
+    for (const child of paragraphArticle.children) {
+        child.style.fontSize = (event.target.value) + "pt";
+      }
+}
+
+function changeLinkSize(event)
+{
+    linkText.style.fontSize = (event.target.value) + "pt";
 }
