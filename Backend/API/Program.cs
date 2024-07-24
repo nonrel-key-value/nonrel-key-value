@@ -1,7 +1,5 @@
-
 using API.Services;
 using Amazon.DynamoDBv2;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace API
 {
@@ -15,18 +13,18 @@ namespace API
 			builder.Services.AddControllers();
 			builder.Services.AddScoped<IPreferenceService, PreferenceService>();
 
-            builder.Services.AddSingleton<IAmazonDynamoDB>(sp =>
+			builder.Services.AddSingleton<IAmazonDynamoDB>(sp =>
 			{
-              var config = new AmazonDynamoDBConfig
-			  {
-               RegionEndpoint = Amazon.RegionEndpoint.EUWest1
-			  };
-         
-		    return new AmazonDynamoDBClient(config);
+				var config = new AmazonDynamoDBConfig
+				{
+					RegionEndpoint = Amazon.RegionEndpoint.EUWest1
+				};
+
+				return new AmazonDynamoDBClient(config);
 			});
 
-            Console.WriteLine($"AWS_ACCESS_KEY_ID: {Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID")}");
-            Console.WriteLine($"AWS_SECRET_ACCESS_KEY: {Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")}");
+			Console.WriteLine($"AWS_ACCESS_KEY_ID: {Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID")}");
+			Console.WriteLine($"AWS_SECRET_ACCESS_KEY: {Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")}");
 
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();

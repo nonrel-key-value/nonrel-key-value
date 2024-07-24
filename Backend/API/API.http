@@ -1,5 +1,9 @@
 @API_HostAddress = http://localhost:5154
 
+GET {{API_HostAddress}}
+Accept: application/json
+###
+
 GET {{API_HostAddress}}/Preference/GetPreferences
 Accept: application/json
 ###
@@ -7,6 +11,7 @@ Accept: application/json
 POST {{API_HostAddress}}/Preference/SetPreferences
 Content-Type: application/json
 Accept: application/json
+
 {
   "color": "#AAAAAA"
 }

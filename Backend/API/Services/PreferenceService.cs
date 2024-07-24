@@ -1,72 +1,59 @@
 ﻿using API.Models;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Services
 {
 	public class PreferenceService : IPreferenceService
 	{
-       private readonly IAmazonDynamoDB dynamoDBClient;
-       private const string TableName = "LocalTest";
+		private readonly IAmazonDynamoDB dynamoDBClient;
+		private const string TableName = "LocalTest";
+		private static readonly Random random = new Random();
 
-	   public PreferenceService(IAmazonDynamoDB dynamoDBClient)
-	   {
-        this.dynamoDBClient = dynamoDBClient;
-       }
 
-	   public async Task<IEnumerable<Preference>> GetPreferences()
-       {
-          var request = new ScanRequest
-          {
-            TableName = TableName
-          };
+		public PreferenceService(IAmazonDynamoDB dynamoDBClient)
+		{
+			this.dynamoDBClient = dynamoDBClient;
+		}
 
-            var response = await dynamoDBClient.ScanAsync(request);
+		public async Task<IEnumerable<Preference>> GetPreferencesAsync()
+		{
+			return Enumerable.Range(1, 5).Select(index => new Preference
+			{
+				Color = String.Format("#{0:X6}", random.Next(0x1000000))
+			}).ToArray();
 
-            return response.Items.Select(item => new Preference
-            {
-                Color = item["Color"].S
-                // Map other properties as needed
-            }).ToArray();
-        }
+			var request = new ScanRequest
+			{
+				TableName = TableName
+			};
 
-        public async Task<Preference> SetPreferences(Preference newPreference)
-        {
-            var request = new PutItemRequest
-            {
-                TableName = TableName,
-                Item = new Dictionary<string, AttributeValue>
-                {
-                    { "Color", new AttributeValue { S = newPreference.Color } }
-                    // Map other properties as needed
-                }
-            };
+			var response = await dynamoDBClient.ScanAsync(request);
 
-            await dynamoDBClient.PutItemAsync(request);
+			return response.Items.Select(item => new Preference
+			{
+				Color = item["Color"].S
+				// Map other properties as needed
+			}).ToArray();
+		}
 
-            return newPreference;
-        }
-    }
+		public async Task<Preference> SetPreferencesAsync(Preference newPreference)
+		{
+			return newPreference;
+
+			var request = new PutItemRequest
+			{
+				TableName = TableName,
+				Item = new Dictionary<string, AttributeValue>
+					{
+						{ "Color", new AttributeValue { S = newPreference.Color } }
+                        // Map other properties as needed
+                    }
+			};
+
+			await dynamoDBClient.PutItemAsync(request);
+
+			return newPreference;
+		}
+	}
 }
-// 		private static readonly Random random = new Random();
-
-// 		public PreferenceService() { }
-
-// 		public IEnumerable<Preference> GetPreferences()
-// 		{
-// 			return Enumerable.Range(1, 5).Select(index => new Preference
-// 			{
-// 				Color = String.Format("#{0:X6}", random.Next(0x1000000))
-// 			}).ToArray();
-// 		}
-
-		
-// 		public Preference SetPreferences(Preference newPreference)
-// 		{
-// 			return newPreference;
-// 		}
-// 	}
-// }
