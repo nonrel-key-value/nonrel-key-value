@@ -1,7 +1,4 @@
-﻿using API.Models;
-using API.Services;
-using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.Design;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {

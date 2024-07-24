@@ -4,7 +4,7 @@ namespace API.Services
 {
 	public interface IPreferenceService
 	{
-		IEnumerable<Preference> GetPreferences();
-		Preference SetPreferences(Preference newPreference);
+		Task<IEnumerable<Preference>> GetPreferencesAsync();
+		Task<Preference> SetPreferencesAsync(Preference newPreference);
 	}
 }

@@ -18,12 +18,13 @@ namespace API.Controllers
 		}
 
 		[HttpGet("GetPreferences", Name = "GetPreferences")]
-		public ActionResult<IEnumerable<Preference>> GetPreferences()
+		public async Task<ActionResult<IEnumerable<Preference>>> GetPreferences()
 		{
 			try
 			{
 				_logger.LogInformation("Getting preferences.");
-				return Ok(_preferenceService.GetPreferences());
+				var answer = await _preferenceService.GetPreferencesAsync();
+				return Ok(answer); ;
 			}
 			catch(Exception ex)
 			{
@@ -33,12 +34,13 @@ namespace API.Controllers
 		}
 
 		[HttpPost("SetPreferences", Name = "SetPreferences")]
-		public ActionResult<Preference> UpdatePreferences([FromBody] Preference preference)
+		public async Task<ActionResult<Preference>> UpdatePreferences([FromBody] Preference preference)
 		{
 			try
 			{
 				_logger.LogInformation("Setting preferences.");
-				return Ok(_preferenceService.SetPreferences(preference));
+				var answer = await _preferenceService.SetPreferencesAsync(preference);
+				return Ok(answer);
 			}
 			catch(Exception ex)
 			{
