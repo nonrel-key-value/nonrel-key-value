@@ -1,3 +1,9 @@
+import {ApiHelper } from "./apiHelper.js";
+
+const baseURL = "https://api.karle.co.za/";
+const apiHelper = new ApiHelper(baseURL);
+
+
 const dropdown = document.getElementById('dropdown');
 const selectedPreference = document.getElementById('selectedPreference');
 const addPreferenceBtn = document.querySelector('add-preference--btn');
@@ -48,6 +54,7 @@ headingSize5.addEventListener("change",changeSize);
 paragraphSizeInput.addEventListener("change",changeParagraphSize);
 
 linkSizeInput.addEventListener("change",changeLinkSize);
+healthCheck();
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -67,20 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     switchPreference(dropdown.value);
 
-    dropdown.addEventListener('change', (event) => {
-        switchPreference(event.target.value);
-    });
+    // dropdown.addEventListener('change', (event) => {
+    //     switchPreference(event.target.value);
+    // });
 
 });
 
-addPreferenceBtn.onclick = () => {
-    // Backend call to add preference
-    console.log('clicked');
-}
+ addPreferenceBtn.onclick = () => {
+     // Backend call to add preference
+     console.log('clicked');
+ }
 
 function switchPreference(value) {
+    console.log("preference switched to: " + value);
     // Set content based on value
-    selectedPreference.textContent = `Selected preference is: ${value}`;
+    // selectedPreference.textContent = `Selected preference is: ${value}`;
 }
 
 function changeColour(event)
@@ -115,3 +123,16 @@ function checkLoggedIn()
         loginButton.classList.remove("hide");
     }
 }
+
+async function healthCheck() {
+    
+      try {
+        const response = await apiHelper.get();
+          
+        if (response) {
+          console.log(response);
+        }
+      } catch (error) {
+        console.error('Error performing CRUD operation:', error);
+      }
+    }
