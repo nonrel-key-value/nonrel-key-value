@@ -7,15 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preference Portal</title>
     <link rel="stylesheet" href="styles/style.css">
-    <script src="scripts/script.js" defer></script>
-
+    <script type="module" src="scripts/script.js" defer></script>
   </head>
   <body>
-
     <main>
       <header>
         <h2 id="title">Preferencey</h2>
         <p>Whatever you prefer!</p>
+        <a id="loginLink" href="https://179530787873.auth.eu-west-1.amazoncognito.com/oauth2/authorize?client_id=340s2eqt65h066rs3o0bdfqocp&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Fweb.karle.co.za"><button class="login--btn">Login</button></a>
       </header>
       <article class="container">
         <span class="dropdown--span">
@@ -24,17 +23,17 @@
           <button class="add-preference--btn">Add New Preference</button>
           <button class="save-preference--btn">Save Changes</button>
           <button class="delete-preference--btn">Delete Preference</button>
+          <section>
+            <!-- Content comes here -->
+            <p class="hide" id="selectedPreference"></p>
+          </section>
         </span>
-        
-        <section>
-          <!-- Content comes here -->
-          <p id="selectedPreference"></p>
-        </section>
-        
       </article>
+      <section class="outerContainer">
       <section class="stylesContainer">
         <article class="innerContainer">
-          <h1>Colours</h1>
+          <h1>Colour Palette</h1>
+          <hr class="solid">
           <ul class="colourList">
             <li class="colourListItem">
               <label class="colourInput" id="colourLabel1"><input id="inputColour1" class="colourIn" type="color" id="colour1" value="#ff0000"></label>
@@ -67,13 +66,14 @@
           </ul>
         </article>
         <section class="innerContainer">
-          <h1>Text</h1>
+          <h1>Text Palette</h1>
+          <hr class="solid">
           <article class="fontSelectorContainer">
             <p>Font:</p>
-          <select id="fontDropdown"></select>
+            <select id="fontDropdown"></select>
           </article>
           <article>
-            <ul class="textList">
+            <ul id="headings" class="textList">
               <li>
                 <label id="heading1">Heading 1</label><input type="range" id="headingSize1" name="headingSize1" min="8" max="30">
               </li>

@@ -1,7 +1,13 @@
+import {ApiHelper } from "./apiHelper.js";
+
+const baseURL = "https://api.karle.co.za/";
+const apiHelper = new ApiHelper(baseURL);
+
+
 const dropdown = document.getElementById('dropdown');
 const selectedPreference = document.getElementById('selectedPreference');
 const addPreferenceBtn = document.querySelector('.add-preference--btn');
-const stylesContainer = document.querySelector('.stylesContainer');
+const headingsContainer = document.getElementById('headings');
 
 const defaultFontSize = 16;
 const defaultColor = 'black';
@@ -28,6 +34,11 @@ const linkText = document.getElementById("linkText");
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
 
+const loginButton = document.getElementById("loginLink");
+
+var logged_in = false;
+
+
 
 colourPicker1.addEventListener("change",changeColour);
 colourPicker2.addEventListener("change",changeColour);
@@ -46,15 +57,18 @@ headingSize5.addEventListener("change",changeSize);
 paragraphSizeInput.addEventListener("change",changeParagraphSize);
 
 linkSizeInput.addEventListener("change",changeLinkSize);
+healthCheck();
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    checkLoggedIn();
+
     document.body.style.fontSize = defaultFontSize;
     document.body.style.color = defaultColor;
 
     const options = ['Preference1', 'Preference2', 'Preference3']; //Get from backend
     const fonts = ['Arial', 'Times New Roman', 'Verdana', 'Georgia', 'Roboto'] //Get from backend?
-
+    
     options.forEach(optionText => {
         const option = document.createElement('option');
         option.value = optionText;
@@ -71,9 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     switchPreference(dropdown.value);
 
-    dropdown.addEventListener('change', (event) => {
-        switchPreference(event.target.value);
-    });
+    // dropdown.addEventListener('change', (event) => {
+    //     switchPreference(event.target.value);
+    // });
 
     changeFont(fontDropdown.value);
 
@@ -83,18 +97,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-addPreferenceBtn.onclick = () => {
-    // Backend call to add preference
-    console.log('clicked');
-}
+ addPreferenceBtn.onclick = () => {
+     // Backend call to add preference
+     console.log('clicked');
+ }
 
 function switchPreference(value) {
+    console.log("preference switched to: " + value);
     // Set content based on value
-    selectedPreference.textContent = `Selected preference is: ${value}`;
+    // selectedPreference.textContent = `Selected preference is: ${value}`;
 }
 
 function changeFont(value) {
-    stylesContainer.style.fontFamily = value;
+    headings.style.fontFamily = value;
 }
 
 function changeColour(event)
@@ -118,3 +133,27 @@ function changeLinkSize(event)
 {
     linkText.style.fontSize = (event.target.value) + "pt";
 }
+
+function checkLoggedIn()
+{
+    if(logged_in)
+    {
+        loginButton.classList.add("hide");
+    }
+    else{
+        loginButton.classList.remove("hide");
+    }
+}
+
+async function healthCheck() {
+    
+      try {
+        const response = await apiHelper.get();
+          
+        if (response) {
+          console.log(response);
+        }
+      } catch (error) {
+        console.error('Error performing CRUD operation:', error);
+      }
+    }
