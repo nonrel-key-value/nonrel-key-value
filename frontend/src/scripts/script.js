@@ -6,10 +6,12 @@ const apiHelper = new ApiHelper(baseURL);
 
 const dropdown = document.getElementById('dropdown');
 const selectedPreference = document.getElementById('selectedPreference');
-const addPreferenceBtn = document.querySelector('add-preference--btn');
+const addPreferenceBtn = document.getElementById('addPref');
 
 const defaultFontSize = 16;
 const defaultColor = 'black';
+
+var userPreferencesObj;
 
 const colourPicker1 = document.getElementById("inputColour1");
 const colourPicker2 = document.getElementById("inputColour2");
@@ -25,8 +27,20 @@ const headingSize3 = document.getElementById("headingSize3");
 const headingSize4 = document.getElementById("headingSize4");
 const headingSize5 = document.getElementById("headingSize5");
 
+const header1 = document.getElementById("heading1");
+const header2 = document.getElementById("heading2");
+const header3 = document.getElementById("heading3");
+const header4 = document.getElementById("heading4");
+const header5 = document.getElementById("heading5");
+
+const savePrefs = document.getElementById("savePrefs");
+
+
+
 const paragraphArticle = document.getElementById("paragraphArticle");
 const linkText = document.getElementById("linkText");
+
+const paragraphText = document.getElementById("pText");
 
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
@@ -51,11 +65,17 @@ headingSize3.addEventListener("change",changeSize);
 headingSize4.addEventListener("change",changeSize);
 headingSize5.addEventListener("change",changeSize);
 
+savePrefs.addEventListener("click", setUserPreferences);
+
 paragraphSizeInput.addEventListener("change",changeParagraphSize);
 
 linkSizeInput.addEventListener("change",changeLinkSize);
-healthCheck();
+//healthCheck();
 
+function what()
+{
+    console.log("the fuck");
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     checkLoggedIn();
@@ -123,6 +143,8 @@ function checkLoggedIn()
         loginButton.classList.remove("hide");
     }
 }
+setUserPreferences();
+console.log(userPreferencesObj);
 
 async function healthCheck() {
     
@@ -135,4 +157,33 @@ async function healthCheck() {
       } catch (error) {
         console.error('Error performing CRUD operation:', error);
       }
+    }
+
+    function setUserPreferences()
+    {
+        let userPrefs = {
+    Color1 : getComputedStyle(colourPicker1.parentNode).backgroundColor,
+    Color2 : getComputedStyle(colourPicker2.parentNode).backgroundColor,
+    Color3 : getComputedStyle(colourPicker3.parentNode).backgroundColor,
+    Color4 : getComputedStyle(colourPicker4.parentNode).backgroundColor,
+    Color5 : getComputedStyle(colourPicker5.parentNode).backgroundColor,
+    Color6 : getComputedStyle(colourPicker6.parentNode).backgroundColor,
+    Color7 : getComputedStyle(colourPicker7.parentNode).backgroundColor,
+    HeaderTextColor : getComputedStyle(header1).color,
+    ParagraphTextColor : getComputedStyle(paragraphText).color,
+    LinkTextColor : getComputedStyle(linkText).color,
+    HeaderTextSize1 : getComputedStyle(header1).fontSize,
+    HeaderTextSize2 : getComputedStyle(header2).fontSize,
+    HeaderTextSize3 : getComputedStyle(header3).fontSize,
+    HeaderTextSize4 : getComputedStyle(header4).fontSize,
+    HeaderTextSize5 : getComputedStyle(header5).fontSize,
+    ParagraphTextSize : getComputedStyle(paragraphText).fontSize,
+    LinkTextSize : getComputedStyle(linkText).fontSize,
+    HeadersFont : getComputedStyle(header1).fontFamily,
+    ParagraphFont : getComputedStyle(paragraphText).fontFamily,
+    LinkFont : getComputedStyle(linkText).fontFamily
+        }
+
+        userPreferencesObj = userPrefs;
+        console.log(userPreferencesObj);
     }
