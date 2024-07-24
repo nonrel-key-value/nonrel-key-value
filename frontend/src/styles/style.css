@@ -23,6 +23,7 @@ header {
   column-gap: 0.5em;
   margin: 0;
   width: auto;
+  padding: 0.2em;
 }
 
 label{
@@ -151,6 +152,7 @@ ul{
   background-color:#0078d7;
   color: white;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .save-preference--btn:hover{
@@ -161,6 +163,28 @@ ul{
   background-color:white;
   color: #0078d7;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+.login--btn{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:white;
+  color: black;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.login--btn:hover{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:black;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .hide{
