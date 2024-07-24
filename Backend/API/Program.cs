@@ -2,8 +2,6 @@
 using API.Services;
 using Amazon.DynamoDBv2;
 using Microsoft.Extensions.DependencyInjection;
-using Amazon.Runtime;
-using Amazon.Runtime.Credentials;
 
 namespace API
 {
@@ -27,7 +25,6 @@ namespace API
 		    return new AmazonDynamoDBClient(config);
 			});
 
-            var credentials = FallbackCredentialsFactory.GetCredentials();
             Console.WriteLine($"AWS_ACCESS_KEY_ID: {Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID")}");
             Console.WriteLine($"AWS_SECRET_ACCESS_KEY: {Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")}");
 
