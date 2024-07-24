@@ -75,10 +75,6 @@ paragraphSizeInput.addEventListener("change",changeParagraphSize);
 linkSizeInput.addEventListener("change",changeLinkSize);
 //healthCheck();
 
-function what()
-{
-    console.log("the fuck");
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     checkLoggedIn();
@@ -117,10 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
- addPreferenceBtn.onclick = () => {
-     // Backend call to add preference
-     console.log('clicked');
- }
+//  addPreferenceBtn.onclick = () => {
+//      // Backend call to add preference
+//      console.log('clicked');
+//  }
 
 function switchPreference(value) {
     console.log("preference switched to: " + value);
