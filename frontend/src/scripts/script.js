@@ -25,6 +25,11 @@ const linkText = document.getElementById("linkText");
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
 
+const loginButton = document.getElementById("loginLink");
+
+var logged_in = false;
+
+
 
 colourPicker1.addEventListener("change",changeColour);
 colourPicker2.addEventListener("change",changeColour);
@@ -46,6 +51,8 @@ linkSizeInput.addEventListener("change",changeLinkSize);
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    checkLoggedIn();
+
     document.body.style.fontSize = defaultFontSize;
     document.body.style.color = defaultColor;
 
@@ -96,4 +103,15 @@ function changeParagraphSize(event)
 function changeLinkSize(event)
 {
     linkText.style.fontSize = (event.target.value) + "pt";
+}
+
+function checkLoggedIn()
+{
+    if(logged_in)
+    {
+        loginButton.classList.add("hide");
+    }
+    else{
+        loginButton.classList.remove("hide");
+    }
 }
