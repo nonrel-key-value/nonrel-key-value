@@ -10,7 +10,7 @@ namespace API.Services
 	public class PreferenceService : IPreferenceService
 	{
        private readonly IAmazonDynamoDB dynamoDBClient;
-       private const string TableName = "PreferencesTB";
+       private const string TableName = "LocalTest";
 
 	   public PreferenceService(IAmazonDynamoDB dynamoDBClient)
 	   {
