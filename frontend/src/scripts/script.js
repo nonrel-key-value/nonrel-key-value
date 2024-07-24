@@ -1,6 +1,7 @@
 const dropdown = document.getElementById('dropdown');
 const selectedPreference = document.getElementById('selectedPreference');
-const addPreferenceBtn = document.querySelector('add-preference--btn');
+const addPreferenceBtn = document.querySelector('.add-preference--btn');
+const stylesContainer = document.querySelector('.stylesContainer');
 
 const defaultFontSize = 16;
 const defaultColor = 'black';
@@ -12,6 +13,8 @@ const colourPicker4 = document.getElementById("inputColour4");
 const colourPicker5 = document.getElementById("inputColour5");
 const colourPicker6 = document.getElementById("inputColour6");
 const colourPicker7 = document.getElementById("inputColour7");
+
+const fontDropdown = document.getElementById("fontDropdown");
 
 const headingSize1 = document.getElementById("headingSize1");
 const headingSize2 = document.getElementById("headingSize2");
@@ -50,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.color = defaultColor;
 
     const options = ['Preference1', 'Preference2', 'Preference3']; //Get from backend
+    const fonts = ['Arial', 'Times New Roman', 'Verdana', 'Georgia', 'Roboto'] //Get from backend?
 
     options.forEach(optionText => {
         const option = document.createElement('option');
@@ -58,10 +62,23 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdown.appendChild(option);
     });
 
+    fonts.forEach(optionText => {
+        const option = document.createElement('option');
+        option.value = optionText;
+        option.textContent = optionText;
+        fontDropdown.appendChild(option);
+    });
+
     switchPreference(dropdown.value);
 
     dropdown.addEventListener('change', (event) => {
         switchPreference(event.target.value);
+    });
+
+    changeFont(fontDropdown.value);
+
+    fontDropdown.addEventListener('change', (event) => {
+        changeFont(event.target.value);
     });
 
 });
@@ -74,6 +91,10 @@ addPreferenceBtn.onclick = () => {
 function switchPreference(value) {
     // Set content based on value
     selectedPreference.textContent = `Selected preference is: ${value}`;
+}
+
+function changeFont(value) {
+    stylesContainer.style.fontFamily = value;
 }
 
 function changeColour(event)

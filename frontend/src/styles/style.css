@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
   }
 
   
@@ -88,6 +87,9 @@ ul{
 }
 .innerContainer
 {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   padding: 2em;
   margin: 1em;
   background-color: aliceblue;
@@ -122,4 +124,26 @@ ul{
   border-radius: 0.375em; 
   color: black;
   cursor: pointer;
+}
+
+.delete-preference--btn{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  color: black;
+  cursor: pointer;
+}
+
+.fontSelectorContainer {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+#fontDropdown {
+  height: 2.5em;
+  width: 20em;
+  cursor: pointer;
+  border-radius: 0.375em; 
 }
