@@ -3,7 +3,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
   }
 
   main{
@@ -106,7 +106,9 @@ ul{
 }
 .innerContainer
 {
-  display: flexbox;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   padding: 2em;
   margin: 1em;
   background-color: aliceblue;
@@ -170,6 +172,28 @@ ul{
   transition: 0.2s;
 }
 
+.delete-preference--btn{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:#0078d7;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-preference--btn:hover{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:white;
+  color: #0078d7;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
 .login--btn{
   width: 12em; 
   height: 2.5em; 
@@ -180,6 +204,7 @@ ul{
   cursor: pointer;
   transition: 0.2s;
 }
+
 .login--btn:hover{
   width: 12em; 
   height: 2.5em; 
@@ -189,6 +214,19 @@ ul{
   color: white;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.fontSelectorContainer {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+#fontDropdown {
+  height: 2.5em;
+  width: 20em;
+  cursor: pointer;
+  border-radius: 0.375em; 
 }
 
 .hide{

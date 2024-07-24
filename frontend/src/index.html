@@ -8,7 +8,6 @@
     <title>Preference Portal</title>
     <link rel="stylesheet" href="styles/style.css">
     <script type="module" src="scripts/script.js" defer></script>
-
   </head>
   <body>
     <main>
@@ -23,6 +22,7 @@
           <select id="dropdown"></select>
           <button id="addPref" class="add-preference--btn">Add New Preference</button>
           <button id="savePrefs" class="save-preference--btn">Save Changes</button>
+          <button class="delete-preference--btn">Delete Preference</button>
           <section>
             <!-- Content comes here -->
             <p class="hide" id="selectedPreference"></p>
@@ -65,40 +65,41 @@
             </li>
           </ul>
         </article>
-        <article class="innerContainer">
+        <section class="innerContainer">
           <h1 class="normalFont">Text Palette</h1>
           <hr class="solid">
-          <ul class="textList">
-            <li>
-              <label id="heading1">Heading 1<input type="range" id="headingSize1" name="headingSize1" min="8" max="30"></label>
-            </li>
-            <li>
-              <label id="heading2">Heading 2<input type="range" id="headingSize2" name="headingSize2" min="8" max="30"></label>
-            </li>
-            <li>
-              <label id="heading3">Heading 3<input type="range" id="headingSize3" name="headingSize3" min="8" max="30"></label>
-            </li>
-            <li>
-              <label id="heading4">Heading 4<input type="range" id="headingSize4" name="headingSize4" min="8" max="30"></label>
-            </li>
-            <li>
-              <label id="heading5">Heading 5<input type="range" id="headingSize5" name="headingSize5" min="8" max="30"></label>
-            </li>
-            <li>
-              <article id="paragraphArticle">
-                <p id="pText" class="paragraphText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam at, dolorum quo eveniet nesciunt totam doloremque adipisci! Veritatis eligendi, maiores velit impedit consectetur magni. Laudantium, dolor aliquid! Repudiandae, quae neque?</p>
-                <p class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p>
-              </article>
-              <input type="range" id="paragraphSize" name="paragraphSize" min="8" max="15">
-            </li>
-            <li>
-              <label id="linkText">https://linkStyle.com<input type="range" id="linkSize" name="linkSize" min="8" max="30"></label>
-            </li>
-          </ul>
+          <article class="fontSelectorContainer">
+            <p>Font:</p>
+            <select id="fontDropdown"></select>
+          </article>
+          <article>
+            <ul id="headings" class="textList">
+              <li>
+                <label id="heading1">Heading 1</label><input type="range" id="headingSize1" name="headingSize1" min="8" max="30">
+              </li>
+              <li>
+                <label id="heading2">Heading 2<input type="range" id="headingSize2" name="headingSize2" min="8" max="30"></label>
+              </li>
+              <li>
+                <label id="heading3">Heading 3<input type="range" id="headingSize3" name="headingSize3" min="8" max="30"></label>
+              </li>
+              <li>
+                <label id="heading4">Heading 4<input type="range" id="headingSize4" name="headingSize4" min="8" max="30"></label>
+              </li>
+              <li>
+                <label id="heading5">Heading 5<input type="range" id="headingSize5" name="headingSize5" min="8" max="30"></label>
+              </li>
+            </ul>
+          </article>
+          <article id="paragraphArticle">
+            <p id="pText" class="paragraphText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam at, dolorum quo eveniet nesciunt totam doloremque adipisci! Veritatis eligendi, maiores velit impedit consectetur magni. Laudantium, dolor aliquid! Repudiandae, quae neque?</p>
+            <p class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p> 
+            <input type="range" id="paragraphSize" name="paragraphSize" min="8" max="15">
+          </article>
+          <label id="linkText">https://linkSize.com<input type="range" id="linkSize" name="linkSize" min="8" max="30"></label>
         </article>
       </section>
-    </section>
+
     </main>
-  
   </body>
 </html>
