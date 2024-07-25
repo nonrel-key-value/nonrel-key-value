@@ -146,7 +146,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.style.fontSize = defaultFontSize;
     document.body.style.color = defaultColor;
 
-    const options = ['Preference1', 'Preference2', 'Preference3']; //Get from backend
+    var userPrefs = getUserPrefs();
+    let options = [];
+    userPrefs.forEach(pref=>{
+      options.push(pref.profile);
+    })
     const fonts = ['Arial', 'Times New Roman', 'Verdana', 'Georgia', 'Roboto'] //Get from backend?
     
     options.forEach(optionText => {
