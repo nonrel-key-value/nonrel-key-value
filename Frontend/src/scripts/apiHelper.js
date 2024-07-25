@@ -4,11 +4,14 @@ export class ApiHelper {
     }
 
     async post(endpoint, data) {
-        const url = `${this.baseURL}/${endpoint}`;
+        console.log("data being sent: " + JSON.stringify(data));
+        const url = `${this.baseURL}${endpoint}`;
         const options = {
+            mode:  'cors',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${sessionStorage.getItem("id_token")}`
             },
             body: JSON.stringify(data)
         };
@@ -21,17 +24,20 @@ export class ApiHelper {
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
-            return await response.json();
         } catch (error) {
-            console.error('There was a problem with the fetch operation');
+            console.error('There was a problem with the fetch operation: ' + error);
+            console.log(error);
         }
     }
 
     async get(endpoint) {
         const url = `${this.baseURL}${endpoint}`;
         const options = {
+            mode:  'cors',
             method: 'GET',
             headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${sessionStorage.getItem("id_token")}`
             }
         }
 

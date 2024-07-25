@@ -1,6 +1,8 @@
 import {ApiHelper } from "./apiHelper.js";
 
+//const baseURL = "http://18.201.41.51/"
 const baseURL = "https://api.karle.co.za/";
+//const baseURL = "https://lsu7lwwod8.execute-api.eu-west-1.amazonaws.com/api/";
 const apiHelper = new ApiHelper(baseURL);
 
 const main = document.querySelector('main');
@@ -13,7 +15,6 @@ const deletePreferenceBtn = document.getElementById('deletePrefs')
 const confirmDeleteDialog = document.getElementById('confirmDeleteDialog');
 const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-
 const addPreferenceBtn = document.getElementById('addPref');
 const addPreferenceDialog = document.getElementById('addPreferenceDialog');
 const cancelNewPreferenceBtn = document.getElementById('cancelNewPreferenceBtn');
@@ -145,7 +146,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.style.fontSize = defaultFontSize;
     document.body.style.color = defaultColor;
 
-    const options = ['Preference1', 'Preference2', 'Preference3']; //Get from backend
+    var userPrefs = await getUserPrefs();
+    console.log("HERE:" + userPrefs);
+    let options = [];
+    userPrefs.forEach(pref=>{
+      options.push(pref.profile);
+    })
     const fonts = ['Arial', 'Times New Roman', 'Verdana', 'Georgia', 'Roboto'] //Get from backend?
     
     options.forEach(optionText => {
@@ -197,7 +203,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     linkFontDropdown.addEventListener('change', (event) => {
         changeLinkFont(event.target.value);
     });
-
 });
 
 deletePreferenceBtn.onclick = () => {
@@ -218,6 +223,7 @@ confirmDeleteBtn.onclick = () => {
 
  addPreferenceBtn.onclick = () => {
     // GET ID OF NEXT PREFERENCE
+    getUserPrefs();
     nextPreferenceId.textContent = '5';
     addPreferenceDialog.style.visibility = 'visible';
     main.classList.add('blur');
@@ -307,25 +313,43 @@ function changeLinkSize(event)
 //         loginButton.classList.remove("hide");
 //     }
 // }
-setUserPreferences();
-console.log(userPreferencesObj);
+//setUserPreferences();
+//console.log(userPreferencesObj);
 
-async function healthCheck() {
+
+
+async function getUserPrefs() {
+  let prefs;
       try {
-        const response = await apiHelper.get();
+        const response = await apiHelper.get('Preference');
           
         if (response) {
           console.log(response);
+          prefs = await response;
         }
       } catch (error) {
         console.error('Error performing CRUD operation:', error);
       }
+      return prefs;
     }
+
+    async function saveUserPref(userPrefObj) {
+        try {
+          const response = await apiHelper.post('Preference',userPrefObj);
+            
+          if (response) {
+            console.log(response);
+          }
+        } catch (error) {
+          console.error('Error performing CRUD operation:', error);
+        }
+      }
 
 
     function displayUserPreferences()
     {
-        let storedPref = JSON.parse(localStorage.getItem("1"));
+        let storedPref = (JSON.parse(localStorage.getItem("1"))).preference;
+        try{
         colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
         colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
         colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
@@ -337,7 +361,8 @@ async function healthCheck() {
         headingsContainer.style.color = storedPref.HeaderTextColor;
         headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
 
-        paragraphArticle.style.color = storedPref.ParagraphTextColor;
+        paragraphText.style.color = storedPref.ParagraphTextColor;
+        paragraphText2.style.color = storedPref.ParagraphTextColor;
         paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
         header1.style.fontSize = storedPref.HeaderTextSize1;
         header2.style.fontSize = storedPref.HeaderTextSize2;
@@ -345,19 +370,25 @@ async function healthCheck() {
         header4.style.fontSize = storedPref.HeaderTextSize4;
         header5.style.fontSize = storedPref.HeaderTextSize5;
 
-        paragraphArticle.style.fontSize = storedPref.ParagraphTextSize,
+        paragraphText.style.fontSize = storedPref.ParagraphTextSize;
+        paragraphText2.style.fontSize = storedPref.ParagraphTextSize;
         linkText.style.fontSize = storedPref.LinkTextSize,
         headingsContainer.style.fontFamily = storedPref.fontFamily;
         paragraphArticle.style.fontFamily = storedPref.ParagraphFont,
         linkText.style.fontFamily = storedPref.LinkFont;
         linkText.style.color = storedPref.LinkTextColor;
         linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
+      }catch{
+        console.log("defaults");
+      }
 
     }
 
     function setUserPreferences()
     {
-        let userPrefs = {
+        let userPrefs ={
+          profile: "preference",
+          preference: {
             Color1 : getComputedStyle(colourPicker1.parentNode).backgroundColor,
             Color2 : getComputedStyle(colourPicker2.parentNode).backgroundColor,
             Color3 : getComputedStyle(colourPicker3.parentNode).backgroundColor,
@@ -379,10 +410,12 @@ async function healthCheck() {
             ParagraphFont : getComputedStyle(paragraphText).fontFamily,
             LinkFont : getComputedStyle(linkText).fontFamily
         }
+      }
         userPreferencesObj = userPrefs;
         localStorage.setItem("1", JSON.stringify(userPreferencesObj));
 
         console.log(userPreferencesObj);
+        saveUserPref(userPreferencesObj);
     }
     async function handleRedirect() {
         try{
