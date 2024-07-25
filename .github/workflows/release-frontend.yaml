@@ -1,0 +1,36 @@
+name: Release CD
+
+# Needs to be fixed once frontend and backend code merged
+
+on:
+  workflow_call: 
+    inputs:
+      account-id:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  security-events: write
+  id-token: write
+
+jobs:
+  frontend-deploy:
+    name: Frontend Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::${{ inputs.account-id }}:role/GithubRunner
+        aws-region: "eu-west-1"
+        role-session-name: GitHub_to_AWS_via_FederatedOIDC
+
+    - name: Upload new Frontend Files
+      run: |
+        aws s3 rm --recursive s3://${{ inputs.account-id  }}-frontend-deploy-bucket
+        aws s3 cp ./Frontend/src s3://${{ inputs.account-id  }}-frontend-deploy-bucket --recursive
+  

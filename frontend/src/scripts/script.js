@@ -88,10 +88,6 @@ paragraphSizeInput.addEventListener("change",changeParagraphSize);
 linkSizeInput.addEventListener("change",changeLinkSize);
 //healthCheck();
 
-function what()
-{
-    console.log("the fuck");
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     checkLoggedIn();

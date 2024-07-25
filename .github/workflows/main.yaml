@@ -1,0 +1,60 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  checks: write
+  contents: write
+  id-token: write
+  security-events: write
+
+jobs: 
+  changed_files:
+    runs-on: ubuntu-latest
+    name: Get changed-files
+    outputs: 
+      terraform_changed: ${{ steps.changed-files-yaml.outputs.terraform_any_changed }}
+      frontend_changed: ${{ steps.changed-files-yaml.outputs.frontend_any_changed }}
+      backend_changed: ${{ steps.changed-files-yaml.outputs.backend_any_changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get file changes
+        id: changed-files-yaml
+        uses: tj-actions/changed-files@v44
+        with:
+          files_yaml: |
+            terraform:
+              - Terraform/**
+            frontend:
+              - Frontend/**
+            backend:
+              - Backend/**
+
+  # terraform-apply:
+  #   name: "Terraform apply"
+  #   needs: changed_files
+  #   if: needs.changed_files.outputs.terraform_changed == 'true' && ${{ vars.DEPLOY_ON_MAIN }} == 'true'
+  #   secrets: inherit
+  #   uses: ./.github/workflows/terraform-apply.yaml
+  #   with:
+  #     account-id: ${{ vars.ACCOUNT_ID }}
+
+  release-api:
+    name: "Deploy API"
+    needs: [changed_files]
+    if: needs.changed_files.outputs.backend_changed == 'true' && ${{ vars.DEPLOY_ON_MAIN }} == 'true'
+    secrets: inherit
+    uses: ./.github/workflows/release-api.yaml  
+    with:
+      account-id: ${{ vars.ACCOUNT_ID }}
+
+  release-frontend:
+    name: "Deploy Frontend"
+    needs: [changed_files]
+    if: needs.changed_files.outputs.frontend_changed == 'true' && ${{ vars.DEPLOY_ON_MAIN }} == 'true'
+    secrets: inherit
+    uses: ./.github/workflows/release-frontend.yaml  
+    with:
+      account-id: ${{ vars.ACCOUNT_ID }}
