@@ -137,6 +137,7 @@ linkSizeInput.addEventListener("change", changeLinkSize);
 dropdown.addEventListener("change", switchPreference);
 
 async function loadStuff() {
+  console.log("we loading");
   var userPrefs = await getUserPrefs();
   let options = [];
   prefs = [];
@@ -144,7 +145,7 @@ async function loadStuff() {
   userPrefs.forEach((pref) => {
     options.push(pref.profile);
     prefs.push(pref.preference);
-    console.log(pref.preference);
+    console.log("hey tiger, pls work: " + pref.preference.Color1);
   });
 
   displayUserPreferences(prefs[0]);
@@ -281,12 +282,17 @@ postNewPreferenceBtn.onclick = () => {
 
 async function switchPreference() {
 
-  var userPrefs = await getUserPrefs();
+  userPrefs = await getUserPrefs();
   prefs = [];
 
   userPrefs.forEach((pref) => {
-    prefs.push(pref.preference);
-    console.log(pref.preference);
+    if(pref.preference == null)
+    {
+      prefs.push(defaultPref);
+    }
+    else{
+      prefs.push(pref.preference);
+    }
   });
     
     displayUserPreferences(prefs[dropdown.selectedIndex]);
