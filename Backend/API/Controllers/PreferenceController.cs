@@ -2,7 +2,6 @@ using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
-using System.IO;
 
 namespace API.Controllers
 {
@@ -19,7 +18,7 @@ namespace API.Controllers
 			_preferenceService = preferenceService;
 		}
 
-		[HttpGet("GetPreferences", Name = "GetPreferences")]
+		[HttpGet("", Name = "GetPreferences")]
 		public async Task<ActionResult<IEnumerable<PreferenceBody>>> GetPreferences()
 		{
 			try
@@ -36,7 +35,7 @@ namespace API.Controllers
 			}
 		}
 
-		[HttpPost("SetPreferences", Name = "SetPreferences")]
+		[HttpPost("", Name = "SetPreferences")]
 		public async Task<ActionResult> UpdatePreferences([FromBody] PreferenceBody body)
 		{
 			try
@@ -54,7 +53,7 @@ namespace API.Controllers
 		}
 
 
-		[HttpDelete("DeletePreference", Name = "DeletePreference")]
+		[HttpDelete("", Name = "DeletePreference")]
 		public async Task<ActionResult> DeletePreference([FromBody] string profileName)
 		{
 			try

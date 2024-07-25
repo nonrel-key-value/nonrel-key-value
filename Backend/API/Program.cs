@@ -2,7 +2,6 @@ using DotNetEnv;
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.Runtime;
-using Microsoft.Extensions.DependencyInjection;
 using API.Services;
 
 namespace API
@@ -34,8 +33,8 @@ namespace API
 
 			builder.Services.AddSingleton<IAmazonDynamoDB>(sp =>
 			{
-				var accessKeyId = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
-				var secretAccessKey = Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY");
+				var accessKeyId = Environment.GetEnvironmentVariable("DYNAMO_KEY");
+				var secretAccessKey = Environment.GetEnvironmentVariable("DYNAMO_SECRET");
 				var region = "eu-west-1";
 
 				if(string.IsNullOrEmpty(accessKeyId) || string.IsNullOrEmpty(secretAccessKey) || string.IsNullOrEmpty(region))

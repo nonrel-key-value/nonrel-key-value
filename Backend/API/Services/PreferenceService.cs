@@ -79,7 +79,7 @@ namespace API.Services
 			var response = await _dynamoDBClient.DeleteItemAsync(request);
 			if(response.HttpStatusCode == System.Net.HttpStatusCode.OK) return;
 
-			throw new Exception("Error publishing to DynamoDB");
+			throw new Exception("Error deleting from DynamoDB");
 		}
 	}
 }
