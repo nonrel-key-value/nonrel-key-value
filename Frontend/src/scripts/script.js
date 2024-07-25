@@ -98,8 +98,8 @@ const paragraphText2 = document.getElementById("pText2");
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
 
-var userPrefs = [];
 var storedPref;
+let prefs = [];
 
 // const loginButton = document.getElementById("loginLink");
 
@@ -138,11 +138,12 @@ dropdown.addEventListener("change", switchPreference);
 
 async function loadStuff() {
   var userPrefs = await getUserPrefs();
-  console.log("HERE:" + userPrefs[1]);
   let options = [];
+  prefs = [];
 
   userPrefs.forEach((pref) => {
     options.push(pref.profile);
+    prefs.push(pref.preference);
   });
 
   dropdown.replaceChildren();
@@ -277,12 +278,8 @@ postNewPreferenceBtn.onclick = () => {
 
 async function switchPreference(event) {
 
-    var uPrefs = await getUserPrefs();
-    console.log("preference switched to: " + uPrefs[dropdown.selectedIndex].profile);
-    console.log("user prefs: " + uPrefs);
-    storedPref = userPrefs[dropdown.selectedIndex].preference;
     console.log("storedPref: " + storedPref);
-    displayUserPreferences();
+    displayUserPreferences(prefs[dropdown.selectedIndex]);
     // Set content based on value
 }
 
@@ -391,15 +388,10 @@ async function saveUserPref(userPrefObj) {
     console.error("Error performing CRUD operation:", error);
   }
 }
-    async function displayUserPreferences()
+    async function displayUserPreferences(pref)
     {
-      console.log("stored pref: " + storedPref.preference);
-
-      let pref = storedPref.preference;
-      console.log("pref");
-      console.log("here !!!!!!");
+      console.log("pref: " + pref);
         try{
-
         colourPicker1.parentNode.style.backgroundColor = pref.Color1;
         colourPicker2.parentNode.style.backgroundColor = pref.Color2;
         colourPicker3.parentNode.style.backgroundColor = pref.Color3;
