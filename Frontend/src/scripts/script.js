@@ -343,14 +343,14 @@ async function getUserPrefs() {
 
     function displayUserPreferences()
     {
-        let storedPref = JSON.parse(localStorage.getItem("1"));
-        colourPicker1.parentNode.style.backgroundColor = storedPref.preference.Color1;
-        colourPicker2.parentNode.style.backgroundColor = storedPref.preference.Color2;
-        colourPicker3.parentNode.style.backgroundColor = storedPref.preference.Color3;
-        colourPicker4.parentNode.style.backgroundColor = storedPref.preference.Color4;
-        colourPicker5.parentNode.style.backgroundColor = storedPref.preference.Color5;
-        colourPicker6.parentNode.style.backgroundColor = storedPref.preference.Color6;
-        colourPicker7.parentNode.style.backgroundColor = storedPref.preference.Color7;
+        let storedPref = (JSON.parse(localStorage.getItem("1"))).preference;
+        colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
+        colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
+        colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
+        colourPicker4.parentNode.style.backgroundColor = storedPref.Color4;
+        colourPicker5.parentNode.style.backgroundColor = storedPref.Color5;
+        colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
+        colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
 
         headingsContainer.style.color = storedPref.HeaderTextColor;
         headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
