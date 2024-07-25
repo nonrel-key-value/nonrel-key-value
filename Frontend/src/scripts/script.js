@@ -150,7 +150,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.style.fontSize = defaultFontSize;
     document.body.style.color = defaultColor;
 
-    const options = ['Preference1', 'Preference2', 'Preference3']; //Get from backend
+    var userPrefs = await getUserPrefs();
+    console.log("HERE:" + userPrefs);
+    let options = [];
+    userPrefs.forEach(pref=>{
+      options.push(pref.profile);
+    })
     const fonts = ['Arial', 'Times New Roman', 'Verdana', 'Georgia', 'Roboto'] //Get from backend?
     
     options.forEach(optionText => {
@@ -365,7 +370,7 @@ async function getUserPrefs() {
       } catch (error) {
         console.error('Error performing CRUD operation:', error);
       }
-      return JSON.parse(prefs);
+      return prefs;
     }
 
     async function saveUserPref(userPrefObj) {
@@ -421,7 +426,7 @@ async function getUserPrefs() {
 
     function setUserPreferences()
     {
-        let userPrefs = {
+        let userPrefs ={
           profile: "preference",
           preference: {
             Color1 : getComputedStyle(colourPicker1.parentNode).backgroundColor,
