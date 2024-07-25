@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // checkLoggedIn();
 
-  const fonts = ["Arial", "Times New Roman", "Verdana", "Georgia", "Roboto"]; //Get from backend?
+  const fonts = ["Arial", "Times New Roman", "Verdana", "Georgia", "Roboto","Pacifico"]; //Get from backend?
 
   document.body.style.fontSize = defaultFontSize;
   document.body.style.color = defaultColor;
