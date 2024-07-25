@@ -115,9 +115,12 @@ async function loadStuff() {
   var userPrefs = await getUserPrefs();
   console.log("HERE:" + userPrefs);
   let options = [];
+
   userPrefs.forEach((pref) => {
     options.push(pref.profile);
   });
+
+  dropdown.replaceChildren();
 
   options.forEach((optionText) => {
     const option = document.createElement("option");
