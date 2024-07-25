@@ -271,28 +271,7 @@ postNewPreferenceBtn.onclick = () => {
 
   let obj = {
     profile: `Preference${newPreferenceId}`,
-    preference: {
-      color1: "rgba(255, 192, 203, 0.094)",
-      color2: "rgba(255, 192, 203, 0.094)",
-      color3: "rgba(255, 192, 203, 0.094)",
-      color4: "rgba(255, 192, 203, 0.094)",
-      color5: "rgba(255, 192, 203, 0.094)",
-      color6: "rgba(255, 192, 203, 0.094)",
-      color7: "rgba(255, 192, 203, 0.094)",
-      headerTextColor: "rgb(0, 0, 0)",
-      headerTextSize1: "16px",
-      headerTextSize2: "16px",
-      headerTextSize3: "16px",
-      headerTextSize4: "16px",
-      headerTextSize5: "16px",
-      headersFont: "Poppins, sans-serif",
-      linkFont: "Poppins, sans-serif",
-      linkTextColor: "rgb(0, 0, 0)",
-      linkTextSize: "16px",
-      paragraphFont: "Poppins, sans-serif",
-      paragraphTextColor: "rgb(0, 0, 0)",
-      paragraphTextSize: "16px",
-    },
+    defaultPref,
   };
 
   saveUserPref(obj);
