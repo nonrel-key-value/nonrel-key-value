@@ -75,6 +75,8 @@ paragraphSizeInput.addEventListener("change",changeParagraphSize);
 linkSizeInput.addEventListener("change",changeLinkSize);
 //healthCheck();
 
+dropdown.addEventListener("change",switchPreference);
+
 
 document.addEventListener('DOMContentLoaded', () => {
     checkLoggedIn();
@@ -120,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function switchPreference(value) {
     console.log("preference switched to: " + value);
+    displayUserPreferences();
     // Set content based on value
     // selectedPreference.textContent = `Selected preference is: ${value}`;
 }
@@ -175,6 +178,35 @@ async function healthCheck() {
       }
     }
 
+
+    function displayUserPreferences()
+    {
+        let storedPref = JSON.parse(localStorage.getItem("1"));
+        console.log("here we go");
+        colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
+        colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
+        colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
+        colourPicker4.parentNode.style.backgroundColor = storedPref.Color4;
+        colourPicker5.parentNode.style.backgroundColor = storedPref.Color5;
+        colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
+        colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
+
+        console.log("hhuh??");
+        header1.style.color = storedPref.HeaderTextColor;
+        paragraphText.style.color = storedPref.ParagraphTextColor;
+        header1.style.fontSize = storedPref.HeaderTextSize1;
+        header2.style.fontSize = storedPref.HeaderTextSize2;
+        header3.style.fontSize = storedPref.HeaderTextSize3;
+        header4.style.fontSize = storedPref.HeaderTextSize4;
+        header5.style.fontSize = storedPref.HeaderTextSize5;
+
+        paragraphText.style.fontSize = storedPref.ParagraphTextSize,
+        linkText.style.fontSize = storedPref.LinkTextSize,
+        header1.style.fontFamily = storedPref.HeadersFont,
+        paragraphText.style.fontFamily = storedPref.ParagraphFont,
+        linkText.style.fontFamily = storedPref.LinkFont;
+    }
+
     function setUserPreferences()
     {
         let userPrefs = {
@@ -200,5 +232,7 @@ async function healthCheck() {
             LinkFont : getComputedStyle(linkText).fontFamily
         }
         userPreferencesObj = userPrefs;
+        localStorage.setItem("1", JSON.stringify(userPreferencesObj));
+
         console.log(userPreferencesObj);
     }
