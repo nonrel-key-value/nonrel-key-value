@@ -33,47 +33,19 @@ jobs:
             backend:
               - Backend/**
 
-      - name: Run step if test file(s) change 
-        env:
-          TF: ${{ steps.changed-files-yaml.outputs.terraform_any_changed }}
-          FE: ${{ steps.changed-files-yaml.outputs.frontend_any_changed }}
-          BE: ${{ steps.changed-files-yaml.outputs.backend_any_changed }}
-        run: |
-          echo "TF: $TF"
-          echo "FE: $FE"
-          echo "BE: $BE"
-
   # terraform-plan:
   #   name: "Terraform plan"
   #   needs: changed_files
-  #   if: needs.changed_files.outputs.terraform_changed == 'true'
+  #   if: ${{ needs.changed_files.outputs.terraform_changed == 'true' }}
   #   secrets: inherit
   #   uses: ./.github/workflows/terraform-plan.yaml
   #   with:
   #     account-id: ${{ vars.ACCOUNT_ID }}
 
-  test:
-    name: "Test"
-    needs: [changed_files]
-    runs-on: ubuntu-latest
-    env:
-      TF: ${{ needs.changed_files.outputs.terraform_changed }}
-      FE: ${{ needs.changed_files.outputs.frontend_changed }}
-      BE: ${{ needs.changed_files.outputs.backend_changed }}
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@main
-
-      - name: Test
-        run: |
-          echo "TF: $TF"
-          echo "FE: $FE"
-          echo "BE: $BE"
-
   release-api:
     name: "Deploy API"
     needs: [changed_files]
-    if: ${{ vars.DEPLOY_ON_PR == 'true' && needs.changed_files.outputs.backend_changed == 'true'}}
+    if: ${{ needs.changed_files.outputs.backend_changed == 'true' && vars.DEPLOY_ON_PR == 'true' }}
     secrets: inherit
     uses: ./.github/workflows/release-api.yaml  
     with:
@@ -82,7 +54,7 @@ jobs:
   release-frontend:
     name: "Deploy Frontend"
     needs: [changed_files]
-    if: (needs.changed_files.outputs.frontend_changed == 'true' && ${{ vars.DEPLOY_ON_PR }} == 'true')
+    if: ${{ needs.changed_files.outputs.frontend_changed == 'true' && vars.DEPLOY_ON_PR == 'true' }}
     secrets: inherit
     uses: ./.github/workflows/release-frontend.yaml  
     with:
