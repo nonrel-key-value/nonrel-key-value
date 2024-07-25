@@ -414,6 +414,8 @@ async function saveUserPref(userPrefObj) {
 }
     function displayUserPreferences()
     {
+      console.log("here !!!!!!");
+      console.log(userPrefs);
         storedPref = userPrefs[dropdown.selectedIndex].preference;
         try{
         colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
