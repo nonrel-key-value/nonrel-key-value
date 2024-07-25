@@ -310,17 +310,34 @@ function changeLinkSize(event)
 setUserPreferences();
 console.log(userPreferencesObj);
 
-async function healthCheck() {
+getUserPrefs();
+
+async function getUserPrefs() {
+  let prefs;
       try {
-        const response = await apiHelper.get();
+        const response = await apiHelper.get('Preferences');
           
         if (response) {
           console.log(response);
+          prefs = await response;
         }
       } catch (error) {
         console.error('Error performing CRUD operation:', error);
       }
+      return JSON.parse(prefs);
     }
+
+    async function saveUserPref(userPrefObj) {
+        try {
+          const response = await apiHelper.post('Preference/SetPreferences');
+            
+          if (response) {
+            console.log(response);
+          }
+        } catch (error) {
+          console.error('Error performing CRUD operation:', error);
+        }
+      }
 
 
     function displayUserPreferences()
@@ -337,7 +354,8 @@ async function healthCheck() {
         headingsContainer.style.color = storedPref.HeaderTextColor;
         headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
 
-        paragraphArticle.style.color = storedPref.ParagraphTextColor;
+        paragraphText.style.color = storedPref.ParagraphTextColor;
+        paragraphText2.style.color = storedPref.ParagraphTextColor;
         paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
         header1.style.fontSize = storedPref.HeaderTextSize1;
         header2.style.fontSize = storedPref.HeaderTextSize2;
@@ -345,7 +363,8 @@ async function healthCheck() {
         header4.style.fontSize = storedPref.HeaderTextSize4;
         header5.style.fontSize = storedPref.HeaderTextSize5;
 
-        paragraphArticle.style.fontSize = storedPref.ParagraphTextSize,
+        paragraphText.style.fontSize = storedPref.ParagraphTextSize;
+        paragraphText2.style.fontSize = storedPref.ParagraphTextSize;
         linkText.style.fontSize = storedPref.LinkTextSize,
         headingsContainer.style.fontFamily = storedPref.fontFamily;
         paragraphArticle.style.fontFamily = storedPref.ParagraphFont,

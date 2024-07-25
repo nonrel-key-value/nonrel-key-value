@@ -32,6 +32,8 @@ export class ApiHelper {
         const options = {
             method: 'GET',
             headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${sessionStorage.getItem("id_token")}`
             }
         }
 
