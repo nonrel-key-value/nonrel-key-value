@@ -303,21 +303,6 @@ function changeLinkSize(event)
     linkText.style.fontSize = (event.target.value) + "pt";
 }
 
-// function checkLoggedIn()
-// {
-//     if(logged_in)
-//     {
-//         loginButton.classList.add("hide");
-//     }
-//     else{
-//         loginButton.classList.remove("hide");
-//     }
-// }
-//setUserPreferences();
-//console.log(userPreferencesObj);
-
-
-
 async function getUserPrefs() {
   let prefs;
       try {
