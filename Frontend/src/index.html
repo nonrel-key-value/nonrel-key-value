@@ -61,7 +61,7 @@
             </li>
             <li class="colourListItem">
               <label class="colourInput" id="colourLabel7"><input id="inputColour7" class="colourIn" type="color" id="colour7" value="#ff0000"></label>
-              <p>Colour 7</p>
+              <p class="normalFont">Colour 7</p>
             </li>
           </ul>
         </article>
@@ -71,11 +71,12 @@
           <article class="fontSelectorContainer">
             <p class="normalFont">Font:</p>
             <select id="fontDropdown"></select>
+            <label class="headingColourInput" id="headingsColourInput"><input id="inputColour1" class="colourIn" type="color" id="colour1" value="#000000"></label>
           </article>
           <article>
             <ul id="headings" class="textList">
               <li>
-                <label id="heading1">Heading 1</label><input type="range" id="headingSize1" name="headingSize1" min="8" max="30">
+                <label id="heading1">Heading 1<input type="range" id="headingSize1" name="headingSize1" min="8" max="30"></label>
               </li>
               <li>
                 <label id="heading2">Heading 2<input type="range" id="headingSize2" name="headingSize2" min="8" max="30"></label>
@@ -93,10 +94,17 @@
           </article>
           <article id="paragraphArticle">
             <p id="pText" class="paragraphText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam at, dolorum quo eveniet nesciunt totam doloremque adipisci! Veritatis eligendi, maiores velit impedit consectetur magni. Laudantium, dolor aliquid! Repudiandae, quae neque?</p>
-            <p class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p> 
+            <p id="pText2" class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p> 
+            <section class="paragraphOptions">
             <input type="range" id="paragraphSize" name="paragraphSize" min="8" max="15">
+            <label class="paragraphColourInput" id="pColourInput" ><input id="inputParagraphColour" class="colourIn" type="color" id="colour1" value="#000000"></label>
+          </section>
           </article>
+          <section class="linkOptions">
           <label id="linkText">https://linkSize.com<input type="range" id="linkSize" name="linkSize" min="8" max="30"></label>
+          <label class="linkColourInput" id="lColourInput"><input id="inputLinkColour" class="colourIn" type="color" id="colour1" value="#000000"></label>
+        </section>
+
         </article>
       </section>
 

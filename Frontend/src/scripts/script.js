@@ -24,6 +24,8 @@ const colourPicker7 = document.getElementById("inputColour7");
 
 const fontDropdown = document.getElementById("fontDropdown");
 
+const inputParagraphColour = document.getElementById("inputParagraphColour");
+
 const headingSize1 = document.getElementById("headingSize1");
 const headingSize2 = document.getElementById("headingSize2");
 const headingSize3 = document.getElementById("headingSize3");
@@ -36,14 +38,22 @@ const header3 = document.getElementById("heading3");
 const header4 = document.getElementById("heading4");
 const header5 = document.getElementById("heading5");
 
+const headingsColor = document.getElementById("headingsColourInput");
+
+const inputLinkColour = document.getElementById("inputLinkColour");
+
 const savePrefs = document.getElementById("savePrefs");
 
+const paragraphColPicker = document.getElementById("pColourInput");
+const headerColPicker = document.getElementById("headingsColourInput");
+const linkColPicker = document.getElementById("lColourInput");
 
 
 const paragraphArticle = document.getElementById("paragraphArticle");
 const linkText = document.getElementById("linkText");
 
 const paragraphText = document.getElementById("pText");
+const paragraphText2 = document.getElementById("pText2");
 
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
@@ -68,12 +78,20 @@ headingSize3.addEventListener("change",changeSize);
 headingSize4.addEventListener("change",changeSize);
 headingSize5.addEventListener("change",changeSize);
 
+inputParagraphColour.addEventListener("change",changeParagraphColour);
+
+headingsColor.addEventListener("change", changeHeadingColour);
+
+inputLinkColour.addEventListener("change",changeLinkColour);
+
 savePrefs.addEventListener("click", setUserPreferences);
 
 paragraphSizeInput.addEventListener("change",changeParagraphSize);
 
 linkSizeInput.addEventListener("change",changeLinkSize);
 //healthCheck();
+
+dropdown.addEventListener("change",switchPreference);
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -120,17 +138,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function switchPreference(value) {
     console.log("preference switched to: " + value);
+    displayUserPreferences();
     // Set content based on value
     // selectedPreference.textContent = `Selected preference is: ${value}`;
 }
 
 function changeFont(value) {
     headings.style.fontFamily = value;
+    header1.style.fontFamily = value;
 }
 
 function changeColour(event)
 {
     event.target.parentNode.style.backgroundColor = event.target.value;
+}
+
+function changeParagraphColour(event)
+{
+    event.target.parentNode.style.backgroundColor = event.target.value;
+    paragraphText.style.color = event.target.value;
+    paragraphText2.style.color = event.target.value;
+}
+
+function changeHeadingColour(event)
+{
+    event.target.parentNode.style.backgroundColor = event.target.value;
+    header1.style.color = event.target.value;
+    header2.style.color = event.target.value;
+    header3.style.color = event.target.value;
+    header4.style.color = event.target.value;
+    header5.style.color = event.target.value;
+}
+
+function changeLinkColour(event)
+{
+    event.target.parentNode.style.backgroundColor = event.target.value;
+    linkText.style.color = event.target.value;
 }
 
 function changeSize(event)
@@ -175,6 +218,46 @@ async function healthCheck() {
       }
     }
 
+
+    function displayUserPreferences()
+    {
+        let storedPref = JSON.parse(localStorage.getItem("1"));
+        colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
+        colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
+        colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
+        colourPicker4.parentNode.style.backgroundColor = storedPref.Color4;
+        colourPicker5.parentNode.style.backgroundColor = storedPref.Color5;
+        colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
+        colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
+
+        header1.style.color = storedPref.HeaderTextColor;
+        header2.style.color = storedPref.HeaderTextColor;
+        header3.style.color = storedPref.HeaderTextColor;
+        header4.style.color = storedPref.HeaderTextColor;
+        header5.style.color = storedPref.HeaderTextColor;
+        headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
+
+        paragraphText.style.color = storedPref.ParagraphTextColor;
+        paragraphText2.style.color = storedPref.ParagraphTextColor;
+        paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
+        header1.style.fontSize = storedPref.HeaderTextSize1;
+        header2.style.fontSize = storedPref.HeaderTextSize2;
+        header3.style.fontSize = storedPref.HeaderTextSize3;
+        header4.style.fontSize = storedPref.HeaderTextSize4;
+        header5.style.fontSize = storedPref.HeaderTextSize5;
+
+        paragraphText.style.fontSize = storedPref.ParagraphTextSize,
+        paragraphText2.style.fontSize = storedPref.ParagraphTextSize,
+        linkText.style.fontSize = storedPref.LinkTextSize,
+        header1.style.fontFamily = storedPref.HeadersFont,
+        paragraphText.style.fontFamily = storedPref.ParagraphFont,
+        paragraphText2.style.fontFamily = storedPref.ParagraphFont,
+        linkText.style.fontFamily = storedPref.LinkFont;
+        linkText.style.color = storedPref.LinkTextColor;
+        linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
+
+    }
+
     function setUserPreferences()
     {
         let userPrefs = {
@@ -200,5 +283,28 @@ async function healthCheck() {
             LinkFont : getComputedStyle(linkText).fontFamily
         }
         userPreferencesObj = userPrefs;
+        localStorage.setItem("1", JSON.stringify(userPreferencesObj));
+
         console.log(userPreferencesObj);
     }
+    async function handleRedirect() {
+        try{
+        let hash = location.hash.substring(1); // Remove the '#' from the beginning
+        let fragmentParams = new URLSearchParams(hash);
+        let accessToken = fragmentParams.get("access_token");
+        if(accessToken){
+            logged_in = true;
+          sessionStorage.setItem("Token", accessToken);
+          history.replaceState(null, null, window.location.href.split("#")[0]);
+        }
+        }
+        catch(err){
+        console.log("Something failed: " + err);
+        }
+      }
+      
+      window.addEventListener("load", handleRedirect);
+      
+      export async function auth() {
+        await login();
+      }
