@@ -222,6 +222,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   headingFontDropdown.addEventListener("change", (event) => {
     changeHeadingFont(event.target.value);
+    console.log("heading font: " + event.target.value);
   });
 
   paragraphFontDropdown.addEventListener("change", (event) => {
