@@ -33,6 +33,14 @@ jobs:
             backend:
               - Backend/**
 
+      - name: Run step if test file(s) change
+        if: steps.changed-files-yaml.outputs.frontend_any_changed == 'true'  
+        env:
+          TEST_ALL_CHANGED_FILES: ${{ steps.changed-files-yaml.outputs.frontend_all_changed_files }}
+        run: |
+          echo "One or more test file(s) has changed."
+          echo "List all the files that have changed: $TEST_ALL_CHANGED_FILES"
+
   # terraform-plan:
   #   name: "Terraform plan"
   #   needs: changed_files
