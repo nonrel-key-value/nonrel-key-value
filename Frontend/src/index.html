@@ -65,19 +65,19 @@
           <article>
             <ul id="headings" class="textList">
               <li>
-                <label class="rowElement" id="heading1">Heading 1<input type="range" id="headingSize1" name="headingSize1" min="8" max="30"></label>
+                <label class="rowElement" id="heading1">Heading 1<input type="range" id="headingSize1" name="headingSize1" min="8" max="24"></label>
               </li>
               <li>
-                <label class="rowElement" id="heading2">Heading 2<input type="range" id="headingSize2" name="headingSize2" min="8" max="30"></label>
+                <label class="rowElement" id="heading2">Heading 2<input type="range" id="headingSize2" name="headingSize2" min="8" max="24"></label>
               </li>
               <li>
-                <label class="rowElement" id="heading3">Heading 3<input type="range" id="headingSize3" name="headingSize3" min="8" max="30"></label>
+                <label class="rowElement" id="heading3">Heading 3<input type="range" id="headingSize3" name="headingSize3" min="8" max="24"></label>
               </li>
               <li>
-                <label class="rowElement" id="heading4">Heading 4<input type="range" id="headingSize4" name="headingSize4" min="8" max="30"></label>
+                <label class="rowElement" id="heading4">Heading 4<input type="range" id="headingSize4" name="headingSize4" min="8" max="24"></label>
               </li>
               <li>
-                <label class="rowElement" id="heading5">Heading 5<input type="range" id="headingSize5" name="headingSize5" min="8" max="30"></label>
+                <label class="rowElement" id="heading5">Heading 5<input type="range" id="headingSize5" name="headingSize5" min="8" max="24"></label>
               </li>
               <li>
                 <label class="headingColourInput colorDropdown" id="headingsColourInput"><input id="inputColour1" class="colourIn" type="color" id="colour1" value="#000000"><select id="headingFontDropdown"></select></label>
@@ -106,21 +106,31 @@
     </main>
 
     <dialog id="confirmDeleteDialog">
-      <h1 class="delete-title">Confirm Deletion</h1>
-      <p class="delete-text">Are you sure you want to delete this preference? This can not be undone!</p>
-      <footer class="button-container">
-          <button id="cancelDeleteBtn" class="cancel-delete--btn">Cancel</button>
-          <button id="confirmDeleteBtn" class="confirm-delete--btn">Delete</button>
-      </footer>
+      <header>
+        <h1 class="delete-title">Confirm Deletion</h1>
+      </header>
+      <section>
+        <p class="delete-text">Are you sure you want to delete <label id="currentPreferenceName"></label>>? This can not be undone!</p>
+        <footer class="button-container">
+            <button id="cancelDeleteBtn" class="cancel-delete--btn">Cancel</button>
+            <button id="confirmDeleteBtn" class="confirm-delete--btn">Delete</button>
+        </footer>
+      </section>
     </dialog>
 
     <dialog id="addPreferenceDialog">
-      <h1 class="add-title">Add New Preference</h1>
-      <p class="add-text">You will be creating a new preference called Preference<label id="nextPreferenceId">XXX</label></p>
-      <footer class="button-container">
-        <button id="cancelNewPreferenceBtn">Cancel</button>
-          <button id="postNewPreferenceBtn">Add Preference</button>
-      </footer>
+      <header class="dialog-header">
+        <h1 class="add-title">Add New Preference</h1>
+      </header>
+      <section>
+        <p class="add-text">Please select the index of the preference:<input id="preferenceId" class="preference-index" type="number" value="0" min="0" max="9"></p>
+        <p class="add-text">You will be creating a new preference called Preference<label id="nextPreferenceId">0</label></p>
+        <p>If this preference already exists it will be overwritten. So be careful pls.</p>
+        <footer class="button-container">
+          <button id="cancelNewPreferenceBtn">Cancel</button>
+            <button id="postNewPreferenceBtn">Add Preference</button>
+        </footer>
+      </section>     
     </dialog>
   </body>
 </html>
