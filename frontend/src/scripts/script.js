@@ -287,3 +287,24 @@ async function healthCheck() {
 
         console.log(userPreferencesObj);
     }
+    async function handleRedirect() {
+        try{
+        let hash = location.hash.substring(1); // Remove the '#' from the beginning
+        let fragmentParams = new URLSearchParams(hash);
+        let accessToken = fragmentParams.get("access_token");
+        if(accessToken){
+            logged_in = true;
+          sessionStorage.setItem("Token", accessToken);
+          history.replaceState(null, null, window.location.href.split("#")[0]);
+        }
+        }
+        catch(err){
+        console.log("Something failed: " + err);
+        }
+      }
+      
+      window.addEventListener("load", handleRedirect);
+      
+      export async function auth() {
+        await login();
+      }
