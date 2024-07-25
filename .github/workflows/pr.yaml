@@ -52,6 +52,22 @@ jobs:
   #   with:
   #     account-id: ${{ vars.ACCOUNT_ID }}
 
+  test:
+    name: "Test"
+    needs: [changed_files]
+    secrets: inherit
+    runs-on: ubuntu-latest
+    env:
+      TF: ${{ needs.changed_files.outputs.terraform_changed }}
+      FE: ${{ needs.changed_files.outputs.frontend_changed }}
+      BE: ${{ needs.changed_files.outputs.backend_changed }}
+    steps:
+      - name: Test
+        run: |
+          echo "TF: $TF"
+          echo "FE: $FE"
+          echo "BE: $BE"
+
   release-api:
     name: "Deploy API"
     needs: [changed_files]
