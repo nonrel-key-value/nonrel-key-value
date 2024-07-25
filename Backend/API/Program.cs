@@ -16,7 +16,7 @@ namespace API
 								  policy =>
 								  {
 									  policy.AllowAnyOrigin()
-										   .WithMethods("GET", "POST")
+										   .WithMethods("GET", "POST", "OPTIONS")
 										   .AllowAnyHeader();
 								  });
 			});
