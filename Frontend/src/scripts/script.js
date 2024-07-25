@@ -310,7 +310,10 @@ function changeLinkSize(event)
 setUserPreferences();
 console.log(userPreferencesObj);
 
-getUserPrefs();
+if(sessionStorage.getItem("id_token") != null)
+{
+  getUserPrefs();
+}
 
 async function getUserPrefs() {
   let prefs;
@@ -402,6 +405,7 @@ async function getUserPrefs() {
         localStorage.setItem("1", JSON.stringify(userPreferencesObj));
 
         console.log(userPreferencesObj);
+        saveUserPref(JSON.stringify(userPreferencesObj))
     }
     async function handleRedirect() {
         try{
