@@ -395,70 +395,68 @@ async function saveUserPref(userPrefObj) {
 }
     async function displayUserPreferences()
     {
-      userPrefs = await getUserPrefs();
+      pref = storedPref.preference;
       console.log("here !!!!!!");
-      console.log(userPrefs);
-        storedPref = userPrefs[dropdown.selectedIndex].preference;
         try{
-        colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
-        colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
-        colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
-        colourPicker4.parentNode.style.backgroundColor = storedPref.Color4;
-        colourPicker5.parentNode.style.backgroundColor = storedPref.Color5;
-        colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
-        colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
+        colourPicker1.parentNode.style.backgroundColor = pref.Color1;
+        colourPicker2.parentNode.style.backgroundColor = pref.Color2;
+        colourPicker3.parentNode.style.backgroundColor = pref.Color3;
+        colourPicker4.parentNode.style.backgroundColor = pref.Color4;
+        colourPicker5.parentNode.style.backgroundColor = pref.Color5;
+        colourPicker6.parentNode.style.backgroundColor = pref.Color6;
+        colourPicker7.parentNode.style.backgroundColor = pref.Color7;
 
-        headingsContainer.style.color = storedPref.HeaderTextColor;
-        headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
+        headingsContainer.style.color = pref.HeaderTextColor;
+        headerColPicker.style.backgroundColor = pref.HeaderTextColor;
 
-        paragraphText.style.color = storedPref.ParagraphTextColor;
-        paragraphText2.style.color = storedPref.ParagraphTextColor;
-        paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
-        header1.style.fontSize = storedPref.HeaderTextSize1;
-        header2.style.fontSize = storedPref.HeaderTextSize2;
-        header3.style.fontSize = storedPref.HeaderTextSize3;
-        header4.style.fontSize = storedPref.HeaderTextSize4;
-        header5.style.fontSize = storedPref.HeaderTextSize5;
+        paragraphText.style.color = pref.ParagraphTextColor;
+        paragraphText2.style.color = pref.ParagraphTextColor;
+        paragraphColPicker.style.backgroundColor = pref.ParagraphTextColor;
+        header1.style.fontSize = pref.HeaderTextSize1;
+        header2.style.fontSize = pref.HeaderTextSize2;
+        header3.style.fontSize = pref.HeaderTextSize3;
+        header4.style.fontSize = pref.HeaderTextSize4;
+        header5.style.fontSize = pref.HeaderTextSize5;
 
-        paragraphText.style.fontSize = storedPref.ParagraphTextSize;
-        paragraphText2.style.fontSize = storedPref.ParagraphTextSize;
-        linkText.style.fontSize = storedPref.LinkTextSize,
-        headingsContainer.style.fontFamily = storedPref.fontFamily;
-        paragraphArticle.style.fontFamily = storedPref.ParagraphFont,
-        linkText.style.fontFamily = storedPref.LinkFont;
-        linkText.style.color = storedPref.LinkTextColor;
-        linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
+        paragraphText.style.fontSize = pref.ParagraphTextSize;
+        paragraphText2.style.fontSize = pref.ParagraphTextSize;
+        linkText.style.fontSize = pref.LinkTextSize,
+        headingsContainer.style.fontFamily = pref.fontFamily;
+        paragraphArticle.style.fontFamily = pref.ParagraphFont,
+        linkText.style.fontFamily = pref.LinkFont;
+        linkText.style.color = pref.LinkTextColor;
+        linkColPicker.style.backgroundColor = pref.LinkTextColor;
       }catch{
         console.log("defaulting");
-        storedPref = defaultPref;
-        colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
-        colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
-        colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
-        colourPicker4.parentNode.style.backgroundColor = storedPref.Color4;
-        colourPicker5.parentNode.style.backgroundColor = storedPref.Color5;
-        colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
-        colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
+        let storedPref2 = defaultPref;
+        colourPicker1.parentNode.style.backgroundColor = storedPref2.Color1;
+        colourPicker2.parentNode.style.backgroundColor = storedPref2.Color2;
+        colourPicker3.parentNode.style.backgroundColor = storedPref2.Color3;
+        colourPicker4.parentNode.style.backgroundColor = storedPref2.Color4;
+        colourPicker5.parentNode.style.backgroundColor = storedPref2.Color5;
+        colourPicker6.parentNode.style.backgroundColor = storedPref2.Color6;
+        colourPicker7.parentNode.style.backgroundColor = storedPref2.Color7;
 
-        headingsContainer.style.color = storedPref.HeaderTextColor;
-        headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
+        headingsContainer.style.color = storedPref2.HeaderTextColor;
+        headerColPicker.style.backgroundColor = storedPref2.HeaderTextColor;
 
-        paragraphText.style.color = storedPref.ParagraphTextColor;
-        paragraphText2.style.color = storedPref.ParagraphTextColor;
-        paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
-        header1.style.fontSize = storedPref.HeaderTextSize1;
-        header2.style.fontSize = storedPref.HeaderTextSize2;
-        header3.style.fontSize = storedPref.HeaderTextSize3;
-        header4.style.fontSize = storedPref.HeaderTextSize4;
-        header5.style.fontSize = storedPref.HeaderTextSize5;
+        paragraphText.style.color = storedPref2.ParagraphTextColor;
+        paragraphText2.style.color = storedPref2.ParagraphTextColor;
+        paragraphColPicker.style.backgroundColor = storedPref2.ParagraphTextColor;
+        header1.style.fontSize = storedPref2.HeaderTextSize1;
+        header2.style.fontSize = storedPref2.HeaderTextSize2;
+        header3.style.fontSize = storedPref2.HeaderTextSize3;
+        header4.style.fontSize = storedPref2.HeaderTextSize4;
+        header5.style.fontSize = storedPref2.HeaderTextSize5;
 
-        paragraphText.style.fontSize = storedPref.ParagraphTextSize;
-        paragraphText2.style.fontSize = storedPref.ParagraphTextSize;
-        linkText.style.fontSize = storedPref.LinkTextSize,
-        headingsContainer.style.fontFamily = storedPref.fontFamily;
-        paragraphArticle.style.fontFamily = storedPref.ParagraphFont,
-        linkText.style.fontFamily = storedPref.LinkFont;
-        linkText.style.color = storedPref.LinkTextColor;
-        linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
+        paragraphText.style.fontSize = storedPref2.ParagraphTextSize;
+        paragraphText2.style.fontSize = storedPref2.ParagraphTextSize;
+        linkText.style.fontSize = storedPref2.LinkTextSize,
+        headingsContainer.style.fontFamily = storedPref2.fontFamily;
+        paragraphArticle.style.fontFamily = storedPref2.ParagraphFont,
+        linkText.style.fontFamily = storedPref2.LinkFont;
+        linkText.style.color = storedPref2.LinkTextColor;
+        linkColPicker.style.backgroundColor = storedPref2.LinkTextColor;
       }
     }
 
