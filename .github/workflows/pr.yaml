@@ -16,9 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Get changed-files
     outputs: 
-      terraform_changed: ${{ steps.changed-files-yaml.outputs.terraform_any_changed }}
-      frontend_changed: ${{ steps.changed-files-yaml.outputs.frontend_any_changed }}
-      backend_changed: ${{ steps.changed-files-yaml.outputs.backend_any_changed }}
+      terraform_changed: ${{ steps.changed-files-yaml.outputs.terraform_any_modified }}
+      frontend_changed: ${{ steps.changed-files-yaml.outputs.frontend_any_modified }}
+      backend_changed: ${{ steps.changed-files-yaml.outputs.backend_any_modified }}
     steps:
       - uses: actions/checkout@v4
       - name: Get file changes
