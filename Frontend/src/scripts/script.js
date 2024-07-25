@@ -25,9 +25,9 @@ let defaultPref = {
   "HeaderTextSize5":"25.3333px",
   "ParagraphTextSize":"16px",
   "LinkTextSize":"16px",
-  "HeadersFont":"\"Times New Roman\"",
-  "ParagraphFont":"\"Times New Roman\"",
-  "LinkFont":"\"Times New Roman\""
+  "HeadersFont":"Arial",
+  "ParagraphFont":"Arial",
+  "LinkFont":"Arial"
 }
 const dropdown = document.getElementById("dropdown");
 const selectedPreference = document.getElementById("selectedPreference");
@@ -368,18 +368,6 @@ function changeLinkSize(event) {
   linkText.style.fontSize = event.target.value + "pt";
 }
 
-// function checkLoggedIn()
-// {
-//     if(logged_in)
-//     {
-//         loginButton.classList.add("hide");
-//     }
-//     else{
-//         loginButton.classList.remove("hide");
-//     }
-// }
-//setUserPreferences();
-//console.log(userPreferencesObj);
 
 async function getUserPrefs() {
   let prefs;
@@ -429,7 +417,9 @@ async function saveUserPref(userPrefObj) {
         paragraphText.style.color = pref.ParagraphTextColor;
         paragraphText2.style.color = pref.ParagraphTextColor;
         paragraphColPicker.style.backgroundColor = pref.ParagraphTextColor;
+
         header1.style.fontSize = pref.HeaderTextSize1;
+        console.log(pref.HeaderTextSize1);
         header2.style.fontSize = pref.HeaderTextSize2;
         header3.style.fontSize = pref.HeaderTextSize3;
         header4.style.fontSize = pref.HeaderTextSize4;
