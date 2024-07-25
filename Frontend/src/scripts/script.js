@@ -444,8 +444,11 @@ async function saveUserPref(userPrefObj) {
         paragraphText2.style.fontSize = pref.paragraphTextSize;
         linkText.style.fontSize = pref.linkTextSize,
         headingsContainer.style.fontFamily = pref.headersFont;
+        headingFontDropdown.value = pref.headersFont;
         paragraphArticle.style.fontFamily = pref.paragraphFont,
+        paragraphFontDropdown.value = pref.paragraphFont;
         linkText.style.fontFamily = pref.linkFont;
+        linkFontDropdown.value = pref.linkFont;
         linkText.style.color = pref.linkTextColor;
         linkColPicker.style.backgroundColor = pref.linkTextColor;
       }catch{
