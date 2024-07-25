@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  main{
+    container-type: inline-size;
+  }
+
+  
+header {
+  box-sizing: border-box;
+  background-color: #0078d7;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+  column-gap: 0.5em;
+  margin: 0;
+  width: auto;
+  padding: 0.2em;
+}
+
+label{
+  transition: 0.5s;
+}
+p{
+  transition: 0.5s;
+}
+
+#title{
+  font-family: 'Pacifico';
+  font-weight: 100;
+  font-size:2em;
+}
+
+.normalFont{
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  display: flexbox;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5em;
+  gap: 1em;
+  margin: 0;
+}
+
+.stylesContainer
+{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.outerContainer{
+  container-type: inline-size;
+
+}
+
+.colourListItem{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.3em;
+}
+
+
+.colourInput{
+  width:3em;
+  height: 3em;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.headingColourInput{
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.linkColourInput{
+  width:1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background-color: black; 
+}
+
+.paragraphColourInput{
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background-color: black;
+}
+
+#colourLabel1{
+  background-color: pink;
+}
+
+.colourIn{
+  visibility: hidden;
+}
+
+
+#colour1{
+  fill:pink;
+}
+
+#linkText{
+  font-style:italic;
+  text-decoration: underline;
+}
+
+ul{
+  list-style-type: none;
+}
+.innerContainer
+{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 2em;
+  margin: 1em;
+  background-color: aliceblue;
+}
+
+.dropdown--span {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  padding: 0.5em;
+}
+
+#dropdown {
+  height: 2.5em;
+  width: 20em;
+  cursor: pointer;
+  border-radius: 0.375em; 
+}
+
+.add-preference--btn {
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  color: white;
+  background-color: #0078d7;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+
+.add-preference--btn:hover {
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(0, 0, 0, 0.727); 
+  border-radius: 0.375em; 
+  color: #0078d7;
+  cursor: pointer;
+  background-color: white;
+  transition: 0.2s;
+}
+
+.save-preference--btn{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:#0078d7;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.save-preference--btn:hover{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:white;
+  color: #0078d7;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-preference--btn{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:#0078d7;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-preference--btn:hover{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:white;
+  color: #0078d7;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login--btn{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:white;
+  color: black;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login--btn:hover{
+  width: 12em; 
+  height: 2.5em; 
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  background-color:black;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.fontSelectorContainer {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+#headingFontDropdown {
+  height: 1.5em;
+  cursor: pointer;
+  border-radius: 0.375em; 
+}
+
+.hide{
+  display: none;
+}
+
+.solid{
+  border-top: 3px solid #bbb;
+
+}
+
+@container (max-width: 430px){
+  .stylesContainer{
+    flex-direction: column;
+  }
+
+  .container{
+    flex-direction: column;
+  }
+}
+
+.headingContainer {
+  display: flex;
+  gap: 1em;
+}
+
+.paragraphContainer {
+  display: flex;
+  gap: 1em;
+}
+
+.headingCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#paragraphFontDropdown {
+  height: 1.5em;
+  cursor: pointer;
+  border-radius: 0.375em; 
+}
+
+dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border: none;
+  border-radius: 0.375em; 
+  padding: 0.625em 1.5625em; 
+  transform: translate(-50%,-50%) scale(.9); 
+  background-color: white;
+  max-width: 70%;
+  max-height: 95%;
+  overflow: auto;
+  visibility: hidden;
+
+  button {
+    width: 10em; 
+    height: 2em; 
+    border: 0.125em solid rgba(206, 204, 204, 0.727); 
+    border-radius: 0.375em; 
+    color: white;
+    background-color: #0078d7;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  button:hover {
+    border: 0.125em solid rgba(0, 0, 0, 0.727); 
+    color: #0078d7;
+    background-color: white;
+  }
+}
+
+.blur {
+  filter: blur(0.9em);
+  pointer-events: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5em;
+}
+
+.rowElement {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.colorDropdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5em;
+}
+
+#linkFontDropdown {
+  height: 1.5em;
+  cursor: pointer;
+  border-radius: 0.375em; 
+}
