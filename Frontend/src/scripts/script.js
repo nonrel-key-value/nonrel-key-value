@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.style.color = defaultColor;
 
     var userPrefs = getUserPrefs();
-    console.log(userPrefs);
+    console.log("HERE:" + userPrefs);
     let options = [];
     userPrefs.forEach(pref=>{
       options.push(pref.profile);
