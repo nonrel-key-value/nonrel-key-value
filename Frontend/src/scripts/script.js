@@ -3,11 +3,22 @@ import {ApiHelper } from "./apiHelper.js";
 const baseURL = "https://api.karle.co.za/";
 const apiHelper = new ApiHelper(baseURL);
 
+const main = document.querySelector('main');
 
 const dropdown = document.getElementById('dropdown');
 const selectedPreference = document.getElementById('selectedPreference');
-//const addPreferenceBtn = document.querySelector('add-preference--btn');
 const headingsContainer = document.getElementById('headings');
+
+const deletePreferenceBtn = document.getElementById('deletePrefs')
+const confirmDeleteDialog = document.getElementById('confirmDeleteDialog');
+const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+const addPreferenceBtn = document.getElementById('addPref');
+const addPreferenceDialog = document.getElementById('addPreferenceDialog');
+const cancelNewPreferenceBtn = document.getElementById('cancelNewPreferenceBtn');
+const postNewPreferenceBtn = document.getElementById('postNewPreferenceBtn');
+const nextPreferenceId = document.getElementById('nextPreferenceId');
 
 const defaultFontSize = 16;
 const defaultColor = 'black';
@@ -22,7 +33,9 @@ const colourPicker5 = document.getElementById("inputColour5");
 const colourPicker6 = document.getElementById("inputColour6");
 const colourPicker7 = document.getElementById("inputColour7");
 
-const fontDropdown = document.getElementById("fontDropdown");
+const headingFontDropdown = document.getElementById("headingFontDropdown");
+const paragraphFontDropdown = document.getElementById("paragraphFontDropdown");
+const linkFontDropdown = document.getElementById("linkFontDropdown");
 
 const inputParagraphColour = document.getElementById("inputParagraphColour");
 
@@ -58,9 +71,9 @@ const paragraphText2 = document.getElementById("pText2");
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
 
-const loginButton = document.getElementById("loginLink");
+// const loginButton = document.getElementById("loginLink");
 
-var logged_in = false;
+// var logged_in = false;
 
 
 
@@ -94,8 +107,40 @@ linkSizeInput.addEventListener("change",changeLinkSize);
 dropdown.addEventListener("change",switchPreference);
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    checkLoggedIn();
+document.addEventListener('DOMContentLoaded', async () => {
+
+    function getTokensFromUrl() {
+        const hash = window.location.hash.substr(1);
+        const result = hash.split('&').reduce((res, item) => {
+          const parts = item.split('=');
+          res[parts[0]] = parts[1];
+          return res;
+        }, {});
+    
+        // Clear the URL hash to prevent exposing tokens
+        window.history.replaceState({}, document.title, window.location.pathname);
+    
+        return result;
+      }
+    
+      // Extract tokens
+      const tokens = getTokensFromUrl();
+      console.log(tokens)
+      if (tokens.id_token && tokens.access_token) {
+        // Store tokens securely
+        sessionStorage.setItem('id_token', tokens.id_token);
+        sessionStorage.setItem('access_token', tokens.access_token);
+    
+        // You can now use these tokens for API calls
+        console.log('Tokens extracted and stored securely');
+      } else {
+        console.error('Tokens not found in URL');
+        alert('You are not logged in. Login using Google to continue.')
+        window.location.href = 'https://179530787873.auth.eu-west-1.amazoncognito.com/oauth2/authorize?client_id=340s2eqt65h066rs3o0bdfqocp&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Fweb.karle.co.za';
+      }
+
+
+    // checkLoggedIn();
 
     document.body.style.fontSize = defaultFontSize;
     document.body.style.color = defaultColor;
@@ -114,7 +159,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const option = document.createElement('option');
         option.value = optionText;
         option.textContent = optionText;
-        fontDropdown.appendChild(option);
+        headingFontDropdown.appendChild(option);
+    });
+    fonts.forEach(optionText => {
+        const option = document.createElement('option');
+        option.value = optionText;
+        option.textContent = optionText;
+        paragraphFontDropdown.appendChild(option);
+    });
+    fonts.forEach(optionText => {
+        const option = document.createElement('option');
+        option.value = optionText;
+        option.textContent = optionText;
+        linkFontDropdown.appendChild(option);
     });
 
     switchPreference(dropdown.value);
@@ -123,29 +180,76 @@ document.addEventListener('DOMContentLoaded', () => {
     //     switchPreference(event.target.value);
     // });
 
-    changeFont(fontDropdown.value);
+    // SET INITIAL VALUE OF DROPDOWNS TO VALUE RETURNED FROM BACKEND
 
-    fontDropdown.addEventListener('change', (event) => {
-        changeFont(event.target.value);
+    changeHeadingFont(headingFontDropdown.value);
+    changeParagraphFont(paragraphFontDropdown.value);
+    changeLinkFont(linkFontDropdown.value);
+
+    headingFontDropdown.addEventListener('change', (event) => {
+        changeHeadingFont(event.target.value);
+    });
+
+    paragraphFontDropdown.addEventListener('change', (event) => {
+        changeParagraphFont(event.target.value);
+    });
+
+    linkFontDropdown.addEventListener('change', (event) => {
+        changeLinkFont(event.target.value);
     });
 
 });
 
-//  addPreferenceBtn.onclick = () => {
-//      // Backend call to add preference
-//      console.log('clicked');
-//  }
+deletePreferenceBtn.onclick = () => {
+    confirmDeleteDialog.style.visibility = 'visible';
+    main.classList.add('blur');
+}
+
+cancelDeleteBtn.onclick = () => {
+    confirmDeleteDialog.style.visibility = 'hidden';
+    main.classList.remove('blur');
+}
+
+confirmDeleteBtn.onclick = () => {
+    //BACKEND CALL TO DELETE (refresh selected preference)
+    confirmDeleteDialog.style.visibility = 'hidden';
+    main.classList.remove('blur');
+}
+
+ addPreferenceBtn.onclick = () => {
+    // GET ID OF NEXT PREFERENCE
+    nextPreferenceId.textContent = '5';
+    addPreferenceDialog.style.visibility = 'visible';
+    main.classList.add('blur');
+ }
+
+ cancelNewPreferenceBtn.onclick = () => {
+    addPreferenceDialog.style.visibility = 'hidden';
+    main.classList.remove('blur');
+}
+
+postNewPreferenceBtn.onclick = () => {
+    //BACKEND CALL TO ADD PREFERENCE
+    addPreferenceDialog.style.visibility = 'hidden';
+    main.classList.remove('blur');
+}
 
 function switchPreference(value) {
     console.log("preference switched to: " + value);
     displayUserPreferences();
     // Set content based on value
-    // selectedPreference.textContent = `Selected preference is: ${value}`;
 }
 
-function changeFont(value) {
-    headings.style.fontFamily = value;
-    header1.style.fontFamily = value;
+function changeHeadingFont(value) {
+    headingsContainer.style.fontFamily = value;
+}
+
+function changeParagraphFont(value) {
+    paragraphArticle.style.fontFamily = value;
+}
+
+function changeLinkFont(value) {
+    linkText.style.fontFamily = value;
 }
 
 function changeColour(event)
@@ -193,16 +297,16 @@ function changeLinkSize(event)
     linkText.style.fontSize = (event.target.value) + "pt";
 }
 
-function checkLoggedIn()
-{
-    if(logged_in)
-    {
-        loginButton.classList.add("hide");
-    }
-    else{
-        loginButton.classList.remove("hide");
-    }
-}
+// function checkLoggedIn()
+// {
+//     if(logged_in)
+//     {
+//         loginButton.classList.add("hide");
+//     }
+//     else{
+//         loginButton.classList.remove("hide");
+//     }
+// }
 setUserPreferences();
 console.log(userPreferencesObj);
 
@@ -230,15 +334,10 @@ async function healthCheck() {
         colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
         colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
 
-        header1.style.color = storedPref.HeaderTextColor;
-        header2.style.color = storedPref.HeaderTextColor;
-        header3.style.color = storedPref.HeaderTextColor;
-        header4.style.color = storedPref.HeaderTextColor;
-        header5.style.color = storedPref.HeaderTextColor;
+        headingsContainer.style.color = storedPref.HeaderTextColor;
         headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
 
-        paragraphText.style.color = storedPref.ParagraphTextColor;
-        paragraphText2.style.color = storedPref.ParagraphTextColor;
+        paragraphArticle.style.color = storedPref.ParagraphTextColor;
         paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
         header1.style.fontSize = storedPref.HeaderTextSize1;
         header2.style.fontSize = storedPref.HeaderTextSize2;
@@ -246,12 +345,10 @@ async function healthCheck() {
         header4.style.fontSize = storedPref.HeaderTextSize4;
         header5.style.fontSize = storedPref.HeaderTextSize5;
 
-        paragraphText.style.fontSize = storedPref.ParagraphTextSize,
-        paragraphText2.style.fontSize = storedPref.ParagraphTextSize,
+        paragraphArticle.style.fontSize = storedPref.ParagraphTextSize,
         linkText.style.fontSize = storedPref.LinkTextSize,
-        header1.style.fontFamily = storedPref.HeadersFont,
-        paragraphText.style.fontFamily = storedPref.ParagraphFont,
-        paragraphText2.style.fontFamily = storedPref.ParagraphFont,
+        headingsContainer.style.fontFamily = storedPref.fontFamily;
+        paragraphArticle.style.fontFamily = storedPref.ParagraphFont,
         linkText.style.fontFamily = storedPref.LinkFont;
         linkText.style.color = storedPref.LinkTextColor;
         linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
