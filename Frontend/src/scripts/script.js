@@ -419,7 +419,7 @@ async function saveUserPref(userPrefObj) {
         paragraphColPicker.style.backgroundColor = pref.ParagraphTextColor;
 
         header1.style.fontSize = pref.HeaderTextSize1;
-        console.log(pref.HeaderTextSize1);
+        console.log(pref.HeaderTextSize1.value);
         header2.style.fontSize = pref.HeaderTextSize2;
         header3.style.fontSize = pref.HeaderTextSize3;
         header4.style.fontSize = pref.HeaderTextSize4;
@@ -468,7 +468,7 @@ async function saveUserPref(userPrefObj) {
     }
 
 function setUserPreferences() {
-  let userPrefs = {
+  let uPrefs = {
     profile: dropdown.value,
     preference: {
       Color1: getComputedStyle(colourPicker1.parentNode).backgroundColor,
@@ -493,12 +493,8 @@ function setUserPreferences() {
       LinkFont: getComputedStyle(linkText).fontFamily,
     },
   };
-  userPreferencesObj = userPrefs;
-  localStorage.setItem("1", JSON.stringify(userPreferencesObj));
-
-  console.log(userPreferencesObj);
-  saveUserPref(userPreferencesObj);
-
+  console.log(uPrefs);
+  saveUserPref(uPrefs);
 }
 async function handleRedirect() {
   try {
