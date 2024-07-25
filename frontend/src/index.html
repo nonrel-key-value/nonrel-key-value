@@ -61,7 +61,7 @@
             </li>
             <li class="colourListItem">
               <label class="colourInput" id="colourLabel7"><input id="inputColour7" class="colourIn" type="color" id="colour7" value="#ff0000"></label>
-              <p>Colour 7</p>
+              <p class="normalFont">Colour 7</p>
             </li>
           </ul>
         </article>
@@ -71,6 +71,7 @@
           <article class="fontSelectorContainer">
             <p class="normalFont">Font:</p>
             <select id="fontDropdown"></select>
+            <label class="headingColourInput" id="headingsColourInput" id="colourLabel1"><input id="inputColour1" class="colourIn" type="color" id="colour1" value="#000000"></label>
           </article>
           <article>
             <ul id="headings" class="textList">
@@ -94,9 +95,16 @@
           <article id="paragraphArticle">
             <p id="pText" class="paragraphText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam at, dolorum quo eveniet nesciunt totam doloremque adipisci! Veritatis eligendi, maiores velit impedit consectetur magni. Laudantium, dolor aliquid! Repudiandae, quae neque?</p>
             <p id="pText2" class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p> 
+            <section class="pColourSize">
             <input type="range" id="paragraphSize" name="paragraphSize" min="8" max="15">
+            <label class="paragraphColourInput" id="pColourInput" id="colourLabel1"><input id="inputParagraphColour" class="colourIn" type="color" id="colour1" value="#000000"></label>
+          </section>
           </article>
+          <section class="linkOptions">
           <label id="linkText">https://linkSize.com<input type="range" id="linkSize" name="linkSize" min="8" max="30"></label>
+          <label class="linkColourInput" id="lColourInput" id="colourLabel1"><input id="inputLinkColour" class="colourIn" type="color" id="colour1" value="#000000"></label>
+        </section>
+
         </article>
       </section>
 

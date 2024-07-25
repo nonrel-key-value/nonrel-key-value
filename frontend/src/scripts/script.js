@@ -24,6 +24,8 @@ const colourPicker7 = document.getElementById("inputColour7");
 
 const fontDropdown = document.getElementById("fontDropdown");
 
+const inputParagraphColour = document.getElementById("inputParagraphColour");
+
 const headingSize1 = document.getElementById("headingSize1");
 const headingSize2 = document.getElementById("headingSize2");
 const headingSize3 = document.getElementById("headingSize3");
@@ -35,6 +37,10 @@ const header2 = document.getElementById("heading2");
 const header3 = document.getElementById("heading3");
 const header4 = document.getElementById("heading4");
 const header5 = document.getElementById("heading5");
+
+const headingsColor = document.getElementById("headingsColourInput");
+
+const inputLinkColour = document.getElementById("inputLinkColour");
 
 const savePrefs = document.getElementById("savePrefs");
 
@@ -68,6 +74,12 @@ headingSize2.addEventListener("change",changeSize);
 headingSize3.addEventListener("change",changeSize);
 headingSize4.addEventListener("change",changeSize);
 headingSize5.addEventListener("change",changeSize);
+
+inputParagraphColour.addEventListener("change",changeParagraphColour);
+
+headingsColor.addEventListener("change", changeHeadingColour);
+
+inputLinkColour.addEventListener("change",changeLinkColour);
 
 savePrefs.addEventListener("click", setUserPreferences);
 
@@ -138,6 +150,29 @@ function changeColour(event)
     event.target.parentNode.style.backgroundColor = event.target.value;
 }
 
+function changeParagraphColour(event)
+{
+    event.target.parentNode.style.backgroundColor = event.target.value;
+    paragraphText.style.color = event.target.value;
+    paragraphText2.style.color = event.target.value;
+}
+
+function changeHeadingColour(event)
+{
+    event.target.parentNode.style.backgroundColor = event.target.value;
+    header1.style.color = event.target.value;
+    header2.style.color = event.target.value;
+    header3.style.color = event.target.value;
+    header4.style.color = event.target.value;
+    header5.style.color = event.target.value;
+}
+
+function changeLinkColour(event)
+{
+    event.target.parentNode.style.backgroundColor = event.target.value;
+    linkText.style.color = event.target.value;
+}
+
 function changeSize(event)
 {
     event.target.parentNode.style.fontSize = (event.target.value) + "pt";
@@ -193,7 +228,13 @@ async function healthCheck() {
         colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
 
         header1.style.color = storedPref.HeaderTextColor;
+        header2.style.color = storedPref.HeaderTextColor;
+        header3.style.color = storedPref.HeaderTextColor;
+        header4.style.color = storedPref.HeaderTextColor;
+        header5.style.color = storedPref.HeaderTextColor;
+
         paragraphText.style.color = storedPref.ParagraphTextColor;
+        paragraphText2.style.color = storedPref.ParagraphTextColor;
         header1.style.fontSize = storedPref.HeaderTextSize1;
         header2.style.fontSize = storedPref.HeaderTextSize2;
         header3.style.fontSize = storedPref.HeaderTextSize3;
@@ -207,6 +248,8 @@ async function healthCheck() {
         paragraphText.style.fontFamily = storedPref.ParagraphFont,
         paragraphText2.style.fontFamily = storedPref.ParagraphFont,
         linkText.style.fontFamily = storedPref.LinkFont;
+        linkText.style.color = storedPref.LinkTextColor;
+
     }
 
     function setUserPreferences()

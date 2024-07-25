@@ -83,6 +83,37 @@ p{
   background-color: red;
 }
 
+.headingColourInput{
+  width:2em;
+  height: 2em;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.linkColourInput{
+  width:1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.linkOptions{
+  display: flex;
+  align-items: baseline;
+}
+
+.pColourSize{
+  display: flex;
+  align-items: baseline;
+}
+
+.paragraphColourInput{
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background-color: black;
+}
+
 #colourLabel1{
   background-color: pink;
 }
