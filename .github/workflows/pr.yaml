@@ -55,13 +55,15 @@ jobs:
   test:
     name: "Test"
     needs: [changed_files]
-    secrets: inherit
     runs-on: ubuntu-latest
     env:
       TF: ${{ needs.changed_files.outputs.terraform_changed }}
       FE: ${{ needs.changed_files.outputs.frontend_changed }}
       BE: ${{ needs.changed_files.outputs.backend_changed }}
     steps:
+      - name: "Checkout"
+        uses: actions/checkout@main
+
       - name: Test
         run: |
           echo "TF: $TF"
