@@ -373,7 +373,7 @@ async function getUserPrefs() {
   } catch (error) {
     console.error("Error performing CRUD operation:", error);
   }
-  return prefs;
+  return JSON.parse(prefs);
 }
 
 
