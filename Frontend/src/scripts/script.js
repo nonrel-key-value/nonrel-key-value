@@ -113,17 +113,12 @@ linkSizeInput.addEventListener("change",changeLinkSize);
 dropdown.addEventListener("change",switchPreference);
 
 async function loadStuff(){
-
-  document.body.style.fontSize = defaultFontSize;
-  document.body.style.color = defaultColor;
-
   var userPrefs = await getUserPrefs();
   console.log("HERE:" + userPrefs);
   let options = [];
   userPrefs.forEach(pref=>{
     options.push(pref.profile);
   })
-  const fonts = ['Arial', 'Times New Roman', 'Verdana', 'Georgia', 'Roboto'] //Get from backend?
   
   options.forEach(optionText => {
       const option = document.createElement('option');
@@ -166,6 +161,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     // checkLoggedIn();
+
+    const fonts = ['Arial', 'Times New Roman', 'Verdana', 'Georgia', 'Roboto'] //Get from backend?
+    
+  document.body.style.fontSize = defaultFontSize;
+  document.body.style.color = defaultColor;
+
       loadStuff();
 
     fonts.forEach(optionText => {
@@ -230,8 +231,10 @@ confirmDeleteBtn.onclick = () => {
  addPreferenceBtn.onclick = () => {
     // GET ID OF NEXT PREFERENCE
 
+    var newPreferenceId = preferenceId.value.parseInt();
+
     let obj = {
-      "profile": `Preference${preferenceId.value}`,
+      "profile": `Preference${newPreferenceId}`,
       "preference": {
         "color1": "rgba(255, 192, 203, 0.094)",
         "color2": "rgba(255, 192, 203, 0.094)",
