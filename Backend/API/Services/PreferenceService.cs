@@ -44,7 +44,6 @@ namespace API.Services
 
 		public async Task SetPreferencesAsync(PreferenceBody newPreference, string userName)
 		{
-
 			var preferenceAsJson = JsonConvert.SerializeObject(newPreference.Preference);
 			var request = new PutItemRequest
 			{
@@ -58,6 +57,26 @@ namespace API.Services
 			};
 
 			var response = await _dynamoDBClient.PutItemAsync(request);
+			if(response.HttpStatusCode == System.Net.HttpStatusCode.OK) return;
+
+			throw new Exception("Error publishing to DynamoDB");
+		}
+
+		public async Task DeletePreferenceAsync(string preferenceName, string userName)
+		{
+			var deleteKey = new Dictionary<string, AttributeValue>()
+			{
+				{ "UserID", new AttributeValue { S = userName } },
+				{ "Profile", new AttributeValue { S = preferenceName } }
+			};
+
+			var request = new DeleteItemRequest
+			{
+				TableName = TableName,
+				Key = deleteKey
+			};
+
+			var response = await _dynamoDBClient.DeleteItemAsync(request);
 			if(response.HttpStatusCode == System.Net.HttpStatusCode.OK) return;
 
 			throw new Exception("Error publishing to DynamoDB");

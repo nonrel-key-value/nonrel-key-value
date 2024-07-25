@@ -20,7 +20,7 @@ namespace API.Controllers
 		}
 
 		[HttpGet("GetPreferences", Name = "GetPreferences")]
-		public async Task<ActionResult<IEnumerable<Preference>>> GetPreferences()
+		public async Task<ActionResult<IEnumerable<PreferenceBody>>> GetPreferences()
 		{
 			try
 			{
@@ -44,6 +44,24 @@ namespace API.Controllers
 				var userName = GetUser();
 				_logger.LogInformation("Setting preferences.");
 				await _preferenceService.SetPreferencesAsync(body, userName);
+				return Ok();
+			}
+			catch(Exception ex)
+			{
+				_logger.LogError($"Error setting preferences: {ex.Message}");
+				return BadRequest(ex.Message);
+			}
+		}
+
+
+		[HttpDelete("DeletePreference", Name = "DeletePreference")]
+		public async Task<ActionResult> DeletePreference([FromBody] string profileName)
+		{
+			try
+			{
+				var userName = GetUser();
+				_logger.LogInformation("Setting preferences.");
+				await _preferenceService.DeletePreferenceAsync(profileName, userName);
 				return Ok();
 			}
 			catch(Exception ex)

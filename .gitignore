@@ -469,3 +469,4 @@ apps/db/.idea/workspace.xml
 Backend/DiscordBot/Properties/launchSettings.json
 
 OldBackend/*
+Backend/API/API.http
