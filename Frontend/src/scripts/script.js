@@ -403,15 +403,15 @@ async function saveUserPref(userPrefObj) {
     {
       console.log("pref: " + JSON.stringify(pref));
         try{
-        colourPicker1.parentNode.style.backgroundColor = pref.Color1;
-        console.log(pref.Color1);
+        colourPicker1.parentNode.style.backgroundColor = pref.color1;
+        console.log(pref.color1);
         colourPicker1.parentNode.style.backgroundColor = "Purple";
-        colourPicker2.parentNode.style.backgroundColor = pref.Color2;
+        colourPicker2.parentNode.style.backgroundColor = pref.color2;
         colourPicker3.parentNode.style.backgroundColor = pref.Color3;
-        colourPicker4.parentNode.style.backgroundColor = pref.Color4;
-        colourPicker5.parentNode.style.backgroundColor = pref.Color5;
-        colourPicker6.parentNode.style.backgroundColor = pref.Color6;
-        colourPicker7.parentNode.style.backgroundColor = pref.Color7;
+        colourPicker4.parentNode.style.backgroundColor = pref.color4;
+        colourPicker5.parentNode.style.backgroundColor = pref.color5;
+        colourPicker6.parentNode.style.backgroundColor = pref.color6;
+        colourPicker7.parentNode.style.backgroundColor = pref.color7;
         }catch{
           console.log("colors failing");
         }
@@ -424,7 +424,7 @@ async function saveUserPref(userPrefObj) {
         }
 
         try{
-        paragraphText.style.color = pref.ParagraphTextColor;
+        paragraphText.style.color = pref.paragraphTextColor;
         paragraphText2.style.color = pref.ParagraphTextColor;
         paragraphColPicker.style.backgroundColor = pref.ParagraphTextColor;
         }catch{
@@ -434,7 +434,7 @@ async function saveUserPref(userPrefObj) {
         try{
         header1.style.fontSize = pref.HeaderTextSize1;
         header2.style.fontSize = pref.HeaderTextSize2;
-        header3.style.fontSize = pref.HeaderTextSize3;
+        header3.style.fontSize = pref.headerTextSize3;
         header4.style.fontSize = pref.HeaderTextSize4;
         header5.style.fontSize = pref.HeaderTextSize5;
         }catch{
