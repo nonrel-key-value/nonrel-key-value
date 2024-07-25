@@ -1,6 +1,7 @@
 import {ApiHelper } from "./apiHelper.js";
 
-const baseURL = "https://api.karle.co.za/";
+const baseURL = "http://18.201.41.51/"
+//const baseURL = "https://api.karle.co.za/";
 const apiHelper = new ApiHelper(baseURL);
 
 const main = document.querySelector('main');
