@@ -144,8 +144,15 @@ async function loadStuff() {
 
   userPrefs.forEach((pref) => {
     options.push(pref.profile);
-    prefs.push(pref.preference);
-    console.log("hey tiger, pls work: " + pref.preference.Color1);
+    if(pref.preference == null)
+    {
+      prefs.push(defaultPref);
+    }
+    else
+    {
+      prefs.push(pref.preference);
+    }
+    
   });
 
   displayUserPreferences(prefs[0]);
