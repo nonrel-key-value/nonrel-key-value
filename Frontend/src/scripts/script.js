@@ -404,10 +404,8 @@ async function saveUserPref(userPrefObj) {
       console.log("pref: " + JSON.stringify(pref));
         try{
         colourPicker1.parentNode.style.backgroundColor = pref.color1;
-        console.log(pref.color1);
-        colourPicker1.parentNode.style.backgroundColor = "Purple";
         colourPicker2.parentNode.style.backgroundColor = pref.color2;
-        colourPicker3.parentNode.style.backgroundColor = pref.Color3;
+        colourPicker3.parentNode.style.backgroundColor = pref.color3;
         colourPicker4.parentNode.style.backgroundColor = pref.color4;
         colourPicker5.parentNode.style.backgroundColor = pref.color5;
         colourPicker6.parentNode.style.backgroundColor = pref.color6;
@@ -417,8 +415,8 @@ async function saveUserPref(userPrefObj) {
         }
 
         try{
-        headingsContainer.style.color = pref.HeaderTextColor;
-        headerColPicker.style.backgroundColor = pref.HeaderTextColor;
+        headingsContainer.style.color = pref.headerTextColor;
+        headerColPicker.style.backgroundColor = pref.headerTextColor;
         }catch{
           console.log("headings failing");
         }
@@ -426,30 +424,30 @@ async function saveUserPref(userPrefObj) {
         try{
         paragraphText.style.color = pref.paragraphTextColor;
         paragraphText2.style.color = pref.ParagraphTextColor;
-        paragraphColPicker.style.backgroundColor = pref.ParagraphTextColor;
+        paragraphColPicker.style.backgroundColor = pref.paragraphTextColor;
         }catch{
           console.log("paragraph stuff fails");
         }
 
         try{
-        header1.style.fontSize = pref.HeaderTextSize1;
-        header2.style.fontSize = pref.HeaderTextSize2;
+        header1.style.fontSize = pref.headerTextSize1;
+        header2.style.fontSize = pref.headerTextSize2;
         header3.style.fontSize = pref.headerTextSize3;
-        header4.style.fontSize = pref.HeaderTextSize4;
-        header5.style.fontSize = pref.HeaderTextSize5;
+        header4.style.fontSize = pref.headerTextSize4;
+        header5.style.fontSize = pref.headerTextSize5;
         }catch{
           console.log("heading size fails");
         }
 
         try{
-        paragraphText.style.fontSize = pref.ParagraphTextSize;
-        paragraphText2.style.fontSize = pref.ParagraphTextSize;
-        linkText.style.fontSize = pref.LinkTextSize,
-        headingsContainer.style.fontFamily = pref.fontFamily;
-        paragraphArticle.style.fontFamily = pref.ParagraphFont,
-        linkText.style.fontFamily = pref.LinkFont;
-        linkText.style.color = pref.LinkTextColor;
-        linkColPicker.style.backgroundColor = pref.LinkTextColor;
+        paragraphText.style.fontSize = pref.paragraphTextSize;
+        paragraphText2.style.fontSize = pref.paragraphTextSize;
+        linkText.style.fontSize = pref.linkTextSize,
+        headingsContainer.style.fontFamily = pref.headersFont;
+        paragraphArticle.style.fontFamily = pref.paragraphFont,
+        linkText.style.fontFamily = pref.linkFont;
+        linkText.style.color = pref.linkTextColor;
+        linkColPicker.style.backgroundColor = pref.linkTextColor;
       }catch{
         console.log("other stuff fails");
       }
