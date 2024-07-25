@@ -276,11 +276,11 @@ postNewPreferenceBtn.onclick = () => {
 };
 
 async function switchPreference(event) {
-  console.log("dropdown index: " + dropdown.selectedIndex);
-    console.log("preference switched to: " + dropdown.selectedIndex);
-    userPrefs = await getUserPrefs();
-    console.log("user prefs: " + userPrefs);
-    storedPref = userPrefs[dropdown.selectedIndex];
+
+    var uPrefs = await getUserPrefs();
+    console.log("preference switched to: " + uPrefs[dropdown.selectedIndex].profile);
+    console.log("user prefs: " + uPrefs);
+    storedPref = userPrefs[dropdown.selectedIndex].preference;
     console.log("storedPref: " + storedPref);
     displayUserPreferences();
     // Set content based on value
@@ -393,12 +393,13 @@ async function saveUserPref(userPrefObj) {
 }
     async function displayUserPreferences()
     {
-      console.log("stored pref: " + storedPref);
+      console.log("stored pref: " + storedPref.preference);
 
       let pref = storedPref.preference;
       console.log("pref");
       console.log("here !!!!!!");
         try{
+
         colourPicker1.parentNode.style.backgroundColor = pref.Color1;
         colourPicker2.parentNode.style.backgroundColor = pref.Color2;
         colourPicker3.parentNode.style.backgroundColor = pref.Color3;
