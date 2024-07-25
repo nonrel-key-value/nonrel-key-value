@@ -9,6 +9,7 @@ export class ApiHelper {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem("id_token")}`,
             },
             body: JSON.stringify(data)
         };
@@ -32,6 +33,8 @@ export class ApiHelper {
         const options = {
             method: 'GET',
             headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('id_token')}`,
+                'Content-Type': 'application/json'
             }
         }
 
@@ -46,6 +49,31 @@ export class ApiHelper {
             return await response.json();
         } catch (error) {
             console.error('There was a problem with the fetch operation');
+        }
+    }
+
+    async delete(endpoint, data) {
+        const url = `${this.baseURL}/${endpoint}`;
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('id_token')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+    
+        try {
+            const response = await fetch(url, options);
+            if (response.status === 401) {
+                logout();
+            }
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('There was a problem with the fetch operation', error);
         }
     }
 
