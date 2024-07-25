@@ -483,7 +483,7 @@ async function saveUserPref(userPrefObj) {
 
 function setUserPreferences() {
   let userPrefs = {
-    profile: "preference",
+    profile: dropdown.value,
     preference: {
       Color1: getComputedStyle(colourPicker1.parentNode).backgroundColor,
       Color2: getComputedStyle(colourPicker2.parentNode).backgroundColor,
