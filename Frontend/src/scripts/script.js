@@ -324,7 +324,7 @@ async function getUserPrefs() {
           
         if (response) {
           console.log(response);
-          prefs = await response;
+          prefs = await response.object;
         }
       } catch (error) {
         console.error('Error performing CRUD operation:', error);
