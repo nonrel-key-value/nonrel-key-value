@@ -138,7 +138,7 @@ dropdown.addEventListener("change", switchPreference);
 
 async function loadStuff() {
   var userPrefs = await getUserPrefs();
-  console.log("HERE:" + userPrefs);
+  console.log("HERE:" + userPrefs[1]);
   let options = [];
 
   userPrefs.forEach((pref) => {
@@ -214,12 +214,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     linkFontDropdown.appendChild(option);
   });
 
-  // switchPreference(dropdown.value);
-
-  // changeHeadingFont(headingFontDropdown.value);
-  // changeParagraphFont(paragraphFontDropdown.value);
-  // changeLinkFont(linkFontDropdown.value);
-
   headingFontDropdown.addEventListener("change", (event) => {
     changeHeadingFont(event.target.value);
     console.log("heading font: " + event.target.value);
@@ -281,11 +275,13 @@ postNewPreferenceBtn.onclick = () => {
   main.classList.remove("blur");
 };
 
-function switchPreference(event) {
+async function switchPreference(event) {
   console.log("dropdown index: " + dropdown.selectedIndex);
     console.log("preference switched to: " + dropdown.selectedIndex);
+    userPrefs = await getUserPrefs();
     console.log("user prefs: " + userPrefs);
     storedPref = userPrefs[dropdown.selectedIndex];
+    console.log("storedPref: " + storedPref);
     displayUserPreferences();
     // Set content based on value
 }
