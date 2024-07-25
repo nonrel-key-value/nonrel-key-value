@@ -15,7 +15,7 @@ namespace API.Services
 			_dynamoDBClient = dynamoDBClient;
 		}
 
-		public async Task<IEnumerable<Preference>> GetPreferencesAsync()
+		public async Task<IEnumerable<PreferenceBody>> GetPreferencesAsync(string userName)
 		{
 			var request = new ScanRequest
 			{
@@ -23,38 +23,44 @@ namespace API.Services
 			};
 
 			var response = await _dynamoDBClient.ScanAsync(request);
-			var answer = new List<Preference>();
+			var answer = new List<PreferenceBody>();
 			foreach(var item in response.Items)
 			{
 				var userId = item["UserID"].S;
+				if(userId.Equals(userName))
+				{
+					var preference = JsonConvert.DeserializeObject<Preference>(item["Preference"].S); ;
+					var profile = item["Profile"].S;
 
-				if(!item.ContainsKey("Preference")) throw new Exception("Bad object obtained from DynamoDB");
-
-				var temp = item["Preference"].S;
-				var t = JsonConvert.DeserializeObject<Preference>(temp);
-
-				answer.Add(t);
+					answer.Add(new PreferenceBody()
+					{
+						Preference = preference,
+						Profile = profile
+					});
+				}
 			}
 			return answer;
 		}
 
-		public async Task<Preference> SetPreferencesAsync(Preference newPreference)
+		public async Task SetPreferencesAsync(PreferenceBody newPreference, string userName)
 		{
-			var preferenceAsJson = JsonConvert.SerializeObject(newPreference);
+
+			var preferenceAsJson = JsonConvert.SerializeObject(newPreference.Preference);
 			var request = new PutItemRequest
 			{
 				TableName = TableName,
 				Item = new Dictionary<string, AttributeValue>
 				{
-					{ "UserID", new AttributeValue { S = "davidbu@bbd.co.za" } },
-					{ "Profile", new AttributeValue { S = "Reading light" } },
+					{ "UserID", new AttributeValue { S = userName } },
+					{ "Profile", new AttributeValue { S = newPreference.Profile } },
 					{ "Preference", new AttributeValue { S = preferenceAsJson } }
 				}
 			};
 
-			await _dynamoDBClient.PutItemAsync(request);
+			var response = await _dynamoDBClient.PutItemAsync(request);
+			if(response.HttpStatusCode == System.Net.HttpStatusCode.OK) return;
 
-			return newPreference;
+			throw new Exception("Error publishing to DynamoDB");
 		}
 	}
 }

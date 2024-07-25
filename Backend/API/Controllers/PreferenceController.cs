@@ -1,6 +1,8 @@
 using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 
 namespace API.Controllers
 {
@@ -22,8 +24,9 @@ namespace API.Controllers
 		{
 			try
 			{
+				var userName = GetUser();
 				_logger.LogInformation("Getting preferences.");
-				var preferences = await _preferenceService.GetPreferencesAsync();
+				var preferences = await _preferenceService.GetPreferencesAsync(userName);
 				return Ok(preferences); ;
 			}
 			catch(Exception ex)
@@ -34,19 +37,33 @@ namespace API.Controllers
 		}
 
 		[HttpPost("SetPreferences", Name = "SetPreferences")]
-		public async Task<ActionResult<Preference>> UpdatePreferences([FromBody] Preference preference)
+		public async Task<ActionResult> UpdatePreferences([FromBody] PreferenceBody body)
 		{
 			try
 			{
+				var userName = GetUser();
 				_logger.LogInformation("Setting preferences.");
-				var savedPreference = await _preferenceService.SetPreferencesAsync(preference);
-				return Ok(savedPreference);
+				await _preferenceService.SetPreferencesAsync(body, userName);
+				return Ok();
 			}
 			catch(Exception ex)
 			{
 				_logger.LogError($"Error setting preferences: {ex.Message}");
 				return BadRequest(ex.Message);
 			}
+		}
+
+		private string GetUser()
+		{
+			var authHeader = (string)HttpContext.Request.Headers["Authorization"];
+			var token = authHeader.Trim().Remove(0, authHeader.IndexOf(' ') + 1);
+
+			var handler = new JwtSecurityTokenHandler();
+			var jsonToken = handler.ReadToken(token);
+			var tokenS = jsonToken as JwtSecurityToken;
+			var email = tokenS.Payload["email"].ToString();
+
+			return email;
 		}
 	}
 }

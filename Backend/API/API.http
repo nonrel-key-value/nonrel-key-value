@@ -1,4 +1,5 @@
-@API_HostAddress = http://localhost:5154
+@API_HostAddress = http://localhost:5000
+@AuthToken = eyJraWQiOiJ0eDJYY3IyXC8ra3JjYlwvYm1lNzNTYlRcL0VNYWExQ0pBRjI2bkZFNzBRRGhvPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoicVJSMGJCMHhfZTZtQ2tpSDl4MHdQQSIsInN1YiI6ImEyNjVmNDk0LWQwYjEtNzAyOC0wZmIwLWM3NGQ4ODVmNmZhOCIsImNvZ25pdG86Z3JvdXBzIjpbImV1LXdlc3QtMV9jVmdqeVEzRlJfR29vZ2xlIl0sImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuZXUtd2VzdC0xLmFtYXpvbmF3cy5jb21cL2V1LXdlc3QtMV9jVmdqeVEzRlIiLCJjb2duaXRvOnVzZXJuYW1lIjoiR29vZ2xlXzEwMDA5MzQ5NzgzNzA1ODE2MDUyOCIsImF1ZCI6IjM0MHMyZXF0NjVoMDY2cnMzbzBiZGZxb2NwIiwiaWRlbnRpdGllcyI6W3siZGF0ZUNyZWF0ZWQiOiIxNzIxODkwNTAwMzYwIiwidXNlcklkIjoiMTAwMDkzNDk3ODM3MDU4MTYwNTI4IiwicHJvdmlkZXJOYW1lIjoiR29vZ2xlIiwicHJvdmlkZXJUeXBlIjoiR29vZ2xlIiwiaXNzdWVyIjpudWxsLCJwcmltYXJ5IjoidHJ1ZSJ9XSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3MjE4OTM1ODgsImV4cCI6MTcyMTg5NzE4OCwiaWF0IjoxNzIxODkzNTg5LCJqdGkiOiJkY2U1NWEyYS04ZmRlLTQyNmUtOGRkYi1mOGU4ODRkZDYyODciLCJlbWFpbCI6Implbm5hLmR1bmZvcmRAZ21haWwuY29tIn0.b4CmylsbdCqnTp-qBIBL2qfNewEfyZN53ITIG2-0wAEYI7hnO_14y7qFZBnbkxWAgZjZU_M_M8E0r6yxcxtqXNIY5mDDYbjyDndGqfHfZAWzijPb_wvXv2JZXd8FC5NTlP8T9-eCtQ-utXR5IefqYtKm3qEkLDALvo_oQneeXsdzNvw5cWsqUFoyEk5nsP579hssbFwN5Xs0h5hWjScwpJJyuVs0FnFIwIc6LZ6QRwgSaaVV3hjPZyCfKTv4FOCnCbbR7kzQyiA4iQ-RZDTMmIEGGeFOIdmw_7so5jyA9Tszt3zlVmyMuuuk-9VL2qQKU13eHgXyab-lRHsjeClTEw
 
 GET {{API_HostAddress}}
 Accept: application/json
@@ -6,13 +7,37 @@ Accept: application/json
 
 GET {{API_HostAddress}}/Preference/GetPreferences
 Accept: application/json
+Authorization: Bearer {{AuthToken}}
 ###
 
 POST {{API_HostAddress}}/Preference/SetPreferences
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {{AuthToken}}
 
 {
-  "color": "#AAAAAA"
+  "profile": "jenna1",
+  "preference": {
+    "color1": "new",
+    "color2": "string",
+    "color3": "string",
+    "color4": "string",
+    "color5": "string",
+    "color6": "string",
+    "color7": "string",
+    "headerTextColor": "string",
+    "headerTextSize1": "string",
+    "headerTextSize2": "string",
+    "headerTextSize3": "string",
+    "headerTextSize4": "string",
+    "headerTextSize5": "string",
+    "headersFont": "string",
+    "linkFont": "string",
+    "linkTextColor": "string",
+    "linkTextSize": "string",
+    "paragraphFont": "string",
+    "paragraphTextColor": "string",
+    "paragraphTextSize": "string"
+  }
 }
 ###
