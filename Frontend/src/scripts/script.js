@@ -107,7 +107,46 @@ linkSizeInput.addEventListener("change",changeLinkSize);
 dropdown.addEventListener("change",switchPreference);
 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+    // function getTokensFromUrl() {
+    //     const hash = window.location.hash.substr(1);
+    //     const result = hash.split('&').reduce((res, item) => {
+    //       const parts = item.split('=');
+    //       res[parts[0]] = parts[1];
+    //       return res;
+    //     }, {});
+    
+    //     // Clear the URL hash to prevent exposing tokens
+    //     window.history.replaceState({}, document.title, window.location.pathname);
+    
+    //     return result;
+    //   }
+    
+    //   // Extract tokens
+    //   const tokens = getTokensFromUrl();
+    //   if (tokens.id_token && tokens.access_token) {
+    //     // Store tokens securely
+    //     sessionStorage.setItem('id_token', tokens.id_token);
+    //     sessionStorage.setItem('access_token', tokens.access_token);
+    //     response = await fetch(`/api/user/signIn`, {
+    //       method: "PUT",
+    //       headers: {
+    //         "Authorization": `Bearer ${sessionStorage.getItem('id_token')}`,
+    //         "Content-Type": "application/json"
+    //       }
+    //     });
+    //     console.log("API Call to signIn made.");
+    
+    //     // You can now use these tokens for API calls
+    //     console.log('Tokens extracted and stored securely');
+    //   } else {
+    //     console.error('Tokens not found in URL');
+    //     alert('You are not logged in. Login using Google to continue.')
+    //     window.location.href = 'https://179530787873.auth.eu-west-1.amazoncognito.com/oauth2/authorize?client_id=340s2eqt65h066rs3o0bdfqocp&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Fweb.karle.co.za';
+    //   }
+
+
     checkLoggedIn();
 
     document.body.style.fontSize = defaultFontSize;
@@ -305,8 +344,7 @@ async function healthCheck() {
         headingsContainer.style.color = storedPref.HeaderTextColor;
         headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
 
-        paragraphText.style.color = storedPref.ParagraphTextColor;
-        paragraphText2.style.color = storedPref.ParagraphTextColor;
+        paragraphArticle.style.color = storedPref.ParagraphTextColor;
         paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
         header1.style.fontSize = storedPref.HeaderTextSize1;
         header2.style.fontSize = storedPref.HeaderTextSize2;
@@ -314,12 +352,10 @@ async function healthCheck() {
         header4.style.fontSize = storedPref.HeaderTextSize4;
         header5.style.fontSize = storedPref.HeaderTextSize5;
 
-        paragraphText.style.fontSize = storedPref.ParagraphTextSize,
-        paragraphText2.style.fontSize = storedPref.ParagraphTextSize,
+        paragraphArticle.style.fontSize = storedPref.ParagraphTextSize,
         linkText.style.fontSize = storedPref.LinkTextSize,
         headingsContainer.style.fontFamily = storedPref.fontFamily;
-        paragraphText.style.fontFamily = storedPref.ParagraphFont,
-        paragraphText2.style.fontFamily = storedPref.ParagraphFont,
+        paragraphArticle.style.fontFamily = storedPref.ParagraphFont,
         linkText.style.fontFamily = storedPref.LinkFont;
         linkText.style.color = storedPref.LinkTextColor;
         linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
