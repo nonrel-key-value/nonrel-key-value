@@ -64,11 +64,9 @@ namespace API
 				app.UseSwaggerUI();
 			}
 
-			app.UseHttpsRedirection();
-
+			app.MapControllers();
 			app.UseCors(corsPolicyName);
 			app.UseAuthorization();
-			app.MapControllers();
 			app.Run();
 		}
 	}
