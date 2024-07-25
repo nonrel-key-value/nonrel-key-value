@@ -71,9 +71,9 @@ const paragraphText2 = document.getElementById("pText2");
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
 
-const loginButton = document.getElementById("loginLink");
+// const loginButton = document.getElementById("loginLink");
 
-var logged_in = false;
+// var logged_in = false;
 
 
 
@@ -109,45 +109,46 @@ dropdown.addEventListener("change",switchPreference);
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // function getTokensFromUrl() {
-    //     const hash = window.location.hash.substr(1);
-    //     const result = hash.split('&').reduce((res, item) => {
-    //       const parts = item.split('=');
-    //       res[parts[0]] = parts[1];
-    //       return res;
-    //     }, {});
+    function getTokensFromUrl() {
+        const hash = window.location.hash.substr(1);
+        const result = hash.split('&').reduce((res, item) => {
+          const parts = item.split('=');
+          res[parts[0]] = parts[1];
+          return res;
+        }, {});
     
-    //     // Clear the URL hash to prevent exposing tokens
-    //     window.history.replaceState({}, document.title, window.location.pathname);
+        // Clear the URL hash to prevent exposing tokens
+        window.history.replaceState({}, document.title, window.location.pathname);
     
-    //     return result;
-    //   }
+        return result;
+      }
     
-    //   // Extract tokens
-    //   const tokens = getTokensFromUrl();
-    //   if (tokens.id_token && tokens.access_token) {
-    //     // Store tokens securely
-    //     sessionStorage.setItem('id_token', tokens.id_token);
-    //     sessionStorage.setItem('access_token', tokens.access_token);
-    //     response = await fetch(`/api/user/signIn`, {
-    //       method: "PUT",
-    //       headers: {
-    //         "Authorization": `Bearer ${sessionStorage.getItem('id_token')}`,
-    //         "Content-Type": "application/json"
-    //       }
-    //     });
-    //     console.log("API Call to signIn made.");
+      // Extract tokens
+      const tokens = getTokensFromUrl();
+      console.log(tokens)
+      if (tokens.id_token && tokens.access_token) {
+        // Store tokens securely
+        sessionStorage.setItem('id_token', tokens.id_token);
+        sessionStorage.setItem('access_token', tokens.access_token);
+        response = await fetch(`/api/user/signIn`, {
+          method: "PUT",
+          headers: {
+            "Authorization": `Bearer ${sessionStorage.getItem('id_token')}`,
+            "Content-Type": "application/json"
+          }
+        });
+        console.log("API Call to signIn made.");
     
-    //     // You can now use these tokens for API calls
-    //     console.log('Tokens extracted and stored securely');
-    //   } else {
-    //     console.error('Tokens not found in URL');
-    //     alert('You are not logged in. Login using Google to continue.')
-    //     window.location.href = 'https://179530787873.auth.eu-west-1.amazoncognito.com/oauth2/authorize?client_id=340s2eqt65h066rs3o0bdfqocp&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Fweb.karle.co.za';
-    //   }
+        // You can now use these tokens for API calls
+        console.log('Tokens extracted and stored securely');
+      } else {
+        console.error('Tokens not found in URL');
+        alert('You are not logged in. Login using Google to continue.')
+        window.location.href = 'https://179530787873.auth.eu-west-1.amazoncognito.com/oauth2/authorize?client_id=340s2eqt65h066rs3o0bdfqocp&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Fweb.karle.co.za';
+      }
 
 
-    checkLoggedIn();
+    // checkLoggedIn();
 
     document.body.style.fontSize = defaultFontSize;
     document.body.style.color = defaultColor;
@@ -304,16 +305,16 @@ function changeLinkSize(event)
     linkText.style.fontSize = (event.target.value) + "pt";
 }
 
-function checkLoggedIn()
-{
-    if(logged_in)
-    {
-        loginButton.classList.add("hide");
-    }
-    else{
-        loginButton.classList.remove("hide");
-    }
-}
+// function checkLoggedIn()
+// {
+//     if(logged_in)
+//     {
+//         loginButton.classList.add("hide");
+//     }
+//     else{
+//         loginButton.classList.remove("hide");
+//     }
+// }
 setUserPreferences();
 console.log(userPreferencesObj);
 
