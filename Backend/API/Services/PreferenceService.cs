@@ -1,13 +1,14 @@
 ﻿using API.Models;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
+using Newtonsoft.Json;
 
 namespace API.Services
 {
 	public class PreferenceService : IPreferenceService
 	{
 		private readonly IAmazonDynamoDB _dynamoDBClient;
-		private const string TableName = "LocalTest";
+		private const string TableName = "UserPreferences";
 
 		public PreferenceService(IAmazonDynamoDB dynamoDBClient)
 		{
@@ -22,26 +23,33 @@ namespace API.Services
 			};
 
 			var response = await _dynamoDBClient.ScanAsync(request);
-
-			return response.Items.Select(item => new Preference
+			var answer = new List<Preference>();
+			foreach(var item in response.Items)
 			{
-				UserID = item.ContainsKey("UserID") ? item["UserID"].S : "DefaultUserID",
-				Color = item.ContainsKey("Profile") ? item["Profile"].S : "DefaultColor"
-				// Map other properties as needed
-			}).ToList();
+				var userId = item["UserID"].S;
+
+				if(!item.ContainsKey("Preference")) throw new Exception("Bad object obtained from DynamoDB");
+
+				var temp = item["Preference"].S;
+				var t = JsonConvert.DeserializeObject<Preference>(temp);
+
+				answer.Add(t);
+			}
+			return answer;
 		}
 
 		public async Task<Preference> SetPreferencesAsync(Preference newPreference)
 		{
+			var preferenceAsJson = JsonConvert.SerializeObject(newPreference);
 			var request = new PutItemRequest
 			{
 				TableName = TableName,
 				Item = new Dictionary<string, AttributeValue>
 				{
-					{ "UserID", new AttributeValue { S = newPreference.UserID } },
-					{ "Profile", new AttributeValue { S = newPreference.Color } }
-                    // Map other properties as needed
-                }
+					{ "UserID", new AttributeValue { S = "davidbu@bbd.co.za" } },
+					{ "Profile", new AttributeValue { S = "Reading light" } },
+					{ "Preference", new AttributeValue { S = preferenceAsJson } }
+				}
 			};
 
 			await _dynamoDBClient.PutItemAsync(request);
