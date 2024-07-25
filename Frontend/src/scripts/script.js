@@ -112,6 +112,26 @@ linkSizeInput.addEventListener("change",changeLinkSize);
 
 dropdown.addEventListener("change",switchPreference);
 
+async function loadStuff(){
+
+  document.body.style.fontSize = defaultFontSize;
+  document.body.style.color = defaultColor;
+
+  var userPrefs = await getUserPrefs();
+  console.log("HERE:" + userPrefs);
+  let options = [];
+  userPrefs.forEach(pref=>{
+    options.push(pref.profile);
+  })
+  const fonts = ['Arial', 'Times New Roman', 'Verdana', 'Georgia', 'Roboto'] //Get from backend?
+  
+  options.forEach(optionText => {
+      const option = document.createElement('option');
+      option.value = optionText;
+      option.textContent = optionText;
+      dropdown.appendChild(option);
+  });
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -146,24 +166,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     // checkLoggedIn();
-
-    document.body.style.fontSize = defaultFontSize;
-    document.body.style.color = defaultColor;
-
-    var userPrefs = await getUserPrefs();
-    console.log("HERE:" + userPrefs);
-    let options = [];
-    userPrefs.forEach(pref=>{
-      options.push(pref.profile);
-    })
-    const fonts = ['Arial', 'Times New Roman', 'Verdana', 'Georgia', 'Roboto'] //Get from backend?
-    
-    options.forEach(optionText => {
-        const option = document.createElement('option');
-        option.value = optionText;
-        option.textContent = optionText;
-        dropdown.appendChild(option);
-    });
+      loadStuff();
 
     fonts.forEach(optionText => {
         const option = document.createElement('option');
@@ -219,11 +222,14 @@ confirmDeleteBtn.onclick = () => {
     apiHelper.delete('Preference', dropdown.value);
     confirmDeleteDialog.style.visibility = 'hidden';
     main.classList.remove('blur');
+
+    loadStuff();
+
 }
 
  addPreferenceBtn.onclick = () => {
     // GET ID OF NEXT PREFERENCE
-    
+
     let obj = {
       "profile": `Preference${preferenceId.value}`,
       "preference": {
@@ -255,6 +261,8 @@ confirmDeleteBtn.onclick = () => {
 
     addPreferenceDialog.style.visibility = 'visible';
     main.classList.add('blur');
+
+    loadStuff();
  }
 
  cancelNewPreferenceBtn.onclick = () => {
