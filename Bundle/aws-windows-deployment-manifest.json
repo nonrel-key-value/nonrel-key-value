@@ -3,7 +3,7 @@
     "deployments": {
         "aspNetCoreWeb": [
         {
-            "name": "Backend",
+            "name": "API",
             "parameters": {
                 "appBundle": "./api",
                 "iisPath": "",
