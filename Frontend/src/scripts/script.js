@@ -144,6 +144,7 @@ async function loadStuff() {
   userPrefs.forEach((pref) => {
     options.push(pref.profile);
     prefs.push(pref.preference);
+    console.log(pref.preference);
   });
 
   dropdown.replaceChildren();
