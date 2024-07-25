@@ -83,6 +83,37 @@ p{
   background-color: red;
 }
 
+.headingColourInput{
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.linkColourInput{
+  width:1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.linkOptions{
+  display: flex;
+  align-items: baseline;
+}
+
+.paragraphOptions{
+  display: flex;
+  align-items: baseline;
+}
+
+.paragraphColourInput{
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background-color: black;
+}
+
 #colourLabel1{
   background-color: pink;
 }
@@ -225,7 +256,6 @@ ul{
 
 #headingFontDropdown {
   height: 1.5em;
-  width: 8em;
   cursor: pointer;
   border-radius: 0.375em; 
 }
@@ -273,7 +303,6 @@ ul{
 
 #paragraphFontDropdown {
   height: 1.5em;
-  width: 8em;
   cursor: pointer;
   border-radius: 0.375em; 
 }
@@ -329,4 +358,17 @@ dialog {
   flex-direction: row;
   align-items: center;
   gap: 0.5em;
+}
+
+.colorDropdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5em;
+}
+
+#linkFontDropdown {
+  height: 1.5em;
+  cursor: pointer;
+  border-radius: 0.375em; 
 }

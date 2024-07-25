@@ -55,14 +55,14 @@
             </li>
             <li class="colourListItem">
               <label class="colourInput" id="colourLabel7"><input id="inputColour7" class="colourIn" type="color" id="colour7" value="#ff0000"></label>
-              <p>Colour 7</p>
+              <p class="normalFont">Colour 7</p>
             </li>
           </ul>
         </article>
         <section class="innerContainer">
           <h1 class="normalFont">Text Palette</h1>
           <hr class="solid">
-          <article class="headingContainer">
+          <article>
             <ul id="headings" class="textList">
               <li>
                 <label class="rowElement" id="heading1">Heading 1<input type="range" id="headingSize1" name="headingSize1" min="8" max="30"></label>
@@ -80,24 +80,26 @@
                 <label class="rowElement" id="heading5">Heading 5<input type="range" id="headingSize5" name="headingSize5" min="8" max="30"></label>
               </li>
               <li>
-                <label class="rowElement" id="headingFont">Heading Font<select id="headingFontDropdown"></select></label>
+                <label class="headingColourInput colorDropdown" id="headingsColourInput"><input id="inputColour1" class="colourIn" type="color" id="colour1" value="#000000"><select id="headingFontDropdown"></select></label>
               </li>
             </ul>
           </article>
           <article id="paragraphArticle">
             <p id="pText" class="paragraphText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam at, dolorum quo eveniet nesciunt totam doloremque adipisci! Veritatis eligendi, maiores velit impedit consectetur magni. Laudantium, dolor aliquid! Repudiandae, quae neque?</p>
-            <p class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p>  
-            <section class="rowElement">
+            <p id="pText2" class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p>  
+            <section class="paragraphOptions rowElement">
               <input type="range" id="paragraphSize" name="paragraphSize" min="8" max="15"></input>
+              <label class="paragraphColourInput" id="pColourInput" ><input id="inputParagraphColour" class="colourIn" type="color" id="colour1" value="#000000"></label>
               <select id="paragraphFontDropdown"></select>
             </section>
           </article>
-          <section class="rowElement">
+          <section class="linkOptions rowElement">
             <label id="linkText">https://linkStyle.com</label>
             <input type="range" id="linkSize" name="linkSize" min="8" max="30">
-            <select id="linkFontDropdown"></select>
+            <label class="linkColourInput" id="lColourInput"><input id="inputLinkColour" class="colourIn" type="color" id="colour1" value="#000000"></label>
+            <select id="linkFontDropdown"></select>         
           </section>
-            
+
         </article>
       </section>
 
