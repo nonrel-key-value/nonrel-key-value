@@ -1,6 +1,6 @@
 import {ApiHelper } from "./apiHelper.js";
 
-const baseURL = "https://api.karle.co.za/";
+const baseURL = "http://18.201.41.51/";
 const apiHelper = new ApiHelper(baseURL);
 
 const main = document.querySelector('main');
@@ -13,7 +13,6 @@ const deletePreferenceBtn = document.getElementById('deletePrefs')
 const confirmDeleteDialog = document.getElementById('confirmDeleteDialog');
 const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-
 const addPreferenceBtn = document.getElementById('addPref');
 const addPreferenceDialog = document.getElementById('addPreferenceDialog');
 const cancelNewPreferenceBtn = document.getElementById('cancelNewPreferenceBtn');
@@ -197,12 +196,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     linkFontDropdown.addEventListener('change', (event) => {
         changeLinkFont(event.target.value);
     });
-
-    if(sessionStorage.getItem("id_token") != null)
-      {
-        getUserPrefs();
-      }
-
 });
 
 deletePreferenceBtn.onclick = () => {
@@ -223,6 +216,7 @@ confirmDeleteBtn.onclick = () => {
 
  addPreferenceBtn.onclick = () => {
     // GET ID OF NEXT PREFERENCE
+    getUserPrefs();
     nextPreferenceId.textContent = '5';
     addPreferenceDialog.style.visibility = 'visible';
     main.classList.add('blur');
