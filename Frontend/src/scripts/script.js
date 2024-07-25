@@ -344,13 +344,13 @@ async function getUserPrefs() {
     function displayUserPreferences()
     {
         let storedPref = JSON.parse(localStorage.getItem("1"));
-        colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
-        colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
-        colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
-        colourPicker4.parentNode.style.backgroundColor = storedPref.Color4;
-        colourPicker5.parentNode.style.backgroundColor = storedPref.Color5;
-        colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
-        colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
+        colourPicker1.parentNode.style.backgroundColor = storedPref.preference.Color1;
+        colourPicker2.parentNode.style.backgroundColor = storedPref.preference.Color2;
+        colourPicker3.parentNode.style.backgroundColor = storedPref.preference.Color3;
+        colourPicker4.parentNode.style.backgroundColor = storedPref.preference.Color4;
+        colourPicker5.parentNode.style.backgroundColor = storedPref.preference.Color5;
+        colourPicker6.parentNode.style.backgroundColor = storedPref.preference.Color6;
+        colourPicker7.parentNode.style.backgroundColor = storedPref.preference.Color7;
 
         headingsContainer.style.color = storedPref.HeaderTextColor;
         headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
@@ -378,6 +378,8 @@ async function getUserPrefs() {
     function setUserPreferences()
     {
         let userPrefs = {
+          profile: "preference",
+          preference: {
             Color1 : getComputedStyle(colourPicker1.parentNode).backgroundColor,
             Color2 : getComputedStyle(colourPicker2.parentNode).backgroundColor,
             Color3 : getComputedStyle(colourPicker3.parentNode).backgroundColor,
@@ -399,6 +401,7 @@ async function getUserPrefs() {
             ParagraphFont : getComputedStyle(paragraphText).fontFamily,
             LinkFont : getComputedStyle(linkText).fontFamily
         }
+      }
         userPreferencesObj = userPrefs;
         localStorage.setItem("1", JSON.stringify(userPreferencesObj));
 

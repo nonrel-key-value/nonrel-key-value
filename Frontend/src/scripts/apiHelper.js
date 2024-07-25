@@ -10,6 +10,7 @@ export class ApiHelper {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${sessionStorage.getItem("id_token")}`
             },
             body: JSON.stringify(data)
         };
