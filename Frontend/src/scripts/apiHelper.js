@@ -30,6 +30,7 @@ export class ApiHelper {
     async get(endpoint) {
         const url = `${this.baseURL}${endpoint}`;
         const options = {
+            mode:  'cors',
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
