@@ -314,7 +314,7 @@ function changeLinkSize(event)
 async function getUserPrefs() {
   let prefs;
       try {
-        const response = await apiHelper.get('Preferences');
+        const response = await apiHelper.get('Preference');
           
         if (response) {
           console.log(response);
