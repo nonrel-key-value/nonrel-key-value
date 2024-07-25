@@ -231,7 +231,7 @@ confirmDeleteBtn.onclick = () => {
  addPreferenceBtn.onclick = () => {
     // GET ID OF NEXT PREFERENCE
 
-    var newPreferenceId = preferenceId.value.parseInt();
+    var newPreferenceId = preferenceId.value;
 
     let obj = {
       "profile": `Preference${newPreferenceId}`,
@@ -333,7 +333,6 @@ function changeSize(event)
 
 function changePreference(event)
 {
-
     if (event.target.value > 9) {
         preferenceId.value = 9;
     } else if (event.target.value <= -1) {
@@ -341,6 +340,7 @@ function changePreference(event)
     } else {
         preferenceId.value = Number(event.target.value);
     }
+
     nextPreferenceId.textContent = preferenceId.value;
 }
 
