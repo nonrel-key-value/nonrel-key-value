@@ -4,7 +4,7 @@ export class ApiHelper {
     }
 
     async post(endpoint, data) {
-        const url = `${this.baseURL}/${endpoint}`;
+        const url = `${this.baseURL}${endpoint}`;
         const options = {
             method: 'POST',
             headers: {

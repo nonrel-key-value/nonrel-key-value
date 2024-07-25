@@ -1,6 +1,6 @@
 import {ApiHelper } from "./apiHelper.js";
 
-const baseURL = "http://18.201.41.51/";
+const baseURL = "https://api.karle.co.za/";
 const apiHelper = new ApiHelper(baseURL);
 
 const main = document.querySelector('main');
@@ -306,8 +306,8 @@ function changeLinkSize(event)
 //         loginButton.classList.remove("hide");
 //     }
 // }
-setUserPreferences();
-console.log(userPreferencesObj);
+//setUserPreferences();
+//console.log(userPreferencesObj);
 
 
 
@@ -328,7 +328,7 @@ async function getUserPrefs() {
 
     async function saveUserPref(userPrefObj) {
         try {
-          const response = await apiHelper.post('Preference/SetPreferences');
+          const response = await apiHelper.post('Preference');
             
           if (response) {
             console.log(response);
