@@ -58,6 +58,7 @@ export class ApiHelper {
     async delete(endpoint, data) {
         const url = `${this.baseURL}/${endpoint}`;
         const options = {
+            mode:  'cors',
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('id_token')}`,

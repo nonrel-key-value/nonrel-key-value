@@ -216,7 +216,7 @@ cancelDeleteBtn.onclick = () => {
 confirmDeleteBtn.onclick = () => {
     //BACKEND CALL TO DELETE (still need to refresh selected preference). So another get request and reselect first item in preference dropdown
     currentPreferenceName.textContent = dropdown.value;
-    apiHelper.delete('Preference/DeletePreference', dropdown.value);
+    apiHelper.delete('Preference', dropdown.value);
     confirmDeleteDialog.style.visibility = 'hidden';
     main.classList.remove('blur');
 }
