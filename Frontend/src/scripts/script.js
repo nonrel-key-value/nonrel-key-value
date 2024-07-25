@@ -289,7 +289,7 @@ postNewPreferenceBtn.onclick = () => {
 
 async function switchPreference() {
 
-  userPrefs = await getUserPrefs();
+  let userPrefs = await getUserPrefs();
   prefs = [];
 
   userPrefs.forEach((pref) => {
