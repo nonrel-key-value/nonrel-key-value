@@ -410,7 +410,7 @@ async function getUserPrefs() {
         localStorage.setItem("1", JSON.stringify(userPreferencesObj));
 
         console.log(userPreferencesObj);
-        saveUserPref(JSON.stringify(userPreferencesObj))
+        saveUserPref(userPreferencesObj);
     }
     async function handleRedirect() {
         try{
