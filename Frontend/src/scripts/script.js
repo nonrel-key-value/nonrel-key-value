@@ -404,13 +404,14 @@ async function saveUserPref(userPrefObj) {
       console.log("pref: " + JSON.stringify(pref));
         try{
         colourPicker1.parentNode.style.backgroundColor = pref.Color1;
+        console.log(pref.Color1);
         colourPicker1.parentNode.style.backgroundColor = "Purple";
-        colourPicker2.parentNode.style.backgroundColor = pref.Color2.value;
-        colourPicker3.parentNode.style.backgroundColor = pref.Color3.value;
-        colourPicker4.parentNode.style.backgroundColor = pref.Color4.value;
-        colourPicker5.parentNode.style.backgroundColor = pref.Color5.value;
-        colourPicker6.parentNode.style.backgroundColor = pref.Color6.value;
-        colourPicker7.parentNode.style.backgroundColor = pref.Color7.value;
+        colourPicker2.parentNode.style.backgroundColor = pref.Color2;
+        colourPicker3.parentNode.style.backgroundColor = pref.Color3;
+        colourPicker4.parentNode.style.backgroundColor = pref.Color4;
+        colourPicker5.parentNode.style.backgroundColor = pref.Color5;
+        colourPicker6.parentNode.style.backgroundColor = pref.Color6;
+        colourPicker7.parentNode.style.backgroundColor = pref.Color7;
         }catch{
           console.log("colors failing");
         }
@@ -432,7 +433,6 @@ async function saveUserPref(userPrefObj) {
 
         try{
         header1.style.fontSize = pref.HeaderTextSize1;
-        console.log(pref.HeaderTextSize1.value);
         header2.style.fontSize = pref.HeaderTextSize2;
         header3.style.fontSize = pref.HeaderTextSize3;
         header4.style.fontSize = pref.HeaderTextSize4;
