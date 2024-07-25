@@ -130,14 +130,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Store tokens securely
         sessionStorage.setItem('id_token', tokens.id_token);
         sessionStorage.setItem('access_token', tokens.access_token);
-        response = await fetch(`/api/user/signIn`, {
-          method: "PUT",
-          headers: {
-            "Authorization": `Bearer ${sessionStorage.getItem('id_token')}`,
-            "Content-Type": "application/json"
-          }
-        });
-        console.log("API Call to signIn made.");
     
         // You can now use these tokens for API calls
         console.log('Tokens extracted and stored securely');
