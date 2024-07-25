@@ -148,6 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //     switchPreference(event.target.value);
     // });
 
+    // SET INITIAL VALUE OF DROPDOWNS TO VALUE RETURNED FROM BACKEND
+
     changeHeadingFont(headingFontDropdown.value);
     changeParagraphFont(paragraphFontDropdown.value);
     changeLinkFont(linkFontDropdown.value);

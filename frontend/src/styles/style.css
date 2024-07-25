@@ -97,16 +97,6 @@ p{
   background-color: black;
 }
 
-.linkOptions{
-  display: flex;
-  align-items: baseline;
-}
-
-.paragraphOptions{
-  display: flex;
-  align-items: baseline;
-}
-
 .paragraphColourInput{
   width: 1.5em;
   height: 1.5em;
