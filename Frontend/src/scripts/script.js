@@ -401,7 +401,7 @@ async function saveUserPref(userPrefObj) {
 }
     async function displayUserPreferences(pref)
     {
-      console.log("pref: " + pref);
+      console.log("pref: " + JSON.stringify(pref));
         try{
         colourPicker1.parentNode.style.backgroundColor = pref.Color1;
         colourPicker2.parentNode.style.backgroundColor = pref.Color2;
@@ -410,21 +410,37 @@ async function saveUserPref(userPrefObj) {
         colourPicker5.parentNode.style.backgroundColor = pref.Color5;
         colourPicker6.parentNode.style.backgroundColor = pref.Color6;
         colourPicker7.parentNode.style.backgroundColor = pref.Color7;
+        }catch{
+          console.log("colors failing");
+        }
 
+        try{
         headingsContainer.style.color = pref.HeaderTextColor;
         headerColPicker.style.backgroundColor = pref.HeaderTextColor;
+        }catch{
+          console.log("headings failing");
+        }
 
+        try{
         paragraphText.style.color = pref.ParagraphTextColor;
         paragraphText2.style.color = pref.ParagraphTextColor;
         paragraphColPicker.style.backgroundColor = pref.ParagraphTextColor;
+        }catch{
+          console.log("paragraph stuff fails");
+        }
 
+        try{
         header1.style.fontSize = pref.HeaderTextSize1;
         console.log(pref.HeaderTextSize1.value);
         header2.style.fontSize = pref.HeaderTextSize2;
         header3.style.fontSize = pref.HeaderTextSize3;
         header4.style.fontSize = pref.HeaderTextSize4;
         header5.style.fontSize = pref.HeaderTextSize5;
+        }catch{
+          console.log("heading size fails");
+        }
 
+        try{
         paragraphText.style.fontSize = pref.ParagraphTextSize;
         paragraphText2.style.fontSize = pref.ParagraphTextSize;
         linkText.style.fontSize = pref.LinkTextSize,
@@ -434,37 +450,9 @@ async function saveUserPref(userPrefObj) {
         linkText.style.color = pref.LinkTextColor;
         linkColPicker.style.backgroundColor = pref.LinkTextColor;
       }catch{
-        console.log("defaulting");
-        let storedPref2 = defaultPref;
-        colourPicker1.parentNode.style.backgroundColor = storedPref2.Color1;
-        colourPicker2.parentNode.style.backgroundColor = storedPref2.Color2;
-        colourPicker3.parentNode.style.backgroundColor = storedPref2.Color3;
-        colourPicker4.parentNode.style.backgroundColor = storedPref2.Color4;
-        colourPicker5.parentNode.style.backgroundColor = storedPref2.Color5;
-        colourPicker6.parentNode.style.backgroundColor = storedPref2.Color6;
-        colourPicker7.parentNode.style.backgroundColor = storedPref2.Color7;
-
-        headingsContainer.style.color = storedPref2.HeaderTextColor;
-        headerColPicker.style.backgroundColor = storedPref2.HeaderTextColor;
-
-        paragraphText.style.color = storedPref2.ParagraphTextColor;
-        paragraphText2.style.color = storedPref2.ParagraphTextColor;
-        paragraphColPicker.style.backgroundColor = storedPref2.ParagraphTextColor;
-        header1.style.fontSize = storedPref2.HeaderTextSize1;
-        header2.style.fontSize = storedPref2.HeaderTextSize2;
-        header3.style.fontSize = storedPref2.HeaderTextSize3;
-        header4.style.fontSize = storedPref2.HeaderTextSize4;
-        header5.style.fontSize = storedPref2.HeaderTextSize5;
-
-        paragraphText.style.fontSize = storedPref2.ParagraphTextSize;
-        paragraphText2.style.fontSize = storedPref2.ParagraphTextSize;
-        linkText.style.fontSize = storedPref2.LinkTextSize,
-        headingsContainer.style.fontFamily = storedPref2.fontFamily;
-        paragraphArticle.style.fontFamily = storedPref2.ParagraphFont,
-        linkText.style.fontFamily = storedPref2.LinkFont;
-        linkText.style.color = storedPref2.LinkTextColor;
-        linkColPicker.style.backgroundColor = storedPref2.LinkTextColor;
+        console.log("other stuff fails");
       }
+      
     }
 
 function setUserPreferences() {
