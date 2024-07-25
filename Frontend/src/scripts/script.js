@@ -330,7 +330,7 @@ async function getUserPrefs() {
 
     async function saveUserPref(userPrefObj) {
         try {
-          const response = await apiHelper.post('Preference');
+          const response = await apiHelper.post('Preference',userPrefObj);
             
           if (response) {
             console.log(response);
