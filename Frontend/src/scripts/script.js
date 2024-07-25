@@ -7,6 +7,29 @@ const apiHelper = new ApiHelper(baseURL);
 
 const main = document.querySelector('main');
 
+
+let defaultPref = {
+  "Color1":"rgb(255, 31, 31)",
+  "Color2":"rgb(255, 51, 190)",
+  "Color3":"rgb(194, 82, 255)",
+  "Color4":"rgb(88, 160, 254)",
+  "Color5":"rgb(68, 255, 0)",
+  "Color6":"rgb(255, 240, 77)",
+  "Color7":"rgb(255, 102, 0)",
+  "HeaderTextColor":"rgb(0, 0, 0)",
+  "ParagraphTextColor":"rgb(0, 0, 0)",
+  "LinkTextColor":"rgb(0, 0,0)",
+  "HeaderTextSize1":"25.3333px",
+  "HeaderTextSize2":"25.3333px",
+  "HeaderTextSize3":"25.3333px",
+  "HeaderTextSize4":"25.3333px",
+  "HeaderTextSize5":"25.3333px",
+  "ParagraphTextSize":"16px",
+  "LinkTextSize":"16px",
+  "HeadersFont":"\"Times New Roman\"",
+  "ParagraphFont":"\"Times New Roman\"",
+  "LinkFont":"\"Times New Roman\""
+}
 const dropdown = document.getElementById('dropdown');
 const selectedPreference = document.getElementById('selectedPreference');
 const headingsContainer = document.getElementById('headings');
@@ -71,6 +94,9 @@ const paragraphText2 = document.getElementById("pText2");
 
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
+
+var userPrefs = [];
+var storedPref;
 
 // const loginButton = document.getElementById("loginLink");
 
@@ -146,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.style.fontSize = defaultFontSize;
     document.body.style.color = defaultColor;
 
-    var userPrefs = await getUserPrefs();
+    userPrefs = await getUserPrefs();
     console.log("HERE:" + userPrefs);
     let options = [];
     userPrefs.forEach(pref=>{
@@ -180,13 +206,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         linkFontDropdown.appendChild(option);
     });
 
-    switchPreference(dropdown.value);
-
-    // dropdown.addEventListener('change', (event) => {
-    //     switchPreference(event.target.value);
-    // });
-
-    // SET INITIAL VALUE OF DROPDOWNS TO VALUE RETURNED FROM BACKEND
+    switchPreference(dropdown.selectedIndex);
 
     changeHeadingFont(headingFontDropdown.value);
     changeParagraphFont(paragraphFontDropdown.value);
@@ -242,6 +262,7 @@ postNewPreferenceBtn.onclick = () => {
 
 function switchPreference(value) {
     console.log("preference switched to: " + value);
+    storedPref = userPrefs[value];
     displayUserPreferences();
     // Set content based on value
 }
@@ -348,7 +369,7 @@ async function getUserPrefs() {
 
     function displayUserPreferences()
     {
-        let storedPref = (JSON.parse(localStorage.getItem("1"))).preference;
+        storedPref = userPrefs[dropdown.selectedIndex].preference;
         try{
         colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
         colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
@@ -379,7 +400,36 @@ async function getUserPrefs() {
         linkText.style.color = storedPref.LinkTextColor;
         linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
       }catch{
-        console.log("defaults");
+        console.log("defaulting");
+        storedPref = defaultPref;
+        colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
+        colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
+        colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
+        colourPicker4.parentNode.style.backgroundColor = storedPref.Color4;
+        colourPicker5.parentNode.style.backgroundColor = storedPref.Color5;
+        colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
+        colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
+
+        headingsContainer.style.color = storedPref.HeaderTextColor;
+        headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
+
+        paragraphText.style.color = storedPref.ParagraphTextColor;
+        paragraphText2.style.color = storedPref.ParagraphTextColor;
+        paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
+        header1.style.fontSize = storedPref.HeaderTextSize1;
+        header2.style.fontSize = storedPref.HeaderTextSize2;
+        header3.style.fontSize = storedPref.HeaderTextSize3;
+        header4.style.fontSize = storedPref.HeaderTextSize4;
+        header5.style.fontSize = storedPref.HeaderTextSize5;
+
+        paragraphText.style.fontSize = storedPref.ParagraphTextSize;
+        paragraphText2.style.fontSize = storedPref.ParagraphTextSize;
+        linkText.style.fontSize = storedPref.LinkTextSize,
+        headingsContainer.style.fontFamily = storedPref.fontFamily;
+        paragraphArticle.style.fontFamily = storedPref.ParagraphFont,
+        linkText.style.fontFamily = storedPref.LinkFont;
+        linkText.style.color = storedPref.LinkTextColor;
+        linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
       }
 
     }
