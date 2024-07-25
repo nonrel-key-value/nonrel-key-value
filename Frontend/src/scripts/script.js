@@ -404,6 +404,7 @@ async function saveUserPref(userPrefObj) {
       console.log("pref: " + JSON.stringify(pref));
         try{
         colourPicker1.parentNode.style.backgroundColor = pref.Color1;
+        colourPicker1.parentNode.style.backgroundColor = "Purple";
         colourPicker2.parentNode.style.backgroundColor = pref.Color2;
         colourPicker3.parentNode.style.backgroundColor = pref.Color3;
         colourPicker4.parentNode.style.backgroundColor = pref.Color4;
