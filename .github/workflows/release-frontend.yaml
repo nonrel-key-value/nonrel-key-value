@@ -29,8 +29,8 @@ jobs:
         aws-region: "eu-west-1"
         role-session-name: GitHub_to_AWS_via_FederatedOIDC
 
-    - name: Upload new Frontend Files
-      run: |
-        aws s3 rm --recursive s3://${{ inputs.account-id  }}-frontend-deploy-bucket
-        aws s3 cp ./Frontend/src s3://${{ inputs.account-id  }}-frontend-deploy-bucket --recursive
+    # - name: Upload new Frontend Files
+    #   run: |
+    #     aws s3 rm --recursive s3://${{ inputs.account-id  }}-frontend-deploy-bucket
+    #     aws s3 cp ./Frontend/src s3://${{ inputs.account-id  }}-frontend-deploy-bucket --recursive
   
