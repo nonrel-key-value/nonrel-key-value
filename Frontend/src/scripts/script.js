@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.style.fontSize = defaultFontSize;
     document.body.style.color = defaultColor;
 
-    var userPrefs = getUserPrefs();
+    var userPrefs = await getUserPrefs();
     console.log("HERE:" + userPrefs);
     let options = [];
     userPrefs.forEach(pref=>{
