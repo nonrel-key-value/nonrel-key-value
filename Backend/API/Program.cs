@@ -8,7 +8,18 @@ namespace API
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-
+			// CORS
+			var corsPolicyName = "nosqlCors";
+			builder.Services.AddCors(options =>
+			{
+				options.AddPolicy(name: corsPolicyName,
+								  policy =>
+								  {
+									  policy.AllowAnyOrigin()
+										   .WithMethods("GET", "POST")
+										   .AllowAnyHeader();
+								  });
+			});
 			// Add services to the container.
 			builder.Services.AddControllers();
 			builder.Services.AddScoped<IPreferenceService, PreferenceService>();
@@ -17,7 +28,8 @@ namespace API
 			{
 				var config = new AmazonDynamoDBConfig
 				{
-					RegionEndpoint = Amazon.RegionEndpoint.EUWest1
+					RegionEndpoint = Amazon.RegionEndpoint.EUWest1,
+
 				};
 
 				return new AmazonDynamoDBClient(config);
@@ -41,6 +53,7 @@ namespace API
 
 			app.UseHttpsRedirection();
 
+			app.UseCors(corsPolicyName);
 			app.UseAuthorization();
 
 
