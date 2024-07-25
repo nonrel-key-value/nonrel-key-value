@@ -20,6 +20,9 @@ const addPreferenceDialog = document.getElementById('addPreferenceDialog');
 const cancelNewPreferenceBtn = document.getElementById('cancelNewPreferenceBtn');
 const postNewPreferenceBtn = document.getElementById('postNewPreferenceBtn');
 const nextPreferenceId = document.getElementById('nextPreferenceId');
+const preferenceId = document.getElementById('preferenceId');
+
+const currentPreferenceName = document.getElementById('currentPreferenceName');
 
 const defaultFontSize = 16;
 const defaultColor = 'black';
@@ -92,6 +95,8 @@ headingSize3.addEventListener("change",changeSize);
 headingSize4.addEventListener("change",changeSize);
 headingSize5.addEventListener("change",changeSize);
 
+preferenceId.addEventListener("change",changePreference);
+
 inputParagraphColour.addEventListener("change",changeParagraphColour);
 
 headingsColor.addEventListener("change", changeHeadingColour);
@@ -126,7 +131,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     
       // Extract tokens
       const tokens = getTokensFromUrl();
-      console.log(tokens)
       if (tokens.id_token && tokens.access_token) {
         // Store tokens securely
         sessionStorage.setItem('id_token', tokens.id_token);
@@ -175,17 +179,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         linkFontDropdown.appendChild(option);
     });
 
-    switchPreference(dropdown.value);
+    // switchPreference(dropdown.value);
 
-    // dropdown.addEventListener('change', (event) => {
-    //     switchPreference(event.target.value);
-    // });
-
-    // SET INITIAL VALUE OF DROPDOWNS TO VALUE RETURNED FROM BACKEND
-
-    changeHeadingFont(headingFontDropdown.value);
-    changeParagraphFont(paragraphFontDropdown.value);
-    changeLinkFont(linkFontDropdown.value);
+    // changeHeadingFont(headingFontDropdown.value);
+    // changeParagraphFont(paragraphFontDropdown.value);
+    // changeLinkFont(linkFontDropdown.value);
 
     headingFontDropdown.addEventListener('change', (event) => {
         changeHeadingFont(event.target.value);
@@ -211,7 +209,9 @@ cancelDeleteBtn.onclick = () => {
 }
 
 confirmDeleteBtn.onclick = () => {
-    //BACKEND CALL TO DELETE (refresh selected preference)
+    //BACKEND CALL TO DELETE (still need to refresh selected preference). So another get request and reselect first item in preference dropdown
+    currentPreferenceName.textContent = dropdown.value;
+    apiHelper.delete('Preference/DeletePreference', dropdown.value);
     confirmDeleteDialog.style.visibility = 'hidden';
     main.classList.remove('blur');
 }
@@ -220,6 +220,32 @@ confirmDeleteBtn.onclick = () => {
     // GET ID OF NEXT PREFERENCE
     getUserPrefs();
     nextPreferenceId.textContent = '5';
+    // Backend call with Default Values (still need to refresh). Another GET request
+    apiHelper.post('', {
+        "profile": `Preference${preferenceId.value}`,
+        "preference": {
+          "color1": "rgba(255, 192, 203, 0.094)",
+          "color2": "rgba(255, 192, 203, 0.094)",
+          "color3": "rgba(255, 192, 203, 0.094)",
+          "color4": "rgba(255, 192, 203, 0.094)",
+          "color5": "rgba(255, 192, 203, 0.094)",
+          "color6": "rgba(255, 192, 203, 0.094)",
+          "color7": "rgba(255, 192, 203, 0.094)",
+          "headerTextColor": "rgb(0, 0, 0)",
+          "headerTextSize1": "16px",
+          "headerTextSize2": "16px",
+          "headerTextSize3": "16px",
+          "headerTextSize4": "16px",
+          "headerTextSize5": "16px",
+          "headersFont": "Poppins, sans-serif",
+          "linkFont": "Poppins, sans-serif",
+          "linkTextColor": "rgb(0, 0, 0)",
+          "linkTextSize": "16px",
+          "paragraphFont": "Poppins, sans-serif",
+          "paragraphTextColor": "rgb(0, 0, 0)",
+          "paragraphTextSize": "16px"
+        }
+      })
     addPreferenceDialog.style.visibility = 'visible';
     main.classList.add('blur');
  }
@@ -284,6 +310,20 @@ function changeLinkColour(event)
 function changeSize(event)
 {
     event.target.parentNode.style.fontSize = (event.target.value) + "pt";
+}
+
+
+function changePreference(event)
+{
+
+    if (event.target.value > 9) {
+        preferenceId.value = 9;
+    } else if (event.target.value <= -1) {
+        preferenceId.value = 0;
+    } else {
+        preferenceId.value = Number(event.target.value);
+    }
+    nextPreferenceId.textContent = preferenceId.value;
 }
 
 function changeParagraphSize(event)

@@ -300,19 +300,24 @@ ul{
 dialog {
   display: flex;
   flex-direction: column;
-  gap: 1em;
   position: fixed;
   top: 50%;
   left: 50%;
   border: none;
-  border-radius: 0.375em; 
-  padding: 0.625em 1.5625em; 
+  border-radius: 0.375em;  
   transform: translate(-50%,-50%) scale(.9); 
   background-color: white;
   max-width: 70%;
   max-height: 95%;
   overflow: auto;
   visibility: hidden;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 0.625em 1.5625em;
+  }
 
   button {
     width: 10em; 
@@ -361,4 +366,13 @@ dialog {
   height: 1.5em;
   cursor: pointer;
   border-radius: 0.375em; 
+}
+
+.dialog-header {
+  background-color: #0078d7;
+}
+
+.add-text {
+  display: flex;
+  gap: 0.25em;
 }
