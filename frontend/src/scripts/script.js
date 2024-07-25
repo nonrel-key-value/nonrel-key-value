@@ -44,6 +44,7 @@ const paragraphArticle = document.getElementById("paragraphArticle");
 const linkText = document.getElementById("linkText");
 
 const paragraphText = document.getElementById("pText");
+const paragraphText2 = document.getElementById("pText2");
 
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
@@ -129,6 +130,7 @@ function switchPreference(value) {
 
 function changeFont(value) {
     headings.style.fontFamily = value;
+    header1.style.fontFamily = value;
 }
 
 function changeColour(event)
@@ -182,7 +184,6 @@ async function healthCheck() {
     function displayUserPreferences()
     {
         let storedPref = JSON.parse(localStorage.getItem("1"));
-        console.log("here we go");
         colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
         colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
         colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
@@ -191,7 +192,6 @@ async function healthCheck() {
         colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
         colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
 
-        console.log("hhuh??");
         header1.style.color = storedPref.HeaderTextColor;
         paragraphText.style.color = storedPref.ParagraphTextColor;
         header1.style.fontSize = storedPref.HeaderTextSize1;
@@ -201,9 +201,11 @@ async function healthCheck() {
         header5.style.fontSize = storedPref.HeaderTextSize5;
 
         paragraphText.style.fontSize = storedPref.ParagraphTextSize,
+        paragraphText2.style.fontSize = storedPref.ParagraphTextSize,
         linkText.style.fontSize = storedPref.LinkTextSize,
         header1.style.fontFamily = storedPref.HeadersFont,
         paragraphText.style.fontFamily = storedPref.ParagraphFont,
+        paragraphText2.style.fontFamily = storedPref.ParagraphFont,
         linkText.style.fontFamily = storedPref.LinkFont;
     }
 
