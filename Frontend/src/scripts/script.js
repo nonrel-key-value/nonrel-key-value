@@ -198,6 +198,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         changeLinkFont(event.target.value);
     });
 
+    if(sessionStorage.getItem("id_token") != null)
+      {
+        getUserPrefs();
+      }
+
 });
 
 deletePreferenceBtn.onclick = () => {
@@ -310,10 +315,7 @@ function changeLinkSize(event)
 setUserPreferences();
 console.log(userPreferencesObj);
 
-if(sessionStorage.getItem("id_token") != null)
-{
-  getUserPrefs();
-}
+
 
 async function getUserPrefs() {
   let prefs;
