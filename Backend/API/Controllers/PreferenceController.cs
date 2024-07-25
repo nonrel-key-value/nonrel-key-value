@@ -23,8 +23,8 @@ namespace API.Controllers
 			try
 			{
 				_logger.LogInformation("Getting preferences.");
-				var answer = await _preferenceService.GetPreferencesAsync();
-				return Ok(answer); ;
+				var preferences = await _preferenceService.GetPreferencesAsync();
+				return Ok(preferences); ;
 			}
 			catch(Exception ex)
 			{
@@ -39,8 +39,8 @@ namespace API.Controllers
 			try
 			{
 				_logger.LogInformation("Setting preferences.");
-				var answer = await _preferenceService.SetPreferencesAsync(preference);
-				return Ok(answer);
+				var savedPreference = await _preferenceService.SetPreferencesAsync(preference);
+				return Ok(savedPreference);
 			}
 			catch(Exception ex)
 			{

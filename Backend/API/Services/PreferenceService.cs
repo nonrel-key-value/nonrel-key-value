@@ -25,9 +25,10 @@ namespace API.Services
 
 			return response.Items.Select(item => new Preference
 			{
-				//Color = item["Color"].S
+				UserID = item.ContainsKey("UserID") ? item["UserID"].S : "DefaultUserID",
+				Color = item.ContainsKey("Profile") ? item["Profile"].S : "DefaultColor"
 				// Map other properties as needed
-			}).ToArray();
+			}).ToList();
 		}
 
 		public async Task<Preference> SetPreferencesAsync(Preference newPreference)
@@ -36,10 +37,11 @@ namespace API.Services
 			{
 				TableName = TableName,
 				Item = new Dictionary<string, AttributeValue>
-					{
-						//{ "Color", new AttributeValue { S = newPreference.Color } }
-                        // Map other properties as needed
-                    }
+				{
+					{ "UserID", new AttributeValue { S = newPreference.UserID } },
+					{ "Profile", new AttributeValue { S = newPreference.Color } }
+                    // Map other properties as needed
+                }
 			};
 
 			await _dynamoDBClient.PutItemAsync(request);

@@ -1,5 +1,9 @@
-using API.Services;
+using DotNetEnv;
+using Amazon;
 using Amazon.DynamoDBv2;
+using Amazon.Runtime;
+using Microsoft.Extensions.DependencyInjection;
+using API.Services;
 
 namespace API
 {
@@ -7,6 +11,9 @@ namespace API
 	{
 		public static void Main(string[] args)
 		{
+			// Load environment variables from .env file
+			Env.Load();
+
 			var builder = WebApplication.CreateBuilder(args);
 			// CORS
 			var corsPolicyName = "nosqlCors";
@@ -27,18 +34,23 @@ namespace API
 
 			builder.Services.AddSingleton<IAmazonDynamoDB>(sp =>
 			{
+				var accessKeyId = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
+				var secretAccessKey = Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY");
+				var region = Environment.GetEnvironmentVariable("AWS_REGION");
+
+				if(string.IsNullOrEmpty(accessKeyId) || string.IsNullOrEmpty(secretAccessKey) || string.IsNullOrEmpty(region))
+				{
+					throw new InvalidOperationException("AWS credentials or region are not set in environment variables.");
+				}
+
+				var credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
 				var config = new AmazonDynamoDBConfig
 				{
-					RegionEndpoint = Amazon.RegionEndpoint.EUWest1,
-
+					RegionEndpoint = RegionEndpoint.GetBySystemName(region)
 				};
 
-				return new AmazonDynamoDBClient(config);
+				return new AmazonDynamoDBClient(credentials, config);
 			});
-
-			Console.WriteLine($"AWS_ACCESS_KEY_ID: {Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID")}");
-			Console.WriteLine($"AWS_SECRET_ACCESS_KEY: {Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")}");
-
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
@@ -56,10 +68,7 @@ namespace API
 
 			app.UseCors(corsPolicyName);
 			app.UseAuthorization();
-
-
 			app.MapControllers();
-
 			app.Run();
 		}
 	}
