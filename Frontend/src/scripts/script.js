@@ -7,6 +7,28 @@ const apiHelper = new ApiHelper(baseURL);
 
 const main = document.querySelector("main");
 
+let defaultPref = {
+  "color1":"rgb(255, 31, 31)",
+  "color2":"rgb(255, 51, 190)",
+  "color3":"rgb(194, 82, 255)",
+  "color4":"rgb(88, 160, 254)",
+  "color5":"rgb(68, 255, 0)",
+  "color6":"rgb(255, 240, 77)",
+  "color7":"rgb(255, 102, 0)",
+  "headerTextColor":"rgb(0, 0, 0)",
+  "paragraphTextColor":"rgb(0, 0, 0)",
+  "linkTextColor":"rgb(0, 0,0)",
+  "headerTextSize1":"25.3333px",
+  "headerTextSize2":"25.3333px",
+  "headerTextSize3":"25.3333px",
+  "headerTextSize4":"25.3333px",
+  "headerTextSize5":"25.3333px",
+  "paragraphTextSize":"16px",
+  "linkTextSize":"16px",
+  "headersFont":"Arial",
+  "paragraphFont":"Arial",
+  "linkFont":"Arial"
+}
 const dropdown = document.getElementById("dropdown");
 const selectedPreference = document.getElementById("selectedPreference");
 const headingsContainer = document.getElementById("headings");
@@ -76,6 +98,9 @@ const paragraphText2 = document.getElementById("pText2");
 const paragraphSizeInput = document.getElementById("paragraphSize");
 const linkSizeInput = document.getElementById("linkSize");
 
+var storedPref;
+let prefs = [];
+
 // const loginButton = document.getElementById("loginLink");
 
 // var logged_in = false;
@@ -112,13 +137,25 @@ linkSizeInput.addEventListener("change", changeLinkSize);
 dropdown.addEventListener("change", switchPreference);
 
 async function loadStuff() {
+  console.log("we loading");
   var userPrefs = await getUserPrefs();
-  console.log("HERE:" + userPrefs);
   let options = [];
+  prefs = [];
 
   userPrefs.forEach((pref) => {
     options.push(pref.profile);
+    if(pref.preference == null)
+    {
+      prefs.push(defaultPref);
+    }
+    else
+    {
+      prefs.push(pref.preference);
+    }
+    
   });
+
+  displayUserPreferences(prefs[0]);
 
   dropdown.replaceChildren();
 
@@ -189,14 +226,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     linkFontDropdown.appendChild(option);
   });
 
-  // switchPreference(dropdown.value);
-
-  // changeHeadingFont(headingFontDropdown.value);
-  // changeParagraphFont(paragraphFontDropdown.value);
-  // changeLinkFont(linkFontDropdown.value);
-
   headingFontDropdown.addEventListener("change", (event) => {
     changeHeadingFont(event.target.value);
+    console.log("heading font: " + event.target.value);
   });
 
   paragraphFontDropdown.addEventListener("change", (event) => {
@@ -245,28 +277,7 @@ postNewPreferenceBtn.onclick = () => {
 
   let obj = {
     profile: `Preference${newPreferenceId}`,
-    preference: {
-      color1: "rgba(255, 192, 203, 0.094)",
-      color2: "rgba(255, 192, 203, 0.094)",
-      color3: "rgba(255, 192, 203, 0.094)",
-      color4: "rgba(255, 192, 203, 0.094)",
-      color5: "rgba(255, 192, 203, 0.094)",
-      color6: "rgba(255, 192, 203, 0.094)",
-      color7: "rgba(255, 192, 203, 0.094)",
-      headerTextColor: "rgb(0, 0, 0)",
-      headerTextSize1: "16px",
-      headerTextSize2: "16px",
-      headerTextSize3: "16px",
-      headerTextSize4: "16px",
-      headerTextSize5: "16px",
-      headersFont: "Poppins, sans-serif",
-      linkFont: "Poppins, sans-serif",
-      linkTextColor: "rgb(0, 0, 0)",
-      linkTextSize: "16px",
-      paragraphFont: "Poppins, sans-serif",
-      paragraphTextColor: "rgb(0, 0, 0)",
-      paragraphTextSize: "16px",
-    },
+    defaultPref,
   };
 
   saveUserPref(obj);
@@ -276,10 +287,23 @@ postNewPreferenceBtn.onclick = () => {
   main.classList.remove("blur");
 };
 
-function switchPreference(value) {
-  console.log("preference switched to: " + value);
-  displayUserPreferences();
-  // Set content based on value
+async function switchPreference() {
+
+  let userPrefs = await getUserPrefs();
+  prefs = [];
+
+  userPrefs.forEach((pref) => {
+    if(pref.preference == null)
+    {
+      prefs.push(defaultPref);
+    }
+    else{
+      prefs.push(pref.preference);
+    }
+  });
+    
+    displayUserPreferences(prefs[dropdown.selectedIndex]);
+    // Set content based on value
 }
 
 function changeHeadingFont(value) {
@@ -344,18 +368,6 @@ function changeLinkSize(event) {
   linkText.style.fontSize = event.target.value + "pt";
 }
 
-// function checkLoggedIn()
-// {
-//     if(logged_in)
-//     {
-//         loginButton.classList.add("hide");
-//     }
-//     else{
-//         loginButton.classList.remove("hide");
-//     }
-// }
-//setUserPreferences();
-//console.log(userPreferencesObj);
 
 async function getUserPrefs() {
   let prefs;
@@ -369,8 +381,12 @@ async function getUserPrefs() {
   } catch (error) {
     console.error("Error performing CRUD operation:", error);
   }
+  console.log(prefs);
   return prefs;
 }
+
+
+
 
 async function saveUserPref(userPrefObj) {
   try {
@@ -383,74 +399,92 @@ async function saveUserPref(userPrefObj) {
     console.error("Error performing CRUD operation:", error);
   }
 }
+    async function displayUserPreferences(pref)
+    {
+      console.log("pref: " + JSON.stringify(pref));
+        try{
+        colourPicker1.parentNode.style.backgroundColor = pref.color1;
+        colourPicker2.parentNode.style.backgroundColor = pref.color2;
+        colourPicker3.parentNode.style.backgroundColor = pref.color3;
+        colourPicker4.parentNode.style.backgroundColor = pref.color4;
+        colourPicker5.parentNode.style.backgroundColor = pref.color5;
+        colourPicker6.parentNode.style.backgroundColor = pref.color6;
+        colourPicker7.parentNode.style.backgroundColor = pref.color7;
+        }catch{
+          console.log("colors failing");
+        }
 
-function displayUserPreferences() {
-  let storedPref = JSON.parse(localStorage.getItem("1")).preference;
-  try {
-    colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
-    colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
-    colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
-    colourPicker4.parentNode.style.backgroundColor = storedPref.Color4;
-    colourPicker5.parentNode.style.backgroundColor = storedPref.Color5;
-    colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
-    colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
+        try{
+        headingsContainer.style.color = pref.headerTextColor;
+        headerColPicker.style.backgroundColor = pref.headerTextColor;
+        }catch{
+          console.log("headings failing");
+        }
 
-    headingsContainer.style.color = storedPref.HeaderTextColor;
-    headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
+        try{
+        paragraphText.style.color = pref.paragraphTextColor;
+        paragraphText2.style.color = pref.ParagraphTextColor;
+        paragraphColPicker.style.backgroundColor = pref.paragraphTextColor;
+        }catch{
+          console.log("paragraph stuff fails");
+        }
 
-    paragraphText.style.color = storedPref.ParagraphTextColor;
-    paragraphText2.style.color = storedPref.ParagraphTextColor;
-    paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
-    header1.style.fontSize = storedPref.HeaderTextSize1;
-    header2.style.fontSize = storedPref.HeaderTextSize2;
-    header3.style.fontSize = storedPref.HeaderTextSize3;
-    header4.style.fontSize = storedPref.HeaderTextSize4;
-    header5.style.fontSize = storedPref.HeaderTextSize5;
+        try{
+        header1.style.fontSize = pref.headerTextSize1;
+        header2.style.fontSize = pref.headerTextSize2;
+        header3.style.fontSize = pref.headerTextSize3;
+        header4.style.fontSize = pref.headerTextSize4;
+        header5.style.fontSize = pref.headerTextSize5;
+        }catch{
+          console.log("heading size fails");
+        }
 
-    paragraphText.style.fontSize = storedPref.ParagraphTextSize;
-    paragraphText2.style.fontSize = storedPref.ParagraphTextSize;
-    (linkText.style.fontSize = storedPref.LinkTextSize),
-      (headingsContainer.style.fontFamily = storedPref.fontFamily);
-    (paragraphArticle.style.fontFamily = storedPref.ParagraphFont),
-      (linkText.style.fontFamily = storedPref.LinkFont);
-    linkText.style.color = storedPref.LinkTextColor;
-    linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
-  } catch {
-    console.log("defaults");
-  }
-}
+        try{
+        paragraphText.style.fontSize = pref.paragraphTextSize;
+        paragraphText2.style.fontSize = pref.paragraphTextSize;
+        linkText.style.fontSize = pref.linkTextSize,
+        headingsContainer.style.fontFamily = pref.headersFont;
+        headingFontDropdown.value = pref.headersFont;
+        paragraphArticle.style.fontFamily = pref.paragraphFont,
+        paragraphFontDropdown.value = pref.paragraphFont;
+        linkText.style.fontFamily = pref.linkFont;
+        linkFontDropdown.value = pref.linkFont;
+        linkText.style.color = pref.linkTextColor;
+        linkColPicker.style.backgroundColor = pref.linkTextColor;
+      }catch{
+        console.log("other stuff fails");
+      }
+      
+    }
 
 function setUserPreferences() {
-  let userPrefs = {
-    profile: "preference",
+  let uPrefs = {
+    profile: dropdown.value,
     preference: {
-      Color1: getComputedStyle(colourPicker1.parentNode).backgroundColor,
-      Color2: getComputedStyle(colourPicker2.parentNode).backgroundColor,
-      Color3: getComputedStyle(colourPicker3.parentNode).backgroundColor,
-      Color4: getComputedStyle(colourPicker4.parentNode).backgroundColor,
-      Color5: getComputedStyle(colourPicker5.parentNode).backgroundColor,
-      Color6: getComputedStyle(colourPicker6.parentNode).backgroundColor,
-      Color7: getComputedStyle(colourPicker7.parentNode).backgroundColor,
-      HeaderTextColor: getComputedStyle(header1).color,
-      ParagraphTextColor: getComputedStyle(paragraphText).color,
-      LinkTextColor: getComputedStyle(linkText).color,
-      HeaderTextSize1: getComputedStyle(header1).fontSize,
-      HeaderTextSize2: getComputedStyle(header2).fontSize,
-      HeaderTextSize3: getComputedStyle(header3).fontSize,
-      HeaderTextSize4: getComputedStyle(header4).fontSize,
-      HeaderTextSize5: getComputedStyle(header5).fontSize,
-      ParagraphTextSize: getComputedStyle(paragraphText).fontSize,
-      LinkTextSize: getComputedStyle(linkText).fontSize,
-      HeadersFont: getComputedStyle(header1).fontFamily,
-      ParagraphFont: getComputedStyle(paragraphText).fontFamily,
-      LinkFont: getComputedStyle(linkText).fontFamily,
+      color1: getComputedStyle(colourPicker1.parentNode).backgroundColor,
+      color2: getComputedStyle(colourPicker2.parentNode).backgroundColor,
+      color3: getComputedStyle(colourPicker3.parentNode).backgroundColor,
+      color4: getComputedStyle(colourPicker4.parentNode).backgroundColor,
+      color5: getComputedStyle(colourPicker5.parentNode).backgroundColor,
+      color6: getComputedStyle(colourPicker6.parentNode).backgroundColor,
+      color7: getComputedStyle(colourPicker7.parentNode).backgroundColor,
+      headerTextColor: getComputedStyle(header1).color,
+      paragraphTextColor: getComputedStyle(paragraphText).color,
+      linkTextColor: getComputedStyle(linkText).color,
+      headerTextSize1: getComputedStyle(header1).fontSize,
+      headerTextSize2: getComputedStyle(header2).fontSize,
+      headerTextSize3: getComputedStyle(header3).fontSize,
+      headerTextSize4: getComputedStyle(header4).fontSize,
+      headerTextSize5: getComputedStyle(header5).fontSize,
+      paragraphTextSize: getComputedStyle(paragraphText).fontSize,
+      linkTextSize: getComputedStyle(linkText).fontSize,
+      headersFont: getComputedStyle(header1).fontFamily,
+      paragraphFont: getComputedStyle(paragraphText).fontFamily,
+      linkFont: getComputedStyle(linkText).fontFamily,
     },
   };
-  userPreferencesObj = userPrefs;
-  localStorage.setItem("1", JSON.stringify(userPreferencesObj));
-
-  console.log(userPreferencesObj);
-  saveUserPref(userPreferencesObj);
+  console.log(uPrefs);
+  saveUserPref(uPrefs);
 }
 async function handleRedirect() {
   try {
