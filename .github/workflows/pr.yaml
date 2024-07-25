@@ -55,7 +55,7 @@ jobs:
   release-api:
     name: "Deploy API"
     needs: [changed_files]
-    if: needs.changed_files.outputs.backend_changed == 'true' && ${{ vars.DEPLOY_ON_PR }} == 'true'
+    if: (needs.changed_files.outputs.backend_changed == 'true' && ${{ vars.DEPLOY_ON_PR }} == 'true')
     secrets: inherit
     uses: ./.github/workflows/release-api.yaml  
     with:
@@ -64,7 +64,7 @@ jobs:
   release-frontend:
     name: "Deploy Frontend"
     needs: [changed_files]
-    if: needs.changed_files.outputs.frontend_changed == 'true' && ${{ vars.DEPLOY_ON_PR }} == 'true'
+    if: (needs.changed_files.outputs.frontend_changed == 'true' && ${{ vars.DEPLOY_ON_PR }} == 'true')
     secrets: inherit
     uses: ./.github/workflows/release-frontend.yaml  
     with:
