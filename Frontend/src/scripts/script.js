@@ -1,7 +1,8 @@
 import {ApiHelper } from "./apiHelper.js";
 
-const baseURL = "http://18.201.41.51/"
+//const baseURL = "http://18.201.41.51/"
 //const baseURL = "https://api.karle.co.za/";
+const baseURL = "https://lsu7lwwod8.execute-api.eu-west-1.amazonaws.com/api";
 const apiHelper = new ApiHelper(baseURL);
 
 const main = document.querySelector('main');
