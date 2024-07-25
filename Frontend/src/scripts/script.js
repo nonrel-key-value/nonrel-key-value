@@ -412,38 +412,6 @@ async function saveUserPref(userPrefObj) {
     console.error("Error performing CRUD operation:", error);
   }
 }
-
-function setUserPreferences() {
-  let userPrefs = {
-    profile: "preference",
-    preference: {
-      Color1: getComputedStyle(colourPicker1.parentNode).backgroundColor,
-      Color2: getComputedStyle(colourPicker2.parentNode).backgroundColor,
-      Color3: getComputedStyle(colourPicker3.parentNode).backgroundColor,
-      Color4: getComputedStyle(colourPicker4.parentNode).backgroundColor,
-      Color5: getComputedStyle(colourPicker5.parentNode).backgroundColor,
-      Color6: getComputedStyle(colourPicker6.parentNode).backgroundColor,
-      Color7: getComputedStyle(colourPicker7.parentNode).backgroundColor,
-      HeaderTextColor: getComputedStyle(header1).color,
-      ParagraphTextColor: getComputedStyle(paragraphText).color,
-      LinkTextColor: getComputedStyle(linkText).color,
-      HeaderTextSize1: getComputedStyle(header1).fontSize,
-      HeaderTextSize2: getComputedStyle(header2).fontSize,
-      HeaderTextSize3: getComputedStyle(header3).fontSize,
-      HeaderTextSize4: getComputedStyle(header4).fontSize,
-      HeaderTextSize5: getComputedStyle(header5).fontSize,
-      ParagraphTextSize: getComputedStyle(paragraphText).fontSize,
-      LinkTextSize: getComputedStyle(linkText).fontSize,
-      HeadersFont: getComputedStyle(header1).fontFamily,
-      ParagraphFont: getComputedStyle(paragraphText).fontFamily,
-      LinkFont: getComputedStyle(linkText).fontFamily,
-    },
-  };
-  userPreferencesObj = userPrefs;
-
-  console.log(userPreferencesObj);
-  saveUserPref(userPreferencesObj);
-}
     function displayUserPreferences()
     {
         storedPref = userPrefs[dropdown.selectedIndex].preference;
@@ -541,6 +509,7 @@ function setUserPreferences() {
 
   console.log(userPreferencesObj);
   saveUserPref(userPreferencesObj);
+
 }
 async function handleRedirect() {
   try {
