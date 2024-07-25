@@ -400,6 +400,49 @@ async function getUserPrefs() {
 
 
 
+
+async function saveUserPref(userPrefObj) {
+  try {
+    const response = await apiHelper.post("Preference", userPrefObj);
+
+    if (response) {
+      console.log(response);
+    }
+  } catch (error) {
+    console.error("Error performing CRUD operation:", error);
+  }
+}
+
+    function setUserPreferences()
+    {
+        let userPrefs ={
+          profile: dropdown.value,
+          preference: {
+            Color1 : getComputedStyle(colourPicker1.parentNode).backgroundColor,
+            Color2 : getComputedStyle(colourPicker2.parentNode).backgroundColor,
+            Color3 : getComputedStyle(colourPicker3.parentNode).backgroundColor,
+            Color4 : getComputedStyle(colourPicker4.parentNode).backgroundColor,
+            Color5 : getComputedStyle(colourPicker5.parentNode).backgroundColor,
+            Color6 : getComputedStyle(colourPicker6.parentNode).backgroundColor,
+            Color7 : getComputedStyle(colourPicker7.parentNode).backgroundColor,
+            HeaderTextColor : getComputedStyle(header1).color,
+            ParagraphTextColor : getComputedStyle(paragraphText).color,
+            LinkTextColor : getComputedStyle(linkText).color,
+            HeaderTextSize1 : getComputedStyle(header1).fontSize,
+            HeaderTextSize2 : getComputedStyle(header2).fontSize,
+            HeaderTextSize3 : getComputedStyle(header3).fontSize,
+            HeaderTextSize4 : getComputedStyle(header4).fontSize,
+            HeaderTextSize5 : getComputedStyle(header5).fontSize,
+            ParagraphTextSize : getComputedStyle(paragraphText).fontSize,
+            LinkTextSize : getComputedStyle(linkText).fontSize,
+            HeadersFont : getComputedStyle(header1).fontFamily,
+            ParagraphFont : getComputedStyle(paragraphText).fontFamily,
+            LinkFont : getComputedStyle(linkText).fontFamily
+        }
+      }
+        userPreferencesObj = userPrefs;
+        localStorage.setItem("1", JSON.stringify(userPreferencesObj));
+    }
     function displayUserPreferences()
     {
         storedPref = userPrefs[dropdown.selectedIndex].preference;
@@ -465,83 +508,6 @@ async function getUserPrefs() {
         linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
       }
     }
-async function saveUserPref(userPrefObj) {
-  try {
-    const response = await apiHelper.post("Preference", userPrefObj);
-
-    if (response) {
-      console.log(response);
-    }
-  } catch (error) {
-    console.error("Error performing CRUD operation:", error);
-  }
-}
-
-    function setUserPreferences()
-    {
-        let userPrefs ={
-          profile: dropdown.value,
-          preference: {
-            Color1 : getComputedStyle(colourPicker1.parentNode).backgroundColor,
-            Color2 : getComputedStyle(colourPicker2.parentNode).backgroundColor,
-            Color3 : getComputedStyle(colourPicker3.parentNode).backgroundColor,
-            Color4 : getComputedStyle(colourPicker4.parentNode).backgroundColor,
-            Color5 : getComputedStyle(colourPicker5.parentNode).backgroundColor,
-            Color6 : getComputedStyle(colourPicker6.parentNode).backgroundColor,
-            Color7 : getComputedStyle(colourPicker7.parentNode).backgroundColor,
-            HeaderTextColor : getComputedStyle(header1).color,
-            ParagraphTextColor : getComputedStyle(paragraphText).color,
-            LinkTextColor : getComputedStyle(linkText).color,
-            HeaderTextSize1 : getComputedStyle(header1).fontSize,
-            HeaderTextSize2 : getComputedStyle(header2).fontSize,
-            HeaderTextSize3 : getComputedStyle(header3).fontSize,
-            HeaderTextSize4 : getComputedStyle(header4).fontSize,
-            HeaderTextSize5 : getComputedStyle(header5).fontSize,
-            ParagraphTextSize : getComputedStyle(paragraphText).fontSize,
-            LinkTextSize : getComputedStyle(linkText).fontSize,
-            HeadersFont : getComputedStyle(header1).fontFamily,
-            ParagraphFont : getComputedStyle(paragraphText).fontFamily,
-            LinkFont : getComputedStyle(linkText).fontFamily
-        }
-      }
-        userPreferencesObj = userPrefs;
-        localStorage.setItem("1", JSON.stringify(userPreferencesObj));
-    }
-function displayUserPreferences() {
-  let storedPref = JSON.parse(localStorage.getItem("1")).preference;
-  try {
-    colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
-    colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
-    colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
-    colourPicker4.parentNode.style.backgroundColor = storedPref.Color4;
-    colourPicker5.parentNode.style.backgroundColor = storedPref.Color5;
-    colourPicker6.parentNode.style.backgroundColor = storedPref.Color6;
-    colourPicker7.parentNode.style.backgroundColor = storedPref.Color7;
-
-    headingsContainer.style.color = storedPref.HeaderTextColor;
-    headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
-
-    paragraphText.style.color = storedPref.ParagraphTextColor;
-    paragraphText2.style.color = storedPref.ParagraphTextColor;
-    paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
-    header1.style.fontSize = storedPref.HeaderTextSize1;
-    header2.style.fontSize = storedPref.HeaderTextSize2;
-    header3.style.fontSize = storedPref.HeaderTextSize3;
-    header4.style.fontSize = storedPref.HeaderTextSize4;
-    header5.style.fontSize = storedPref.HeaderTextSize5;
-
-    paragraphText.style.fontSize = storedPref.ParagraphTextSize;
-    paragraphText2.style.fontSize = storedPref.ParagraphTextSize;
-    (linkText.style.fontSize = storedPref.LinkTextSize),
-      (headingsContainer.style.fontFamily = storedPref.fontFamily);
-    (paragraphArticle.style.fontFamily = storedPref.ParagraphFont),
-      (linkText.style.fontFamily = storedPref.LinkFont);
-    linkText.style.color = storedPref.LinkTextColor;
-    linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
-  } catch {
-    console.log("defaults");
-  }
-}
 
 function setUserPreferences() {
   let userPrefs = {
