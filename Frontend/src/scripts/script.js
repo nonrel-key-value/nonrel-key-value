@@ -137,7 +137,6 @@ linkSizeInput.addEventListener("change", changeLinkSize);
 dropdown.addEventListener("change", switchPreference);
 
 async function loadStuff() {
-  console.log("we loading");
   var userPrefs = await getUserPrefs();
   let options = [];
   prefs = [];
@@ -192,7 +191,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // You can now use these tokens for API calls
     console.log("Tokens extracted and stored securely");
   } else {
-    console.error("Tokens not found in URL");
     alert("You are not logged in. Login using Google to continue.");
     window.location.href =
       "https://179530787873.auth.eu-west-1.amazoncognito.com/oauth2/authorize?client_id=340s2eqt65h066rs3o0bdfqocp&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Fweb.karle.co.za";
@@ -200,7 +198,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // checkLoggedIn();
 
-  const fonts = ["Arial", "Times New Roman", "Verdana", "Georgia", "Roboto"]; //Get from backend?
+  const fonts = ["Arial", "Times New Roman", "Verdana", "Georgia", "Roboto","Pacifico"]; //Get from backend?
 
   document.body.style.fontSize = defaultFontSize;
   document.body.style.color = defaultColor;
@@ -228,7 +226,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   headingFontDropdown.addEventListener("change", (event) => {
     changeHeadingFont(event.target.value);
-    console.log("heading font: " + event.target.value);
   });
 
   paragraphFontDropdown.addEventListener("change", (event) => {
@@ -375,13 +372,11 @@ async function getUserPrefs() {
     const response = await apiHelper.get("Preference");
 
     if (response) {
-      console.log(response);
       prefs = await response;
     }
   } catch (error) {
     console.error("Error performing CRUD operation:", error);
   }
-  console.log(prefs);
   return prefs;
 }
 
@@ -401,7 +396,6 @@ async function saveUserPref(userPrefObj) {
 }
     async function displayUserPreferences(pref)
     {
-      console.log("pref: " + JSON.stringify(pref));
         try{
         colourPicker1.parentNode.style.backgroundColor = pref.color1;
         colourPicker2.parentNode.style.backgroundColor = pref.color2;
@@ -483,7 +477,6 @@ function setUserPreferences() {
       linkFont: getComputedStyle(linkText).fontFamily,
     },
   };
-  console.log(uPrefs);
   saveUserPref(uPrefs);
 }
 async function handleRedirect() {
