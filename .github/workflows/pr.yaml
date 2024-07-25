@@ -73,7 +73,7 @@ jobs:
   release-api:
     name: "Deploy API"
     needs: [changed_files]
-    if: (needs.changed_files.outputs.backend_changed == 'true' && ${{ vars.DEPLOY_ON_PR }} == 'true')
+    if: ${{ vars.DEPLOY_ON_PR == 'true' && needs.changed_files.outputs.backend_changed == 'true'}}
     secrets: inherit
     uses: ./.github/workflows/release-api.yaml  
     with:
