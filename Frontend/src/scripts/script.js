@@ -301,9 +301,9 @@ postNewPreferenceBtn.onclick = () => {
   main.classList.remove("blur");
 };
 
-function switchPreference(value) {
-    console.log("preference switched to: " + value);
-    storedPref = userPrefs[value];
+function switchPreference(event) {
+    console.log("preference switched to: " + event.selectedIndex);
+    storedPref = userPrefs[event.selectedIndex];
     displayUserPreferences();
     // Set content based on value
 }
