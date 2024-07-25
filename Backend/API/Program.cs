@@ -20,7 +20,7 @@ namespace API
 				options.AddPolicy("CORS", builder =>
 				{
 					builder.WithOrigins(["*"])
-						.WithHeaders(["Content-Type", "Authorization"])
+						.WithHeaders(["*", "Authorization"])
 						.WithMethods([HttpMethods.Get, HttpMethods.Post, HttpMethods.Delete, HttpMethods.Patch, HttpMethods.Put, HttpMethods.Options]).Build();
 				});
 			});
