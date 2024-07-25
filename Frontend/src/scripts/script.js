@@ -412,8 +412,9 @@ async function saveUserPref(userPrefObj) {
     console.error("Error performing CRUD operation:", error);
   }
 }
-    function displayUserPreferences()
+    async function displayUserPreferences()
     {
+      userPrefs = await getUserPrefs();
       console.log("here !!!!!!");
       console.log(userPrefs);
         storedPref = userPrefs[dropdown.selectedIndex].preference;
