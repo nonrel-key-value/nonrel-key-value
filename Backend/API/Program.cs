@@ -13,12 +13,7 @@ namespace API
         {
             // Load environment variables from .env file
             DotNetEnv.Env.Load();
-
-            // Verify environment variable loading
-            Console.WriteLine($"AWS_ACCESS_KEY_ID: {Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID")}");
-            Console.WriteLine($"AWS_SECRET_ACCESS_KEY: {Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY")}");
-            Console.WriteLine($"AWS_REGION: {Environment.GetEnvironmentVariable("AWS_REGION")}");
-
+			
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
