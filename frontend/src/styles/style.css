@@ -39,6 +39,10 @@ p{
   font-size:2em;
 }
 
+.normalFont{
+  font-family: 'Poppins', sans-serif;
+}
+
 .container {
   display: flexbox;
   flex-wrap: wrap;
@@ -218,9 +222,9 @@ ul{
   align-items: center;
 }
 
-#fontDropdown {
-  height: 2.5em;
-  width: 20em;
+#headingFontDropdown {
+  height: 1.5em;
+  width: 8em;
   cursor: pointer;
   border-radius: 0.375em; 
 }
@@ -242,5 +246,27 @@ ul{
   .container{
     flex-direction: column;
   }
+}
+
+.headingContainer {
+  display: flex;
+  gap: 1em;
+}
+
+.paragraphContainer {
+  display: flex;
+  gap: 1em;
+}
+
+.headingCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }
 

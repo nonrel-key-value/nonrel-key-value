@@ -13,16 +13,16 @@
     <main>
       <header>
         <h2 id="title">Preferencey</h2>
-        <p>Whatever you prefer!</p>
+        <p class="normalFont">Whatever you prefer!</p>
         <a id="loginLink" href="https://179530787873.auth.eu-west-1.amazoncognito.com/oauth2/authorize?client_id=340s2eqt65h066rs3o0bdfqocp&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Fweb.karle.co.za"><button class="login--btn">Login</button></a>
       </header>
       <article class="container">
         <span class="dropdown--span">
-          <p>Please select your preference:</p>
-          <select id="dropdown"></select>
-          <button class="add-preference--btn">Add New Preference</button>
-          <button class="save-preference--btn">Save Changes</button>
-          <button class="delete-preference--btn">Delete Preference</button>
+          <p class="normalFont">Please select your preference:</p>
+          <select id="dropdown"></select> 
+          <button id="addPref" class="add-preference--btn">Add New Preference</button>
+          <button id="savePrefs" class="save-preference--btn">Save Changes</button>
+          <button id="deletePrefs" class="delete-preference--btn">Delete Preference</button>
           <section>
             <!-- Content comes here -->
             <p class="hide" id="selectedPreference"></p>
@@ -32,7 +32,7 @@
       <section class="outerContainer">
       <section class="stylesContainer">
         <article class="innerContainer">
-          <h1>Colour Palette</h1>
+          <h1 class="normalFont">Colour Palette</h1>
           <hr class="solid">
           <ul class="colourList">
             <li class="colourListItem">
@@ -66,16 +66,12 @@
           </ul>
         </article>
         <section class="innerContainer">
-          <h1>Text Palette</h1>
+          <h1 class="normalFont">Text Palette</h1>
           <hr class="solid">
-          <article class="fontSelectorContainer">
-            <p>Font:</p>
-            <select id="fontDropdown"></select>
-          </article>
-          <article>
+          <article class="headingContainer">
             <ul id="headings" class="textList">
               <li>
-                <label id="heading1">Heading 1</label><input type="range" id="headingSize1" name="headingSize1" min="8" max="30">
+                <label id="heading1">Heading 1<input type="range" id="headingSize1" name="headingSize1" min="8" max="30"></label>
               </li>
               <li>
                 <label id="heading2">Heading 2<input type="range" id="headingSize2" name="headingSize2" min="8" max="30"></label>
@@ -89,14 +85,19 @@
               <li>
                 <label id="heading5">Heading 5<input type="range" id="headingSize5" name="headingSize5" min="8" max="30"></label>
               </li>
+              <li>
+                <label id="headingFont">Heading Font<select id="headingFontDropdown"></select></label>
+              </li>
             </ul>
           </article>
           <article id="paragraphArticle">
-            <p class="paragraphText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam at, dolorum quo eveniet nesciunt totam doloremque adipisci! Veritatis eligendi, maiores velit impedit consectetur magni. Laudantium, dolor aliquid! Repudiandae, quae neque?</p>
+            <p id="pText" class="paragraphText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam at, dolorum quo eveniet nesciunt totam doloremque adipisci! Veritatis eligendi, maiores velit impedit consectetur magni. Laudantium, dolor aliquid! Repudiandae, quae neque?</p>
             <p class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p> 
             <input type="range" id="paragraphSize" name="paragraphSize" min="8" max="15">
+              <!-- <select id="paragraphFontDropdown"> -->
           </article>
-          <label id="linkText">https://linkSize.com<input type="range" id="linkSize" name="linkSize" min="8" max="30"></label>
+            <label id="linkText">https://linkStyle.com<input type="range" id="linkSize" name="linkSize" min="8" max="30"></label>
+          
         </article>
       </section>
 
