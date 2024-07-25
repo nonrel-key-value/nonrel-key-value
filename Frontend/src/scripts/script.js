@@ -381,7 +381,7 @@ async function getUserPrefs() {
 
     function setUserPreferences()
     {
-        let userPrefs =[{
+        let userPrefs ={
           profile: "preference",
           preference: {
             Color1 : getComputedStyle(colourPicker1.parentNode).backgroundColor,
@@ -405,7 +405,7 @@ async function getUserPrefs() {
             ParagraphFont : getComputedStyle(paragraphText).fontFamily,
             LinkFont : getComputedStyle(linkText).fontFamily
         }
-      }]
+      }
         userPreferencesObj = userPrefs;
         localStorage.setItem("1", JSON.stringify(userPreferencesObj));
 
