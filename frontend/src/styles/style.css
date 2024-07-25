@@ -118,6 +118,7 @@ ul{
   display: flex;
   gap: 1em;
   align-items: center;
+  padding: 0.5em;
 }
 
 #dropdown {
@@ -270,3 +271,62 @@ ul{
   gap: 1em;
 }
 
+#paragraphFontDropdown {
+  height: 1.5em;
+  width: 8em;
+  cursor: pointer;
+  border-radius: 0.375em; 
+}
+
+dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border: none;
+  border-radius: 0.375em; 
+  padding: 0.625em 1.5625em; 
+  transform: translate(-50%,-50%) scale(.9); 
+  background-color: white;
+  max-width: 70%;
+  max-height: 95%;
+  overflow: auto;
+  visibility: hidden;
+
+  button {
+    width: 10em; 
+    height: 2em; 
+    border: 0.125em solid rgba(206, 204, 204, 0.727); 
+    border-radius: 0.375em; 
+    color: white;
+    background-color: #0078d7;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  button:hover {
+    border: 0.125em solid rgba(0, 0, 0, 0.727); 
+    color: #0078d7;
+    background-color: white;
+  }
+}
+
+.blur {
+  filter: blur(0.9em);
+  pointer-events: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5em;
+}
+
+.rowElement {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}

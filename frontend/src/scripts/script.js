@@ -3,11 +3,22 @@ import {ApiHelper } from "./apiHelper.js";
 const baseURL = "https://api.karle.co.za/";
 const apiHelper = new ApiHelper(baseURL);
 
+const main = document.querySelector('main');
 
 const dropdown = document.getElementById('dropdown');
 const selectedPreference = document.getElementById('selectedPreference');
 const headingsContainer = document.getElementById('headings');
+
+const deletePreferenceBtn = document.getElementById('deletePrefs')
+const confirmDeleteDialog = document.getElementById('confirmDeleteDialog');
+const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
 const addPreferenceBtn = document.getElementById('addPref');
+const addPreferenceDialog = document.getElementById('addPreferenceDialog');
+const cancelNewPreferenceBtn = document.getElementById('cancelNewPreferenceBtn');
+const postNewPreferenceBtn = document.getElementById('postNewPreferenceBtn');
+const nextPreferenceId = document.getElementById('nextPreferenceId');
 
 const defaultFontSize = 16;
 const defaultColor = 'black';
@@ -22,7 +33,9 @@ const colourPicker5 = document.getElementById("inputColour5");
 const colourPicker6 = document.getElementById("inputColour6");
 const colourPicker7 = document.getElementById("inputColour7");
 
-const fontDropdown = document.getElementById("headingFontDropdown");
+const headingFontDropdown = document.getElementById("headingFontDropdown");
+const paragraphFontDropdown = document.getElementById("paragraphFontDropdown");
+const linkFontDropdown = document.getElementById("linkFontDropdown");
 
 const headingSize1 = document.getElementById("headingSize1");
 const headingSize2 = document.getElementById("headingSize2");
@@ -81,7 +94,6 @@ function what()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('aaa');
     checkLoggedIn();
 
     document.body.style.fontSize = defaultFontSize;
@@ -101,7 +113,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const option = document.createElement('option');
         option.value = optionText;
         option.textContent = optionText;
-        fontDropdown.appendChild(option);
+        headingFontDropdown.appendChild(option);
+    });
+    fonts.forEach(optionText => {
+        const option = document.createElement('option');
+        option.value = optionText;
+        option.textContent = optionText;
+        paragraphFontDropdown.appendChild(option);
+    });
+    fonts.forEach(optionText => {
+        const option = document.createElement('option');
+        option.value = optionText;
+        option.textContent = optionText;
+        linkFontDropdown.appendChild(option);
     });
 
     switchPreference(dropdown.value);
@@ -110,27 +134,73 @@ document.addEventListener('DOMContentLoaded', () => {
     //     switchPreference(event.target.value);
     // });
 
-    changeFont(fontDropdown.value);
+    changeHeadingFont(headingFontDropdown.value);
+    changeParagraphFont(paragraphFontDropdown.value);
+    changeLinkFont(linkFontDropdown.value);
 
-    fontDropdown.addEventListener('change', (event) => {
-        changeFont(event.target.value);
+    headingFontDropdown.addEventListener('change', (event) => {
+        changeHeadingFont(event.target.value);
+    });
+
+    paragraphFontDropdown.addEventListener('change', (event) => {
+        changeParagraphFont(event.target.value);
+    });
+
+    linkFontDropdown.addEventListener('change', (event) => {
+        changeLinkFont(event.target.value);
     });
 
 });
 
+deletePreferenceBtn.onclick = () => {
+    confirmDeleteDialog.style.visibility = 'visible';
+    main.classList.add('blur');
+}
+
+cancelDeleteBtn.onclick = () => {
+    confirmDeleteDialog.style.visibility = 'hidden';
+    main.classList.remove('blur');
+}
+
+confirmDeleteBtn.onclick = () => {
+    //BACKEND CALL TO DELETE (refresh selected preference)
+    confirmDeleteDialog.style.visibility = 'hidden';
+    main.classList.remove('blur');
+}
+
  addPreferenceBtn.onclick = () => {
-     // Backend call to add preference
-     console.log('clicked');
+    // GET ID OF NEXT PREFERENCE
+    nextPreferenceId.textContent = '5';
+    addPreferenceDialog.style.visibility = 'visible';
+    main.classList.add('blur');
  }
+
+ cancelNewPreferenceBtn.onclick = () => {
+    addPreferenceDialog.style.visibility = 'hidden';
+    main.classList.remove('blur');
+}
+
+postNewPreferenceBtn.onclick = () => {
+    //BACKEND CALL TO ADD PREFERENCE
+    addPreferenceDialog.style.visibility = 'hidden';
+    main.classList.remove('blur');
+}
 
 function switchPreference(value) {
     console.log("preference switched to: " + value);
     // Set content based on value
-    // selectedPreference.textContent = `Selected preference is: ${value}`;
 }
 
-function changeFont(value) {
+function changeHeadingFont(value) {
     headingsContainer.style.fontFamily = value;
+}
+
+function changeParagraphFont(value) {
+    paragraphArticle.style.fontFamily = value;
+}
+
+function changeLinkFont(value) {
+    linkText.style.fontFamily = value;
 }
 
 function changeColour(event)

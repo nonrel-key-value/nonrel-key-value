@@ -16,18 +16,12 @@
         <p class="normalFont">Whatever you prefer!</p>
         <a id="loginLink" href="https://179530787873.auth.eu-west-1.amazoncognito.com/oauth2/authorize?client_id=340s2eqt65h066rs3o0bdfqocp&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Fweb.karle.co.za"><button class="login--btn">Login</button></a>
       </header>
-      <article class="container">
-        <span class="dropdown--span">
+      <article class="dropdown--span">
           <p class="normalFont">Please select your preference:</p>
           <select id="dropdown"></select> 
           <button id="addPref" class="add-preference--btn">Add New Preference</button>
           <button id="savePrefs" class="save-preference--btn">Save Changes</button>
           <button id="deletePrefs" class="delete-preference--btn">Delete Preference</button>
-          <section>
-            <!-- Content comes here -->
-            <p class="hide" id="selectedPreference"></p>
-          </section>
-        </span>
       </article>
       <section class="outerContainer">
       <section class="stylesContainer">
@@ -71,36 +65,60 @@
           <article class="headingContainer">
             <ul id="headings" class="textList">
               <li>
-                <label id="heading1">Heading 1<input type="range" id="headingSize1" name="headingSize1" min="8" max="30"></label>
+                <label class="rowElement" id="heading1">Heading 1<input type="range" id="headingSize1" name="headingSize1" min="8" max="30"></label>
               </li>
               <li>
-                <label id="heading2">Heading 2<input type="range" id="headingSize2" name="headingSize2" min="8" max="30"></label>
+                <label class="rowElement" id="heading2">Heading 2<input type="range" id="headingSize2" name="headingSize2" min="8" max="30"></label>
               </li>
               <li>
-                <label id="heading3">Heading 3<input type="range" id="headingSize3" name="headingSize3" min="8" max="30"></label>
+                <label class="rowElement" id="heading3">Heading 3<input type="range" id="headingSize3" name="headingSize3" min="8" max="30"></label>
               </li>
               <li>
-                <label id="heading4">Heading 4<input type="range" id="headingSize4" name="headingSize4" min="8" max="30"></label>
+                <label class="rowElement" id="heading4">Heading 4<input type="range" id="headingSize4" name="headingSize4" min="8" max="30"></label>
               </li>
               <li>
-                <label id="heading5">Heading 5<input type="range" id="headingSize5" name="headingSize5" min="8" max="30"></label>
+                <label class="rowElement" id="heading5">Heading 5<input type="range" id="headingSize5" name="headingSize5" min="8" max="30"></label>
               </li>
               <li>
-                <label id="headingFont">Heading Font<select id="headingFontDropdown"></select></label>
+                <label class="rowElement" id="headingFont">Heading Font<select id="headingFontDropdown"></select></label>
               </li>
             </ul>
           </article>
           <article id="paragraphArticle">
             <p id="pText" class="paragraphText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam at, dolorum quo eveniet nesciunt totam doloremque adipisci! Veritatis eligendi, maiores velit impedit consectetur magni. Laudantium, dolor aliquid! Repudiandae, quae neque?</p>
-            <p class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p> 
-            <input type="range" id="paragraphSize" name="paragraphSize" min="8" max="15">
-              <!-- <select id="paragraphFontDropdown"> -->
+            <p class="paragraphText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis ea dolorum, dicta distinctio explicabo sed architecto, voluptatibus fugit exercitationem labore molestias deserunt repellat, quam dignissimos iste optio sequi officiis.</p>  
+            <section class="rowElement">
+              <input type="range" id="paragraphSize" name="paragraphSize" min="8" max="15"></input>
+              <select id="paragraphFontDropdown"></select>
+            </section>
           </article>
-            <label id="linkText">https://linkStyle.com<input type="range" id="linkSize" name="linkSize" min="8" max="30"></label>
-          
+          <section class="rowElement">
+            <label id="linkText">https://linkStyle.com</label>
+            <input type="range" id="linkSize" name="linkSize" min="8" max="30">
+            <select id="linkFontDropdown"></select>
+          </section>
+            
         </article>
       </section>
 
     </main>
+
+    <dialog id="confirmDeleteDialog">
+      <h1 class="delete-title">Confirm Deletion</h1>
+      <p class="delete-text">Are you sure you want to delete this preference? This can not be undone!</p>
+      <footer class="button-container">
+          <button id="cancelDeleteBtn" class="cancel-delete--btn">Cancel</button>
+          <button id="confirmDeleteBtn" class="confirm-delete--btn">Delete</button>
+      </footer>
+    </dialog>
+
+    <dialog id="addPreferenceDialog">
+      <h1 class="add-title">Add New Preference</h1>
+      <p class="add-text">You will be creating a new preference called Preference<label id="nextPreferenceId">XXX</label></p>
+      <footer class="button-container">
+        <button id="cancelNewPreferenceBtn">Cancel</button>
+          <button id="postNewPreferenceBtn">Add Preference</button>
+      </footer>
+    </dialog>
   </body>
 </html>
