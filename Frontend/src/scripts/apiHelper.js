@@ -6,6 +6,7 @@ export class ApiHelper {
     async post(endpoint, data) {
         const url = `${this.baseURL}${endpoint}`;
         const options = {
+            mode:  'cors',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
