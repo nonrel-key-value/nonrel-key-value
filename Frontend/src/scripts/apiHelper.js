@@ -4,7 +4,6 @@ export class ApiHelper {
     }
 
     async post(endpoint, data) {
-        console.log("data being sent: " + JSON.stringify(data));
         const url = `${this.baseURL}${endpoint}`;
         const options = {
             mode:  'cors',
