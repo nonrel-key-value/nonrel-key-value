@@ -284,7 +284,8 @@ postNewPreferenceBtn.onclick = () => {
 function switchPreference(event) {
   console.log("dropdown index: " + dropdown.selectedIndex);
     console.log("preference switched to: " + dropdown.selectedIndex);
-    storedPref = userPrefs[event.selectedIndex];
+    console.log("user prefs: " + userPrefs);
+    storedPref = userPrefs[dropdown.selectedIndex];
     displayUserPreferences();
     // Set content based on value
 }
