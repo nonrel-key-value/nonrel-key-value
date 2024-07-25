@@ -395,7 +395,10 @@ async function saveUserPref(userPrefObj) {
 }
     async function displayUserPreferences()
     {
+      console.log("stored pref: " + storedPref);
+
       pref = storedPref.preference;
+      console.log("pref");
       console.log("here !!!!!!");
         try{
         colourPicker1.parentNode.style.backgroundColor = pref.Color1;
