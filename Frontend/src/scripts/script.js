@@ -395,7 +395,7 @@ async function saveUserPref(userPrefObj) {
     {
       console.log("stored pref: " + storedPref);
 
-      pref = storedPref.preference;
+      let pref = storedPref.preference;
       console.log("pref");
       console.log("here !!!!!!");
         try{
