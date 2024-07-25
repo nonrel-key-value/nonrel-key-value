@@ -147,6 +147,8 @@ async function loadStuff() {
     console.log(pref.preference);
   });
 
+  displayUserPreferences(prefs[0]);
+
   dropdown.replaceChildren();
 
   options.forEach((optionText) => {
@@ -277,9 +279,16 @@ postNewPreferenceBtn.onclick = () => {
   main.classList.remove("blur");
 };
 
-async function switchPreference(event) {
+async function switchPreference() {
 
-    console.log("storedPref: " + storedPref);
+  var userPrefs = await getUserPrefs();
+  prefs = [];
+
+  userPrefs.forEach((pref) => {
+    prefs.push(pref.preference);
+    console.log(pref.preference);
+  });
+    
     displayUserPreferences(prefs[dropdown.selectedIndex]);
     // Set content based on value
 }
