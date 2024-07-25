@@ -324,12 +324,12 @@ async function getUserPrefs() {
           
         if (response) {
           console.log(response);
-          prefs = await response.object;
+          prefs = await response;
         }
       } catch (error) {
         console.error('Error performing CRUD operation:', error);
       }
-      return JSON.parse(prefs);
+      return prefs;
     }
 
     async function saveUserPref(userPrefObj) {
