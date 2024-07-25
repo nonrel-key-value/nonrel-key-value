@@ -232,6 +232,8 @@ confirmDeleteBtn.onclick = () => {
     // GET ID OF NEXT PREFERENCE
 
     var newPreferenceId = preferenceId.value;
+    console.log(newPreferenceId);
+    console.log(nextPreferenceId.textContent);
 
     let obj = {
       "profile": `Preference${newPreferenceId}`,
