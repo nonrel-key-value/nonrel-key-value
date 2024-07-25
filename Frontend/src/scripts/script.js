@@ -344,6 +344,7 @@ async function getUserPrefs() {
     function displayUserPreferences()
     {
         let storedPref = (JSON.parse(localStorage.getItem("1"))).preference;
+        try{
         colourPicker1.parentNode.style.backgroundColor = storedPref.Color1;
         colourPicker2.parentNode.style.backgroundColor = storedPref.Color2;
         colourPicker3.parentNode.style.backgroundColor = storedPref.Color3;
@@ -372,6 +373,9 @@ async function getUserPrefs() {
         linkText.style.fontFamily = storedPref.LinkFont;
         linkText.style.color = storedPref.LinkTextColor;
         linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
+      }catch{
+        console.log("defaults");
+      }
 
     }
 
