@@ -36,7 +36,7 @@ namespace API
 			{
 				var accessKeyId = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
 				var secretAccessKey = Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY");
-				var region = Environment.GetEnvironmentVariable("AWS_REGION");
+				var region = "eu-west-1";
 
 				if(string.IsNullOrEmpty(accessKeyId) || string.IsNullOrEmpty(secretAccessKey) || string.IsNullOrEmpty(region))
 				{
