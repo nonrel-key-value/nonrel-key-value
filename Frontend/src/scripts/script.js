@@ -398,17 +398,6 @@ async function getUserPrefs() {
   return prefs;
 }
 
-    async function saveUserPref(userPrefObj) {
-        try {
-          const response = await apiHelper.post('Preference',userPrefObj);
-            
-          if (response) {
-            console.log(response);
-          }
-        } catch (error) {
-          console.error('Error performing CRUD operation:', error);
-        }
-      }
 
 
     function displayUserPreferences()
