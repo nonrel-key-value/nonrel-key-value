@@ -14,17 +14,15 @@ namespace API
 			Env.Load();
 
 			var builder = WebApplication.CreateBuilder(args);
-			// CORS
-			var corsPolicyName = "nosqlCors";
+			
 			builder.Services.AddCors(options =>
 			{
-				options.AddPolicy(name: corsPolicyName,
-								  policy =>
-								  {
-									  policy.AllowAnyOrigin()
-										   .WithMethods("GET", "POST", "OPTIONS")
-										   .AllowAnyHeader();
-								  });
+				options.AddPolicy("CORS", builder =>
+				{
+					builder.WithOrigins(["*"])
+						.WithHeaders(["Content-Type", "Authorization"])
+						.WithMethods([HttpMethods.Get, HttpMethods.Post, HttpMethods.Delete, HttpMethods.Patch, HttpMethods.Put, HttpMethods.Options]).Build();
+				});
 			});
 
 			// Add services to the container.
@@ -62,9 +60,9 @@ namespace API
 				app.UseSwagger();
 				app.UseSwaggerUI();
 			}
-
+			
 			app.MapControllers();
-			app.UseCors(corsPolicyName);
+			app.UseCors("CORS");
 			app.UseAuthorization();
 			app.Run();
 		}
