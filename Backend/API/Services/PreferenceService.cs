@@ -1,46 +1,46 @@
 ﻿using API.Models;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Services
 {
 	public class PreferenceService : IPreferenceService
 	{
-       private readonly IAmazonDynamoDB dynamoDBClient;
-       private const string TableName = "LocalTest";
+		private readonly IAmazonDynamoDB dynamoDBClient;
+		private const string TableName = "LocalTest";
+		private static readonly Random random = new Random();
 
-	   public PreferenceService(IAmazonDynamoDB dynamoDBClient)
-	   {
-        this.dynamoDBClient = dynamoDBClient;
-       }
+		public PreferenceService(IAmazonDynamoDB dynamoDBClient)
+		{
+			this.dynamoDBClient = dynamoDBClient;
+		}
 
-	   public async Task<IEnumerable<Preference>> GetPreferences()
-       {
-          var request = new ScanRequest
-          {
-            TableName = TableName
-          };
+        public async Task<IEnumerable<Preference>> GetPreferencesAsync()
+        {
+            var request = new ScanRequest
+            {
+                TableName = TableName
+            };
 
             var response = await dynamoDBClient.ScanAsync(request);
 
             return response.Items.Select(item => new Preference
             {
-                Color = item["Color"].S
+                UserID = item.ContainsKey("UserID") ? item["UserID"].S : "DefaultUserID",
+                Color = item.ContainsKey("Profile") ? item["Profile"].S : "DefaultColor"
                 // Map other properties as needed
-            }).ToArray();
+            }).ToList();
         }
 
-        public async Task<Preference> SetPreferences(Preference newPreference)
+		public async Task<Preference> SetPreferencesAsync(Preference newPreference)
         {
             var request = new PutItemRequest
             {
                 TableName = TableName,
                 Item = new Dictionary<string, AttributeValue>
                 {
-                    { "Color", new AttributeValue { S = newPreference.Color } }
+                    { "UserID", new AttributeValue { S = newPreference.UserID } },
+                    { "Profile", new AttributeValue { S = newPreference.Color } }
                     // Map other properties as needed
                 }
             };
@@ -49,5 +49,6 @@ namespace API.Services
 
             return newPreference;
         }
-    }
+
+	}
 }
