@@ -44,6 +44,9 @@ const inputLinkColour = document.getElementById("inputLinkColour");
 
 const savePrefs = document.getElementById("savePrefs");
 
+const paragraphColPicker = document.getElementById("pColourInput");
+const headerColPicker = document.getElementById("headingsColourInput");
+const linkColPicker = document.getElementById("lColourInput");
 
 
 const paragraphArticle = document.getElementById("paragraphArticle");
@@ -232,9 +235,11 @@ async function healthCheck() {
         header3.style.color = storedPref.HeaderTextColor;
         header4.style.color = storedPref.HeaderTextColor;
         header5.style.color = storedPref.HeaderTextColor;
+        headerColPicker.style.backgroundColor = storedPref.HeaderTextColor;
 
         paragraphText.style.color = storedPref.ParagraphTextColor;
         paragraphText2.style.color = storedPref.ParagraphTextColor;
+        paragraphColPicker.style.backgroundColor = storedPref.ParagraphTextColor;
         header1.style.fontSize = storedPref.HeaderTextSize1;
         header2.style.fontSize = storedPref.HeaderTextSize2;
         header3.style.fontSize = storedPref.HeaderTextSize3;
@@ -249,6 +254,7 @@ async function healthCheck() {
         paragraphText2.style.fontFamily = storedPref.ParagraphFont,
         linkText.style.fontFamily = storedPref.LinkFont;
         linkText.style.color = storedPref.LinkTextColor;
+        linkColPicker.style.backgroundColor = storedPref.LinkTextColor;
 
     }
 
