@@ -19,9 +19,9 @@
       <article class="dropdown--span">
           <p class="normalFont">Please select your preference:</p>
           <select id="dropdown"></select> 
-          <button id="addPref" class="add-preference--btn">Add New Preference</button>
-          <button id="savePrefs" class="save-preference--btn">Save Changes</button>
-          <button id="deletePrefs" class="delete-preference--btn">Delete Preference</button>
+          <button id="addPref" class="add-preference--btn normalFont">Add New Preference</button>
+          <button id="savePrefs" class="save-preference--btn normalFont">Save Changes</button>
+          <button id="deletePrefs" class="delete-preference--btn normalFont">Delete Preference</button>
       </article>
       <section class="outerContainer">
       <section class="stylesContainer">
@@ -107,10 +107,10 @@
 
     <dialog id="confirmDeleteDialog">
       <header>
-        <h1 class="delete-title">Confirm Deletion</h1>
+        <h1 class="delete-title normalFont">Confirm Deletion</h1>
       </header>
       <section>
-        <p class="delete-text">Are you sure you want to delete <label id="currentPreferenceName"></label>>? This can not be undone!</p>
+        <p class="delete-text normalFont">Are you sure you want to delete <label id="currentPreferenceName"></label> This can not be undone!</p>
         <footer class="button-container">
             <button id="cancelDeleteBtn" class="cancel-delete--btn">Cancel</button>
             <button id="confirmDeleteBtn" class="confirm-delete--btn">Delete</button>
@@ -120,15 +120,15 @@
 
     <dialog id="addPreferenceDialog">
       <header class="dialog-header">
-        <h1 class="add-title">Add New Preference</h1>
+        <h1 class="add-title normalFont">Add New Preference</h1>
       </header>
       <section>
-        <p class="add-text">Please select the index of the preference:<input id="preferenceId" class="preference-index" type="number" value="0" min="0" max="9"></p>
-        <p class="add-text">You will be creating a new preference called Preference<label id="nextPreferenceId">0</label></p>
-        <p>If this preference already exists it will be overwritten. So be careful pls.</p>
+        <p class="add-text normalFont">Please select the index of the preference:<input id="preferenceId" class="preference-index" type="number" value="0" min="0" max="9"></p>
+        <p class="add-text normalFont">You will be creating a new preference called Preference<label id="nextPreferenceId">0</label></p>
+        <p class="normalFont">If this preference already exists it will be overwritten. So be careful pls.</p>
         <footer class="button-container">
-          <button id="cancelNewPreferenceBtn">Cancel</button>
-            <button id="postNewPreferenceBtn">Add Preference</button>
+          <button id="cancelNewPreferenceBtn" class="normalFont">Cancel</button>
+            <button id="postNewPreferenceBtn" class="normalFont">Add Preference</button>
         </footer>
       </section>     
     </dialog>
