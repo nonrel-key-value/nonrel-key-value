@@ -404,14 +404,9 @@ async function displayUserPreferences(pref) {
     colourPicker7.parentNode.style.backgroundColor = "rgb(255, 102, 0)";
   }
   try {
-    headerColPicker.style.backgroundColor = pref.headerTextColor;
-  } catch {
-    headerColPicker.style.backgroundColor = "rgb(0, 0, 0)";
-  }
-  try {
-    paragraphText.style.color = "rgb(0, 0, 0)";
-    paragraphText2.style.color = "rgb(0, 0, 0)";
-    paragraphColPicker.style.backgroundColor = "rgb(0, 0, 0)";
+    paragraphText.style.color = pref.paragraphTextColor;
+    paragraphText2.style.color = pref.paragraphTextColor;
+    paragraphColPicker.style.backgroundColor = pref.paragraphTextColor;
   } catch {
     paragraphText.style.color = "rgb(0, 0, 0)";
     paragraphText2.style.color = "rgb(0, 0, 0)";
@@ -430,6 +425,8 @@ async function displayUserPreferences(pref) {
     header3.style.color = pref.headerTextColor;
     header4.style.color = pref.headerTextColor;
     header5.style.color = pref.headerTextColor;
+
+    headerColPicker.style.backgroundColor = pref.headerTextColor;
   } catch {
     header1.style.fontSize = "25px";
     header2.style.fontSize = "25px";
@@ -442,16 +439,18 @@ async function displayUserPreferences(pref) {
     header3.style.color = "rgb(0, 0, 0)";
     header4.style.color = "rgb(0, 0, 0)";
     header5.style.color = "rgb(0, 0, 0)";
+
+    headerColPicker.style.backgroundColor = "rgb(0, 0, 0)";
   }
 
   try {
     paragraphText.style.fontSize = pref.paragraphTextSize;
     paragraphText2.style.fontSize = pref.paragraphTextSize;
-    (linkText.style.fontSize = pref.linkTextSize),
-      (headingsContainer.style.fontFamily = pref.headersFont);
+    linkText.style.fontSize = pref.linkTextSize;
+    headingsContainer.style.fontFamily = pref.headersFont;
     headingFontDropdown.value = pref.headersFont;
-    (paragraphArticle.style.fontFamily = pref.paragraphFont),
-      (paragraphFontDropdown.value = pref.paragraphFont);
+    paragraphArticle.style.fontFamily = pref.paragraphFont;
+    paragraphFontDropdown.value = pref.paragraphFont;
     linkText.style.fontFamily = pref.linkFont;
     linkFontDropdown.value = pref.linkFont;
     linkText.style.color = pref.linkTextColor;
@@ -459,11 +458,11 @@ async function displayUserPreferences(pref) {
   } catch {
     paragraphText.style.fontSize = "16px";
     paragraphText2.style.fontSize = "16px";
-    (linkText.style.fontSize = "16px"),
-      (headingsContainer.style.fontFamily = "Arial");
+    linkText.style.fontSize = "16px";
+    headingsContainer.style.fontFamily = "Arial";
     headingFontDropdown.value = "Arial";
-    (paragraphArticle.style.fontFamily = "Arial"),
-      (paragraphFontDropdown.value = "Arial");
+    paragraphArticle.style.fontFamily = "Arial",
+    paragraphFontDropdown.value = "Arial";
     linkText.style.fontFamily = "Arial";
     linkFontDropdown.value = "Arial";
     linkText.style.color = "rgb(0, 0, 0)";
