@@ -136,7 +136,6 @@ linkSizeInput.addEventListener("change", changeLinkSize);
 dropdown.addEventListener("change", switchPreference);
 
 async function loadStuff() {
-  console.log("here");
   var userPrefs = await getUserPrefs();
   let options = [];
   prefs = [];
