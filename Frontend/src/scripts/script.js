@@ -8,27 +8,27 @@ const apiHelper = new ApiHelper(baseURL);
 const main = document.querySelector("main");
 
 let defaultPref = {
-  "color1":"rgb(255, 31, 31)",
-  "color2":"rgb(255, 51, 190)",
-  "color3":"rgb(194, 82, 255)",
-  "color4":"rgb(88, 160, 254)",
-  "color5":"rgb(68, 255, 0)",
-  "color6":"rgb(255, 240, 77)",
-  "color7":"rgb(255, 102, 0)",
-  "headerTextColor":"rgb(0, 0, 0)",
-  "paragraphTextColor":"rgb(0, 0, 0)",
-  "linkTextColor":"rgb(0, 0,0)",
-  "headerTextSize1":"25.3333px",
-  "headerTextSize2":"25.3333px",
-  "headerTextSize3":"25.3333px",
-  "headerTextSize4":"25.3333px",
-  "headerTextSize5":"25.3333px",
-  "paragraphTextSize":"16px",
-  "linkTextSize":"16px",
-  "headersFont":"Arial",
-  "paragraphFont":"Arial",
-  "linkFont":"Arial"
-}
+  color1: "rgb(255, 31, 31)",
+  color2: "rgb(255, 51, 190)",
+  color3: "rgb(194, 82, 255)",
+  color4: "rgb(88, 160, 254)",
+  color5: "rgb(68, 255, 0)",
+  color6: "rgb(255, 240, 77)",
+  color7: "rgb(255, 102, 0)",
+  headerTextColor: "rgb(0, 0, 0)",
+  paragraphTextColor: "rgb(0, 0, 0)",
+  linkTextColor: "rgb(0, 0,0)",
+  headerTextSize1: "25.3333px",
+  headerTextSize2: "25.3333px",
+  headerTextSize3: "25.3333px",
+  headerTextSize4: "25.3333px",
+  headerTextSize5: "25.3333px",
+  paragraphTextSize: "16px",
+  linkTextSize: "16px",
+  headersFont: "Arial",
+  paragraphFont: "Arial",
+  linkFont: "Arial",
+};
 const dropdown = document.getElementById("dropdown");
 const selectedPreference = document.getElementById("selectedPreference");
 const headingsContainer = document.getElementById("headings");
@@ -132,7 +132,6 @@ savePrefs.addEventListener("click", setUserPreferences);
 paragraphSizeInput.addEventListener("change", changeParagraphSize);
 
 linkSizeInput.addEventListener("change", changeLinkSize);
-//healthCheck();
 
 dropdown.addEventListener("change", switchPreference);
 
@@ -144,15 +143,11 @@ async function loadStuff() {
 
   userPrefs.forEach((pref) => {
     options.push(pref.profile);
-    if(pref.preference == null)
-    {
+    if (pref.preference == null) {
       prefs.push(defaultPref);
-    }
-    else
-    {
+    } else {
       prefs.push(pref.preference);
     }
-    
   });
 
   displayUserPreferences(prefs[0]);
@@ -182,24 +177,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     return result;
   }
 
-  // Extract tokens
   const tokens = getTokensFromUrl();
   if (tokens.id_token && tokens.access_token) {
-    // Store tokens securely
     sessionStorage.setItem("id_token", tokens.id_token);
     sessionStorage.setItem("access_token", tokens.access_token);
-
-    // You can now use these tokens for API calls
-    console.log("Tokens extracted and stored securely");
   } else {
     alert("You are not logged in. Login using Google to continue.");
     window.location.href =
       "https://179530787873.auth.eu-west-1.amazoncognito.com/oauth2/authorize?client_id=340s2eqt65h066rs3o0bdfqocp&response_type=token&scope=email+openid&redirect_uri=https%3A%2F%2Fweb.karle.co.za";
   }
 
-  // checkLoggedIn();
 
-  const fonts = ["Arial", "Times New Roman", "Verdana", "Georgia", "Roboto","Pacifico","Anton","Orbitron","Rowdies"]; //Get from backend?
+  const fonts = [
+    "Arial",
+    "Times New Roman",
+    "Verdana",
+    "Georgia",
+    "Roboto",
+    "Pacifico",
+    "Anton",
+    "Orbitron",
+    "Rowdies",
+  ]; 
 
   document.body.style.fontSize = defaultFontSize;
   document.body.style.color = defaultColor;
@@ -269,7 +268,6 @@ cancelNewPreferenceBtn.onclick = () => {
 };
 
 postNewPreferenceBtn.onclick = () => {
-  // GET ID OF NEXT PREFERENCE
 
   var newPreferenceId = preferenceId.value;
 
@@ -286,22 +284,18 @@ postNewPreferenceBtn.onclick = () => {
 };
 
 async function switchPreference() {
-
   let userPrefs = await getUserPrefs();
   prefs = [];
 
   userPrefs.forEach((pref) => {
-    if(pref.preference == null)
-    {
+    if (pref.preference == null) {
       prefs.push(defaultPref);
-    }
-    else{
+    } else {
       prefs.push(pref.preference);
     }
   });
-    
-    displayUserPreferences(prefs[dropdown.selectedIndex]);
-    // Set content based on value
+
+  displayUserPreferences(prefs[dropdown.selectedIndex]);
 }
 
 function changeHeadingFont(value) {
@@ -366,7 +360,6 @@ function changeLinkSize(event) {
   linkText.style.fontSize = event.target.value + "pt";
 }
 
-
 async function getUserPrefs() {
   let prefs;
   try {
@@ -381,9 +374,6 @@ async function getUserPrefs() {
   return prefs;
 }
 
-
-
-
 async function saveUserPref(userPrefObj) {
   try {
     const response = await apiHelper.post("Preference", userPrefObj);
@@ -395,68 +385,91 @@ async function saveUserPref(userPrefObj) {
     console.error("Error performing CRUD operation:", error);
   }
 }
-    async function displayUserPreferences(pref)
-    {
-        try{
-        colourPicker1.parentNode.style.backgroundColor = pref.color1;
-        colourPicker2.parentNode.style.backgroundColor = pref.color2;
-        colourPicker3.parentNode.style.backgroundColor = pref.color3;
-        colourPicker4.parentNode.style.backgroundColor = pref.color4;
-        colourPicker5.parentNode.style.backgroundColor = pref.color5;
-        colourPicker6.parentNode.style.backgroundColor = pref.color6;
-        colourPicker7.parentNode.style.backgroundColor = pref.color7;
-        }catch{
-          console.log("colors failing");
-        }
+async function displayUserPreferences(pref) {
+  try {
+    colourPicker1.parentNode.style.backgroundColor = pref.color1;
+    colourPicker2.parentNode.style.backgroundColor = pref.color2;
+    colourPicker3.parentNode.style.backgroundColor = pref.color3;
+    colourPicker4.parentNode.style.backgroundColor = pref.color4;
+    colourPicker5.parentNode.style.backgroundColor = pref.color5;
+    colourPicker6.parentNode.style.backgroundColor = pref.color6;
+    colourPicker7.parentNode.style.backgroundColor = pref.color7;
+  } catch {
+    colourPicker1.parentNode.style.backgroundColor = "rgb(255, 31, 31)";
+    colourPicker2.parentNode.style.backgroundColor = "rgb(255, 51, 190)";
+    colourPicker3.parentNode.style.backgroundColor = "rgb(194, 82, 255)";
+    colourPicker4.parentNode.style.backgroundColor = "rgb(88, 160, 254)";
+    colourPicker5.parentNode.style.backgroundColor = "rgb(68, 255, 0)";
+    colourPicker6.parentNode.style.backgroundColor = "rgb(255, 240, 77)";
+    colourPicker7.parentNode.style.backgroundColor = "rgb(255, 102, 0)";
+  }
+  try {
+    headerColPicker.style.backgroundColor = pref.headerTextColor;
+  } catch {
+    headerColPicker.style.backgroundColor = "rgb(0, 0, 0)";
+  }
+  try {
+    paragraphText.style.color = "rgb(0, 0, 0)";
+    paragraphText2.style.color = "rgb(0, 0, 0)";
+    paragraphColPicker.style.backgroundColor = "rgb(0, 0, 0)";
+  } catch {
+    paragraphText.style.color = "rgb(0, 0, 0)";
+    paragraphText2.style.color = "rgb(0, 0, 0)";
+    paragraphColPicker.style.backgroundColor = "rgb(0, 0, 0)";
+  }
 
-        try{
-        //headingsContainer.style.color = pref.headerTextColor;
-        headerColPicker.style.backgroundColor = pref.headerTextColor;
-        }catch{
-          console.log("headings failing");
-        }
+  try {
+    header1.style.fontSize = pref.headerTextSize1;
+    header2.style.fontSize = pref.headerTextSize2;
+    header3.style.fontSize = pref.headerTextSize3;
+    header4.style.fontSize = pref.headerTextSize4;
+    header5.style.fontSize = pref.headerTextSize5;
 
-        try{
-        paragraphText.style.color = pref.paragraphTextColor;
-        paragraphText2.style.color = pref.paragraphTextColor;
-        paragraphColPicker.style.backgroundColor = pref.paragraphTextColor;
-        }catch{
-          console.log("paragraph stuff fails");
-        }
+    header1.style.color = pref.headerTextColor;
+    header2.style.color = pref.headerTextColor;
+    header3.style.color = pref.headerTextColor;
+    header4.style.color = pref.headerTextColor;
+    header5.style.color = pref.headerTextColor;
+  } catch {
+    header1.style.fontSize = "25px";
+    header2.style.fontSize = "25px";
+    header3.style.fontSize = "25px";
+    header4.style.fontSize = "25px";
+    header5.style.fontSize = "25px";
 
-        try{
-        header1.style.fontSize = pref.headerTextSize1;
-        header2.style.fontSize = pref.headerTextSize2;
-        header3.style.fontSize = pref.headerTextSize3;
-        header4.style.fontSize = pref.headerTextSize4;
-        header5.style.fontSize = pref.headerTextSize5;
+    header1.style.color = "rgb(0, 0, 0)";
+    header2.style.color = "rgb(0, 0, 0)";
+    header3.style.color = "rgb(0, 0, 0)";
+    header4.style.color = "rgb(0, 0, 0)";
+    header5.style.color = "rgb(0, 0, 0)";
+  }
 
-        header1.style.color = pref.headerTextColor;
-        header2.style.color = pref.headerTextColor;
-        header3.style.color = pref.headerTextColor;
-        header4.style.color = pref.headerTextColor;
-        header5.style.color = pref.headerTextColor;
-        }catch{
-          console.log("heading stuff fails");
-        }
-
-        try{
-        paragraphText.style.fontSize = pref.paragraphTextSize;
-        paragraphText2.style.fontSize = pref.paragraphTextSize;
-        linkText.style.fontSize = pref.linkTextSize,
-        headingsContainer.style.fontFamily = pref.headersFont;
-        headingFontDropdown.value = pref.headersFont;
-        paragraphArticle.style.fontFamily = pref.paragraphFont,
-        paragraphFontDropdown.value = pref.paragraphFont;
-        linkText.style.fontFamily = pref.linkFont;
-        linkFontDropdown.value = pref.linkFont;
-        linkText.style.color = pref.linkTextColor;
-        linkColPicker.style.backgroundColor = pref.linkTextColor;
-      }catch{
-        console.log("other stuff fails");
-      }
-      
-    }
+  try {
+    paragraphText.style.fontSize = pref.paragraphTextSize;
+    paragraphText2.style.fontSize = pref.paragraphTextSize;
+    (linkText.style.fontSize = pref.linkTextSize),
+      (headingsContainer.style.fontFamily = pref.headersFont);
+    headingFontDropdown.value = pref.headersFont;
+    (paragraphArticle.style.fontFamily = pref.paragraphFont),
+      (paragraphFontDropdown.value = pref.paragraphFont);
+    linkText.style.fontFamily = pref.linkFont;
+    linkFontDropdown.value = pref.linkFont;
+    linkText.style.color = pref.linkTextColor;
+    linkColPicker.style.backgroundColor = pref.linkTextColor;
+  } catch {
+    paragraphText.style.fontSize = "16px";
+    paragraphText2.style.fontSize = "16px";
+    (linkText.style.fontSize = "16px"),
+      (headingsContainer.style.fontFamily = "Arial");
+    headingFontDropdown.value = "Arial";
+    (paragraphArticle.style.fontFamily = "Arial"),
+      (paragraphFontDropdown.value = "Arial");
+    linkText.style.fontFamily = "Arial";
+    linkFontDropdown.value = "Arial";
+    linkText.style.color = "rgb(0, 0, 0)";
+    linkColPicker.style.backgroundColor = "rgb(0, 0, 0)";
+  }
+}
 
 function setUserPreferences() {
   let uPrefs = {
