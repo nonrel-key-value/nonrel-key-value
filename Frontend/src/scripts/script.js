@@ -410,7 +410,7 @@ async function saveUserPref(userPrefObj) {
         }
 
         try{
-        headingsContainer.style.color = pref.headerTextColor;
+        //headingsContainer.style.color = pref.headerTextColor;
         headerColPicker.style.backgroundColor = pref.headerTextColor;
         }catch{
           console.log("headings failing");
@@ -430,8 +430,14 @@ async function saveUserPref(userPrefObj) {
         header3.style.fontSize = pref.headerTextSize3;
         header4.style.fontSize = pref.headerTextSize4;
         header5.style.fontSize = pref.headerTextSize5;
+
+        header1.style.color = pref.headerTextColor;
+        header2.style.color = pref.headerTextColor;
+        header3.style.color = pref.headerTextColor;
+        header4.style.color = pref.headerTextColor;
+        header5.style.color = pref.headerTextColor;
         }catch{
-          console.log("heading size fails");
+          console.log("heading stuff fails");
         }
 
         try{
